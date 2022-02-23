@@ -36,9 +36,9 @@ import luminesce
 from fbnsdkutilities import ApiClientFactory
 
 factory = ApiClientFactory(luminesce, api_secrets_filename='/path/to/secrets.json')
-sql_ex_api = factory.build(luminesce.api.SqlExecutionApi)
+sql_exec_api = factory.build(luminesce.api.SqlExecutionApi)
 
-sql_ex_api.put_by_query_csv("""
+sql_exec_api.put_by_query_csv("""
     select * from lusid.portfolio limit 10
 """)
 ```

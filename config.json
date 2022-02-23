@@ -1,0 +1,6 @@
+{
+  "packageName": "luminesce",
+  "projectName": "luminesce-sdk",
+  "generateSourceCodeOnly": "generateSourceCodeOnly",
+  "packageVersion": "0.0.1"
+}

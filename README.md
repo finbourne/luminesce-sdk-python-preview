@@ -1,4 +1,4 @@
-# LUMINECSE<sup>®</sup> Python Preview SDK
+# LUMINESCE<sup>®</sup> Python Preview SDK
 This is the Python Preview SDK for [LUMINESCE by FINBOURNE](https://www.finbourne.com/luminesce/), a data virtualisation platform that lets you explore, query, fetch and combine data from multiple sources and systems, including LUSID, into an integrated view for interrogation. To use it you'll need a LUSID account. [Sign up for free at lusid.com](https://www.lusid.com/app/signup)
 
 <a href="https://www.lusid.com/app/signup"><img src="https://content.finbourne.com/LUSID_repo.png" alt="LUSID_by_Finbourne"></a>

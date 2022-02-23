@@ -3,18 +3,21 @@ This is the Python Preview SDK for [LUMINESCE by FINBOURNE](https://www.finbourn
 
 <a href="https://www.lusid.com/app/signup"><img src="https://content.finbourne.com/LUSID_repo.png" alt="LUSID_by_Finbourne"></a>
 
+## Build Status
+
+| branch | status |
+| --- | --- |
+| `master` |  ![PyPI](https://img.shields.io/pypi/v/luminesce-sdk-preview?color=blue) ![build](https://github.com/finbourne/luminesce-sdk-python-preview/workflows/luminesce-sdk-python-preview-test/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=finbourne_luminesce-sdk-python-preview&metric=alert_status)](https://sonarcloud.io/dashboard?id=finbourne_luminesce-sdk-python-preview) |
+| `develop` | ![luminesce-sdk-python-preview-test](https://github.com/finbourne/luminesce-sdk-python-preview/workflows/luminesce-sdk-python-preview-test/badge.svg?branch=develop) |
+
 
 ## Installation
 
 The PyPi package for the LUMINESCE SDK can installed using the following:
 
 ```
-pip install luminesce-sdk-preview
+pip install luminesce-sdk-preview finbourne-sdk-utilities
 ```
-
-We publish one version of the Python SDK:
-
-* **luminesce-sdk-python-preview - supports `Production`, `Early Access`, `Beta` and `Experimental` API endpoints.**
 
 For more information on the LUMINESCE API, see [LUMINESCE API Documentation](https://www.lusid.com/honeycomb/swagger/index.html).
 
@@ -25,9 +28,17 @@ For further documentation on building the SDK, running the tutorials and using t
 
 Documentation for classes, methods, attributes and other members of the SDK is [available to view online](https://luminesce-sdk-python-preview.readthedocs.io/en/latest/_autosummary/sdk.luminesce.html).
 
-## Build Status
 
-| branch | status |
-| --- | --- |
-| `master` |  ![PyPI](https://img.shields.io/pypi/v/luminesce-sdk-preview?color=blue) ![build](https://github.com/finbourne/luminesce-sdk-python-preview/workflows/luminesce-sdk-python-preview-test/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=finbourne_luminesce-sdk-python-preview&metric=alert_status)](https://sonarcloud.io/dashboard?id=finbourne_luminesce-sdk-python-preview) |
-| `develop` | ![luminesce-sdk-python-preview-test](https://github.com/finbourne/luminesce-sdk-python-preview/workflows/luminesce-sdk-python-preview-test/badge.svg?branch=develop) |
+## Usage
+
+```python
+import luminesce
+from fbnsdkutilities import ApiClientFactory
+
+factory = ApiClientFactory(luminesce, api_secrets_filename='/path/to/secrets.json')
+sql_ex_api = factory.build(luminesce.api.SqlExecutionApi)
+
+sql_ex_api.put_by_query_csv("""
+    select * from lusid.portfolio limit 10
+""")
+```

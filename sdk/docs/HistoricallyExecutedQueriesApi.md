@@ -1,4 +1,4 @@
-# luminesce.HistoricallyExecutedQueriesApi
+# lusid_scheduler.HistoricallyExecutedQueriesApi
 
 All URIs are relative to *https://www.lusid.com/honeycomb*
 
@@ -24,12 +24,12 @@ Cancel the query (if still running) / clear the data (if already returned) The f
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -39,15 +39,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.HistoricallyExecutedQueriesApi(api_client)
+    api_instance = lusid_scheduler.HistoricallyExecutedQueriesApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 
     try:
@@ -97,12 +97,12 @@ Fetch the data in Json format (if available, or if not simply being informed it 
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -112,15 +112,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.HistoricallyExecutedQueriesApi(api_client)
+    api_instance = lusid_scheduler.HistoricallyExecutedQueriesApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 sort_by = 'sort_by_example' # str | Order the results by these fields.              Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.              Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.              Default is null, the sort order specified in the query itself. (optional)
 filter = 'filter_example' # str | An ODATA filter per Finbourne.Filtering syntax. (optional)
@@ -185,12 +185,12 @@ Fetch the data in Json format (if available, or if not simply being informed it 
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -200,15 +200,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.HistoricallyExecutedQueriesApi(api_client)
+    api_instance = lusid_scheduler.HistoricallyExecutedQueriesApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 bucket_size = 'bucket_size_example' # str | Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated. (optional)
 filter = 'filter_example' # str | An ODATA filter per Finbourne.Filtering syntax. (optional)
@@ -265,12 +265,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -280,15 +280,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.HistoricallyExecutedQueriesApi(api_client)
+    api_instance = lusid_scheduler.HistoricallyExecutedQueriesApi(api_client)
     start_at = '2013-10-20T19:20:30+01:00' # datetime | Date time to start the search from.  Will default to Now - 1 Day (optional)
 end_at = '2013-10-20T19:20:30+01:00' # datetime | Date time to end the search at.  Defaults to now. (optional)
 free_text_search = 'free_text_search_example' # str | Some test that must be in at least one field returned. (optional)
@@ -344,12 +344,12 @@ View progress information (up until this point) of previously started History qu
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -359,15 +359,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.HistoricallyExecutedQueriesApi(api_client)
+    api_instance = lusid_scheduler.HistoricallyExecutedQueriesApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 
     try:

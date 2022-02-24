@@ -1,4 +1,4 @@
-# luminesce.MultiQueryExecutionApi
+# lusid_scheduler.MultiQueryExecutionApi
 
 All URIs are relative to *https://www.lusid.com/honeycomb*
 
@@ -22,12 +22,12 @@ Cancel the query-set (if still running) / clear the data (if already returned) T
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -37,15 +37,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.MultiQueryExecutionApi(api_client)
+    api_instance = lusid_scheduler.MultiQueryExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 
     try:
@@ -95,12 +95,12 @@ View progress information (up until this point) for the entire query-set The fol
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -110,15 +110,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.MultiQueryExecutionApi(api_client)
+    api_instance = lusid_scheduler.MultiQueryExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 
     try:
@@ -168,12 +168,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -183,16 +183,16 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.MultiQueryExecutionApi(api_client)
-    type = luminesce.MultiQueryDefinitionType() # MultiQueryDefinitionType | An enum value defining the set of statements being executed
+    api_instance = lusid_scheduler.MultiQueryExecutionApi(api_client)
+    type = lusid_scheduler.MultiQueryDefinitionType() # MultiQueryDefinitionType | An enum value defining the set of statements being executed
 body = 'body_example' # str | A search value (e.g. 'Apple' on an instrument search)
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt time used by any bitemporal provider in the queries. (optional)
 effective_at = '2013-10-20T19:20:30+01:00' # datetime | The EffectiveAt time used by any bitemporal provider in the queries. (optional)

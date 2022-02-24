@@ -1,4 +1,4 @@
-# luminesce.SqlExecutionApi
+# lusid_scheduler.SqlExecutionApi
 
 All URIs are relative to *https://www.lusid.com/honeycomb*
 
@@ -30,12 +30,12 @@ Method | HTTP request | Description
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -45,15 +45,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
@@ -110,12 +110,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -125,15 +125,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -188,12 +188,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -203,15 +203,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -268,12 +268,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -283,15 +283,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
@@ -348,12 +348,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -363,15 +363,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -426,12 +426,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -441,15 +441,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
@@ -506,12 +506,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -521,15 +521,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -584,12 +584,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -599,15 +599,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -664,12 +664,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -679,15 +679,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
@@ -744,12 +744,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -759,15 +759,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -822,12 +822,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import luminesce
-from luminesce.rest import ApiException
+import lusid_scheduler
+from lusid_scheduler.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -837,15 +837,15 @@ configuration = luminesce.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = luminesce.Configuration(
+configuration = lusid_scheduler.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with luminesce.ApiClient(configuration) as api_client:
+with lusid_scheduler.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = luminesce.SqlExecutionApi(api_client)
+    api_instance = lusid_scheduler.SqlExecutionApi(api_client)
     body = 'body_example' # str | HoneycombSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it
 trailing_commas = True # bool | Should commas be after an expression (as opposed to before) (optional) (default to True)
 uppercase_keywords = False # bool | Should key words be capitalized (optional) (default to False)

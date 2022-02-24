@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.6.21",
+    "version": "1.6.24",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -3647,6 +3647,7 @@
           "GetFees",
           "ListFees",
           "PostTradeCompliance",
+          "EdiInstrument",
           "Testing"
         ],
         "type": "string"

@@ -1,4 +1,4 @@
-# lusid_scheduler.CurrentTableFieldCatalogApi
+# luminesce.CurrentTableFieldCatalogApi
 
 All URIs are relative to *https://www.lusid.com/honeycomb*
 
@@ -20,12 +20,12 @@ Method | HTTP request | Description
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -35,15 +35,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.CurrentTableFieldCatalogApi(api_client)
+    api_instance = luminesce.CurrentTableFieldCatalogApi(api_client)
     free_text_search = 'free_text_search_example' # str | Limit the catalog to only things in some way dealing with the passed in text string (optional)
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 

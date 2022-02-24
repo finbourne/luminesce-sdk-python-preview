@@ -1,4 +1,4 @@
-# lusid_scheduler.SqlBackgroundExecutionApi
+# luminesce.SqlBackgroundExecutionApi
 
 All URIs are relative to *https://www.lusid.com/honeycomb*
 
@@ -28,12 +28,12 @@ Cancel the query (if still running) / clear the data (if already returned) The f
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -43,15 +43,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.SqlBackgroundExecutionApi(api_client)
+    api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 
     try:
@@ -101,12 +101,12 @@ Fetch the data in various formats (if available, or if not simply being informed
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -116,15 +116,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.SqlBackgroundExecutionApi(api_client)
+    api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 sort_by = 'sort_by_example' # str | Order the results by these fields.              Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.              Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.              Default is null, the sort order specified in the query itself. (optional)
@@ -189,12 +189,12 @@ Fetch the data in various formats (if available, or if not simply being informed
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -204,15 +204,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.SqlBackgroundExecutionApi(api_client)
+    api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 sort_by = 'sort_by_example' # str | Order the results by these fields.              Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.              Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.              Default is null, the sort order specified in the query itself. (optional)
 filter = 'filter_example' # str | An ODATA filter per Finbourne.Filtering syntax. (optional)
@@ -271,12 +271,12 @@ Fetch the data in various formats (if available, or if not simply being informed
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -286,15 +286,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.SqlBackgroundExecutionApi(api_client)
+    api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 sort_by = 'sort_by_example' # str | Order the results by these fields.              Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.              Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.              Default is null, the sort order specified in the query itself. (optional)
 filter = 'filter_example' # str | An ODATA filter per Finbourne.Filtering syntax. (optional)
@@ -357,12 +357,12 @@ Fetch the data in various formats (if available, or if not simply being informed
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -372,15 +372,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.SqlBackgroundExecutionApi(api_client)
+    api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 sort_by = 'sort_by_example' # str | Order the results by these fields.              Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.              Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.              Default is null, the sort order specified in the query itself. (optional)
@@ -445,12 +445,12 @@ Fetch the data in various formats (if available, or if not simply being informed
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -460,15 +460,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.SqlBackgroundExecutionApi(api_client)
+    api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 sort_by = 'sort_by_example' # str | Order the results by these fields.              Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.              Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.              Default is null, the sort order specified in the query itself. (optional)
@@ -533,12 +533,12 @@ Fetch the data in various formats (if available, or if not simply being informed
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -548,15 +548,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.SqlBackgroundExecutionApi(api_client)
+    api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 sort_by = 'sort_by_example' # str | Order the results by these fields.              Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.              Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.              Default is null, the sort order specified in the query itself. (optional)
 filter = 'filter_example' # str | An ODATA filter per Finbourne.Filtering syntax. (optional)
@@ -615,12 +615,12 @@ View progress information (up until this point) The following error codes are to
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -630,15 +630,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.SqlBackgroundExecutionApi(api_client)
+    api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 
     try:
@@ -688,12 +688,12 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -703,15 +703,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.SqlBackgroundExecutionApi(api_client)
+    api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     body = 'body_example' # str | The HoneycombSql query to kick off.
 query_name = 'Intentionally slow test query' # str | A name for this query.  This goes into logs and is available in `Sys.Logs.HcQueryStart`. (optional)
 timeout_seconds = 0 # int | Maximum time the query may run for, in seconds: <0 → ∞, 0 → 7200 (2h) (optional) (default to 0)

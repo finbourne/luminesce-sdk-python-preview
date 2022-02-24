@@ -1,4 +1,4 @@
-# lusid_scheduler.ApplicationMetadataApi
+# luminesce.ApplicationMetadataApi
 
 All URIs are relative to *https://www.lusid.com/honeycomb*
 
@@ -20,12 +20,12 @@ Get the comprehensive set of resources that are available for access control
 ```python
 from __future__ import print_function
 import time
-import lusid_scheduler
-from lusid_scheduler.rest import ApiException
+import luminesce
+from luminesce.rest import ApiException
 from pprint import pprint
 # Defining the host is optional and defaults to https://www.lusid.com/honeycomb
 # See configuration.py for a list of all supported configuration parameters.
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 
@@ -35,15 +35,15 @@ configuration = lusid_scheduler.Configuration(
 # satisfies your auth use case.
 
 # Configure OAuth2 access token for authorization: oauth2
-configuration = lusid_scheduler.Configuration(
+configuration = luminesce.Configuration(
     host = "https://www.lusid.com/honeycomb"
 )
 configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # Enter a context with an instance of the API client
-with lusid_scheduler.ApiClient(configuration) as api_client:
+with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = lusid_scheduler.ApplicationMetadataApi(api_client)
+    api_instance = luminesce.ApplicationMetadataApi(api_client)
     
     try:
         # [EXPERIMENTAL] GetServicesAsAccessControlledResources: Get resources available for access control

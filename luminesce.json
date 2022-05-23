@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.9.31",
+    "version": "1.9.36",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -270,9 +270,9 @@
         "tags": [
           "Historically Executed Queries"
         ],
-        "summary": "[EXPERIMENTAL] FetchQueryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).",
-        "description": "Fetch the data in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
-        "operationId": "FetchQueryResultHistogram",
+        "summary": "[EXPERIMENTAL] FetchHistoryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).",
+        "description": "Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "operationId": "FetchHistoryResultHistogram",
         "parameters": [
           {
             "name": "executionId",
@@ -2518,6 +2518,142 @@
         "x-fbn-apistatus": "Experimental"
       }
     },
+    "/api/SqlBackground/{executionId}/histogram": {
+      "get": {
+        "tags": [
+          "Sql Background Execution"
+        ],
+        "summary": "[EXPERIMENTAL] FetchQueryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).",
+        "description": "Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "operationId": "FetchQueryResultHistogram",
+        "parameters": [
+          {
+            "name": "executionId",
+            "in": "path",
+            "description": "ExecutionId returned when starting the query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "ExecutionId returned when starting the query"
+            }
+          },
+          {
+            "name": "timestampFieldName",
+            "in": "query",
+            "description": "Name of the timestamp field used in building the histogram",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Name of the timestamp field used in building the histogram"
+            }
+          },
+          {
+            "name": "startAt",
+            "in": "query",
+            "description": "Start point (of the timestampFieldName field) for the histogram",
+            "schema": {
+              "type": "string",
+              "description": "Start point (of the timestampFieldName field) for the histogram",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "endAt",
+            "in": "query",
+            "description": "End point (of the timestampFieldName field) for the histogram",
+            "schema": {
+              "type": "string",
+              "description": "End point (of the timestampFieldName field) for the histogram",
+              "format": "date-time",
+              "nullable": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "bucketSize",
+            "in": "query",
+            "description": "Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated.",
+            "schema": {
+              "type": "string",
+              "description": "Optional histogram bucket width.  If not provided a set number of buckets between start/end range will be generated.",
+              "format": "date-span",
+              "nullable": true
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "An ODATA filter per Finbourne.Filtering syntax.",
+            "schema": {
+              "type": "string",
+              "description": "An ODATA filter per Finbourne.Filtering syntax.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "jsonProper",
+            "in": "query",
+            "description": "Should this be text/json (not json-encoded-as-a-string)",
+            "schema": {
+              "type": "boolean",
+              "description": "Should this be text/json (not json-encoded-as-a-string)",
+              "default": false
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
     "/api/SqlBackground/{executionId}/json": {
       "get": {
         "tags": [
@@ -3650,7 +3786,8 @@
           "EdiInstrument",
           "EdiInstrumentWriter",
           "Testing",
-          "MarketplaceClientLoadHistory"
+          "MarketplaceClientLoadHistory",
+          "InsightsMetricsEntitlement"
         ],
         "type": "string"
       },

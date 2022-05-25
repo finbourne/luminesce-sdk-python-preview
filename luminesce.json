@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.9.41",
+    "version": "1.9.58",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -3352,6 +3352,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Json (as a string) data request links for all of the child queries",
             "nullable": true,
             "readOnly": true
           },
@@ -3360,6 +3361,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Json-proper data request links for all of the child queries",
             "nullable": true,
             "readOnly": true
           },
@@ -3368,6 +3370,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "CSV data request links for all of the child queries",
             "nullable": true,
             "readOnly": true
           },
@@ -3376,6 +3379,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Pipe delimited data request links for all of the child queries",
             "nullable": true,
             "readOnly": true
           },
@@ -3384,6 +3388,7 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "Excel workbook data request links for all of the child queries",
             "nullable": true,
             "readOnly": true
           },
@@ -3392,6 +3397,16 @@
             "items": {
               "$ref": "#/components/schemas/Link"
             },
+            "description": "SqLite DB data request links for all of the child queries",
+            "nullable": true,
+            "readOnly": true
+          },
+          "histogram": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Histogram links for all of the child queries",
             "nullable": true,
             "readOnly": true
           }

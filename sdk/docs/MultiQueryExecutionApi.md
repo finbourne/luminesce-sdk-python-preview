@@ -193,7 +193,7 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.MultiQueryExecutionApi(api_client)
     type = luminesce.MultiQueryDefinitionType() # MultiQueryDefinitionType | An enum value defining the set of statements being executed
-body = 'body_example' # str | A search value (e.g. 'Apple' on an instrument search)
+body = 'body_example' # str | A \"search\" value (e.g. 'Apple' on an instrument search, a `Finbourne.Filtering` expression of Insights, etc.)  In the cases where \"Nothing\" is valid for a `Finbourne.Filtering` expression, pass `True`.
 as_at = '2013-10-20T19:20:30+01:00' # datetime | The AsAt time used by any bitemporal provider in the queries. (optional)
 effective_at = '2013-10-20T19:20:30+01:00' # datetime | The EffectiveAt time used by any bitemporal provider in the queries. (optional)
 limit1 = 56 # int | A limit that is applied to first-level queries (e.g. Instruments themselves) (optional)
@@ -217,7 +217,7 @@ keep_for_seconds = 0 # int | Maximum time the result may be kept for, in seconds
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **type** | [**MultiQueryDefinitionType**](.md)| An enum value defining the set of statements being executed | 
- **body** | **str**| A search value (e.g. &#39;Apple&#39; on an instrument search) | 
+ **body** | **str**| A \&quot;search\&quot; value (e.g. &#39;Apple&#39; on an instrument search, a &#x60;Finbourne.Filtering&#x60; expression of Insights, etc.)  In the cases where \&quot;Nothing\&quot; is valid for a &#x60;Finbourne.Filtering&#x60; expression, pass &#x60;True&#x60;. | 
  **as_at** | **datetime**| The AsAt time used by any bitemporal provider in the queries. | [optional] 
  **effective_at** | **datetime**| The EffectiveAt time used by any bitemporal provider in the queries. | [optional] 
  **limit1** | **int**| A limit that is applied to first-level queries (e.g. Instruments themselves) | [optional] 

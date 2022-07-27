@@ -4,13 +4,13 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_catalog**](CurrentTableFieldCatalogApi.md#get_catalog) | **GET** /api/Catalog | [EXPERIMENTAL] GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)
+[**get_catalog**](CurrentTableFieldCatalogApi.md#get_catalog) | **GET** /api/Catalog | GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)
 
 
 # **get_catalog**
 > str get_catalog(free_text_search=free_text_search, json_proper=json_proper)
 
-[EXPERIMENTAL] GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)
+GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)
 
  The following HoneycombSql is executed to return this information:  ```sql select     coalesce(f.TableName, r.Name) as TableName,     coalesce(f.FieldName, 'N/A') as FieldName,     f.DataType,     f.FieldType,     f.IsPrimaryKey,     f.IsMain,     case          when f.TableName is not null              then f.Description         else             r.Name || ' returns a different set of columns depending on use.'         end as Description,     f.ParamDefaultValue,     f.TableParamColumns,     min(r.Description) as ProviderDescription from     Sys.Registration r     left outer join Sys.Field f         on r.Name = f.TableName where     r.Type in ('DirectProvider', 'DataProvider')     and      r.ShowAll = false group by     1, 2, 3, 4, 5, 6, 8, 9 order by     1, 5 desc, 6 desc, 2     ```  The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized 
 
@@ -48,7 +48,7 @@ with luminesce.ApiClient(configuration) as api_client:
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
-        # [EXPERIMENTAL] GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)
+        # GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)
         api_response = api_instance.get_catalog(free_text_search=free_text_search, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:

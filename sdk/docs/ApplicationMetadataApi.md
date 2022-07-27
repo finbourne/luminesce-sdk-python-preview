@@ -4,13 +4,13 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_services_as_access_controlled_resources**](ApplicationMetadataApi.md#get_services_as_access_controlled_resources) | **GET** /api/metadata/access/resources | [EXPERIMENTAL] GetServicesAsAccessControlledResources: Get resources available for access control
+[**get_services_as_access_controlled_resources**](ApplicationMetadataApi.md#get_services_as_access_controlled_resources) | **GET** /api/metadata/access/resources | GetServicesAsAccessControlledResources: Get resources available for access control
 
 
 # **get_services_as_access_controlled_resources**
 > ResourceListOfAccessControlledResource get_services_as_access_controlled_resources()
 
-[EXPERIMENTAL] GetServicesAsAccessControlledResources: Get resources available for access control
+GetServicesAsAccessControlledResources: Get resources available for access control
 
 Get the comprehensive set of resources that are available for access control
 
@@ -46,7 +46,7 @@ with luminesce.ApiClient(configuration) as api_client:
     api_instance = luminesce.ApplicationMetadataApi(api_client)
     
     try:
-        # [EXPERIMENTAL] GetServicesAsAccessControlledResources: Get resources available for access control
+        # GetServicesAsAccessControlledResources: Get resources available for access control
         api_response = api_instance.get_services_as_access_controlled_resources()
         pprint(api_response)
     except ApiException as e:

@@ -4,17 +4,17 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancel_history**](HistoricallyExecutedQueriesApi.md#cancel_history) | **DELETE** /api/History/{executionId} | [EXPERIMENTAL] CancelHistory: Cancels (if running) or clears the data from (if completed) a previously started History query
-[**fetch_history_result_histogram**](HistoricallyExecutedQueriesApi.md#fetch_history_result_histogram) | **GET** /api/History/{executionId}/histogram | [EXPERIMENTAL] FetchHistoryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).
-[**fetch_history_result_json**](HistoricallyExecutedQueriesApi.md#fetch_history_result_json) | **GET** /api/History/{executionId}/json | [EXPERIMENTAL] FetchHistoryResultJson: Fetches the result from a previously started query, in JSON format.
-[**get_history**](HistoricallyExecutedQueriesApi.md#get_history) | **GET** /api/History | [EXPERIMENTAL] GetHistory: Shows queries executed in a given historical time window (in Json format).
-[**get_progress_of_history**](HistoricallyExecutedQueriesApi.md#get_progress_of_history) | **GET** /api/History/{executionId} | [EXPERIMENTAL] GetProgressOfHistory: View progress information (up until this point) of a history query
+[**cancel_history**](HistoricallyExecutedQueriesApi.md#cancel_history) | **DELETE** /api/History/{executionId} | CancelHistory: Cancels (if running) or clears the data from (if completed) a previously started History query
+[**fetch_history_result_histogram**](HistoricallyExecutedQueriesApi.md#fetch_history_result_histogram) | **GET** /api/History/{executionId}/histogram | FetchHistoryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).
+[**fetch_history_result_json**](HistoricallyExecutedQueriesApi.md#fetch_history_result_json) | **GET** /api/History/{executionId}/json | FetchHistoryResultJson: Fetches the result from a previously started query, in JSON format.
+[**get_history**](HistoricallyExecutedQueriesApi.md#get_history) | **GET** /api/History | GetHistory: Shows queries executed in a given historical time window (in Json format).
+[**get_progress_of_history**](HistoricallyExecutedQueriesApi.md#get_progress_of_history) | **GET** /api/History/{executionId} | GetProgressOfHistory: View progress information (up until this point) of a history query
 
 
 # **cancel_history**
 > BackgroundQueryCancelResponse cancel_history(execution_id)
 
-[EXPERIMENTAL] CancelHistory: Cancels (if running) or clears the data from (if completed) a previously started History query
+CancelHistory: Cancels (if running) or clears the data from (if completed) a previously started History query
 
 Cancel the query (if still running) / clear the data (if already returned) The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 404 Not Found : The requested query result doesn't exist and is not running. 
 
@@ -51,7 +51,7 @@ with luminesce.ApiClient(configuration) as api_client:
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 
     try:
-        # [EXPERIMENTAL] CancelHistory: Cancels (if running) or clears the data from (if completed) a previously started History query
+        # CancelHistory: Cancels (if running) or clears the data from (if completed) a previously started History query
         api_response = api_instance.cancel_history(execution_id)
         pprint(api_response)
     except ApiException as e:
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 # **fetch_history_result_histogram**
 > str fetch_history_result_histogram(execution_id, bucket_size=bucket_size, filter=filter, json_proper=json_proper)
 
-[EXPERIMENTAL] FetchHistoryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).
+FetchHistoryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).
 
 Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
@@ -127,7 +127,7 @@ filter = 'filter_example' # str | An ODATA filter per Finbourne.Filtering syntax
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
-        # [EXPERIMENTAL] FetchHistoryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).
+        # FetchHistoryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).
         api_response = api_instance.fetch_history_result_histogram(execution_id, bucket_size=bucket_size, filter=filter, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 # **fetch_history_result_json**
 > str fetch_history_result_json(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page, json_proper=json_proper)
 
-[EXPERIMENTAL] FetchHistoryResultJson: Fetches the result from a previously started query, in JSON format.
+FetchHistoryResultJson: Fetches the result from a previously started query, in JSON format.
 
 Fetch the data in Json format (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
@@ -211,7 +211,7 @@ page = 0 # int | 0-N based on chunk sized determined by the limit, ignored if li
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
-        # [EXPERIMENTAL] FetchHistoryResultJson: Fetches the result from a previously started query, in JSON format.
+        # FetchHistoryResultJson: Fetches the result from a previously started query, in JSON format.
         api_response = api_instance.fetch_history_result_json(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:
@@ -255,7 +255,7 @@ Name | Type | Description  | Notes
 # **get_history**
 > BackgroundQueryResponse get_history(start_at=start_at, end_at=end_at, free_text_search=free_text_search, show_all=show_all)
 
-[EXPERIMENTAL] GetHistory: Shows queries executed in a given historical time window (in Json format).
+GetHistory: Shows queries executed in a given historical time window (in Json format).
 
  Starts to load the historical query logs for a certain time range, search criteria, etc.  The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized 
 
@@ -295,7 +295,7 @@ free_text_search = 'free_text_search_example' # str | Some test that must be in 
 show_all = False # bool | For users with extra permissions, they may optionally see other users' queries. (optional) (default to False)
 
     try:
-        # [EXPERIMENTAL] GetHistory: Shows queries executed in a given historical time window (in Json format).
+        # GetHistory: Shows queries executed in a given historical time window (in Json format).
         api_response = api_instance.get_history(start_at=start_at, end_at=end_at, free_text_search=free_text_search, show_all=show_all)
         pprint(api_response)
     except ApiException as e:
@@ -334,7 +334,7 @@ Name | Type | Description  | Notes
 # **get_progress_of_history**
 > BackgroundQueryProgressResponse get_progress_of_history(execution_id)
 
-[EXPERIMENTAL] GetProgressOfHistory: View progress information (up until this point) of a history query
+GetProgressOfHistory: View progress information (up until this point) of a history query
 
 View progress information (up until this point) of previously started History query The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 404 Not Found : The requested query result doesn't exist and is not running. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
@@ -371,7 +371,7 @@ with luminesce.ApiClient(configuration) as api_client:
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 
     try:
-        # [EXPERIMENTAL] GetProgressOfHistory: View progress information (up until this point) of a history query
+        # GetProgressOfHistory: View progress information (up until this point) of a history query
         api_response = api_instance.get_progress_of_history(execution_id)
         pprint(api_response)
     except ApiException as e:

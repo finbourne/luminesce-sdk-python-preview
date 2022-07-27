@@ -4,23 +4,23 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_by_query_csv**](SqlExecutionApi.md#get_by_query_csv) | **GET** /api/Sql/csv/{query} | [EXPERIMENTAL] GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
-[**get_by_query_excel**](SqlExecutionApi.md#get_by_query_excel) | **GET** /api/Sql/excel/{query} | [EXPERIMENTAL] GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
-[**get_by_query_json**](SqlExecutionApi.md#get_by_query_json) | **GET** /api/Sql/json/{query} | [EXPERIMENTAL] GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
-[**get_by_query_pipe**](SqlExecutionApi.md#get_by_query_pipe) | **GET** /api/Sql/pipe/{query} | [EXPERIMENTAL] GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
-[**get_by_query_sqlite**](SqlExecutionApi.md#get_by_query_sqlite) | **GET** /api/Sql/sqlite/{query} | [EXPERIMENTAL] GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
-[**put_by_query_csv**](SqlExecutionApi.md#put_by_query_csv) | **PUT** /api/Sql/csv | [EXPERIMENTAL] PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
-[**put_by_query_excel**](SqlExecutionApi.md#put_by_query_excel) | **PUT** /api/Sql/excel | [EXPERIMENTAL] PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
-[**put_by_query_json**](SqlExecutionApi.md#put_by_query_json) | **PUT** /api/Sql/json | [EXPERIMENTAL] PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
-[**put_by_query_pipe**](SqlExecutionApi.md#put_by_query_pipe) | **PUT** /api/Sql/pipe | [EXPERIMENTAL] PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
-[**put_by_query_sqlite**](SqlExecutionApi.md#put_by_query_sqlite) | **PUT** /api/Sql/sqlite | [EXPERIMENTAL] PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
-[**put_query_to_format**](SqlExecutionApi.md#put_query_to_format) | **PUT** /api/Sql/pretty | [EXPERIMENTAL] PutQueryToFormat: Executes Sql, returned in JSON format, where the sql is the post-body url.
+[**get_by_query_csv**](SqlExecutionApi.md#get_by_query_csv) | **GET** /api/Sql/csv/{query} | GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
+[**get_by_query_excel**](SqlExecutionApi.md#get_by_query_excel) | **GET** /api/Sql/excel/{query} | GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
+[**get_by_query_json**](SqlExecutionApi.md#get_by_query_json) | **GET** /api/Sql/json/{query} | GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
+[**get_by_query_pipe**](SqlExecutionApi.md#get_by_query_pipe) | **GET** /api/Sql/pipe/{query} | GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
+[**get_by_query_sqlite**](SqlExecutionApi.md#get_by_query_sqlite) | **GET** /api/Sql/sqlite/{query} | GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
+[**put_by_query_csv**](SqlExecutionApi.md#put_by_query_csv) | **PUT** /api/Sql/csv | PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
+[**put_by_query_excel**](SqlExecutionApi.md#put_by_query_excel) | **PUT** /api/Sql/excel | PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
+[**put_by_query_json**](SqlExecutionApi.md#put_by_query_json) | **PUT** /api/Sql/json | PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
+[**put_by_query_pipe**](SqlExecutionApi.md#put_by_query_pipe) | **PUT** /api/Sql/pipe | PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
+[**put_by_query_sqlite**](SqlExecutionApi.md#put_by_query_sqlite) | **PUT** /api/Sql/sqlite | PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
+[**put_query_to_format**](SqlExecutionApi.md#put_query_to_format) | **PUT** /api/Sql/pretty | PutQueryToFormat: Executes Sql, returned in JSON format, where the sql is the post-body url.
 
 
 # **get_by_query_csv**
 > str get_by_query_csv(query, query_name=query_name, download=download, timeout=timeout)
 
-[EXPERIMENTAL] GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
+GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
 
  For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -60,7 +60,7 @@ download = False # bool | Makes this a file-download request (as opposed to retu
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # [EXPERIMENTAL] GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
+        # GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
         api_response = api_instance.get_by_query_csv(query, query_name=query_name, download=download, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 # **get_by_query_excel**
 > str get_by_query_excel(query, query_name=query_name, timeout=timeout)
 
-[EXPERIMENTAL] GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
+GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
 
  For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -139,7 +139,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # [EXPERIMENTAL] GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
+        # GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
         api_response = api_instance.get_by_query_excel(query, query_name=query_name, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 # **get_by_query_json**
 > str get_by_query_json(query, query_name=query_name, timeout=timeout, json_proper=json_proper)
 
-[EXPERIMENTAL] GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
+GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
 
  For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -218,7 +218,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
-        # [EXPERIMENTAL] GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
+        # GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
         api_response = api_instance.get_by_query_json(query, query_name=query_name, timeout=timeout, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:
@@ -258,7 +258,7 @@ Name | Type | Description  | Notes
 # **get_by_query_pipe**
 > str get_by_query_pipe(query, query_name=query_name, download=download, timeout=timeout)
 
-[EXPERIMENTAL] GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
+GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
 
  For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -298,7 +298,7 @@ download = False # bool | Makes this a file-download request (as opposed to retu
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # [EXPERIMENTAL] GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
+        # GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
         api_response = api_instance.get_by_query_pipe(query, query_name=query_name, download=download, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
@@ -338,7 +338,7 @@ Name | Type | Description  | Notes
 # **get_by_query_sqlite**
 > str get_by_query_sqlite(query, query_name=query_name, timeout=timeout)
 
-[EXPERIMENTAL] GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
+GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
 
  For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -377,7 +377,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # [EXPERIMENTAL] GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
+        # GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
         api_response = api_instance.get_by_query_sqlite(query, query_name=query_name, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
@@ -416,7 +416,7 @@ Name | Type | Description  | Notes
 # **put_by_query_csv**
 > str put_by_query_csv(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
 
-[EXPERIMENTAL] PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
+PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
 
  For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -456,7 +456,7 @@ download = False # bool | Makes this a file-download request (as opposed to retu
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # [EXPERIMENTAL] PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
+        # PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
         api_response = api_instance.put_by_query_csv(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
@@ -496,7 +496,7 @@ Name | Type | Description  | Notes
 # **put_by_query_excel**
 > str put_by_query_excel(body, query_name=query_name, timeout_seconds=timeout_seconds)
 
-[EXPERIMENTAL] PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
+PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
 
  For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -535,7 +535,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # [EXPERIMENTAL] PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
+        # PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
         api_response = api_instance.put_by_query_excel(body, query_name=query_name, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
@@ -574,7 +574,7 @@ Name | Type | Description  | Notes
 # **put_by_query_json**
 > str put_by_query_json(body, query_name=query_name, timeout_seconds=timeout_seconds, json_proper=json_proper)
 
-[EXPERIMENTAL] PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
+PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
 
  For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -614,7 +614,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
-        # [EXPERIMENTAL] PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
+        # PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
         api_response = api_instance.put_by_query_json(body, query_name=query_name, timeout_seconds=timeout_seconds, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:
@@ -654,7 +654,7 @@ Name | Type | Description  | Notes
 # **put_by_query_pipe**
 > str put_by_query_pipe(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
 
-[EXPERIMENTAL] PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
+PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
 
  For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -694,7 +694,7 @@ download = False # bool | Makes this a file-download request (as opposed to retu
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # [EXPERIMENTAL] PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
+        # PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
         api_response = api_instance.put_by_query_pipe(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
@@ -734,7 +734,7 @@ Name | Type | Description  | Notes
 # **put_by_query_sqlite**
 > str put_by_query_sqlite(body, query_name=query_name, timeout_seconds=timeout_seconds)
 
-[EXPERIMENTAL] PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
+PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
 
  For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
@@ -773,7 +773,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # [EXPERIMENTAL] PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
+        # PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
         api_response = api_instance.put_by_query_sqlite(body, query_name=query_name, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
@@ -812,7 +812,7 @@ Name | Type | Description  | Notes
 # **put_query_to_format**
 > str put_query_to_format(body, trailing_commas=trailing_commas, uppercase_keywords=uppercase_keywords, break_join_on_sections=break_join_on_sections, space_after_expanded_comma=space_after_expanded_comma, keyword_standardization=keyword_standardization, expand_comma_lists=expand_comma_lists, expand_in_lists=expand_in_lists, expand_boolean_expressions=expand_boolean_expressions, expand_between_conditions=expand_between_conditions, expand_case_statements=expand_case_statements, max_line_width=max_line_width)
 
-[EXPERIMENTAL] PutQueryToFormat: Executes Sql, returned in JSON format, where the sql is the post-body url.
+PutQueryToFormat: Executes Sql, returned in JSON format, where the sql is the post-body url.
 
  This formats SQL (given a set of options as to how to do so). It takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly) and returns the reformatted version. e.g. ```sql select x,y,z from a inner join b on a.x=b.x where x>y or y!=z ``` becomes ```sql select x, y, z from a inner join b    on a.x = b.x where x > y    or y != z ``` 
 
@@ -860,7 +860,7 @@ expand_case_statements = True # bool | Should case-statements have line breaks a
 max_line_width = 120 # int | Maximum number of characters to allow on one line (if possible) (optional) (default to 120)
 
     try:
-        # [EXPERIMENTAL] PutQueryToFormat: Executes Sql, returned in JSON format, where the sql is the post-body url.
+        # PutQueryToFormat: Executes Sql, returned in JSON format, where the sql is the post-body url.
         api_response = api_instance.put_query_to_format(body, trailing_commas=trailing_commas, uppercase_keywords=uppercase_keywords, break_join_on_sections=break_join_on_sections, space_after_expanded_comma=space_after_expanded_comma, keyword_standardization=keyword_standardization, expand_comma_lists=expand_comma_lists, expand_in_lists=expand_in_lists, expand_boolean_expressions=expand_boolean_expressions, expand_between_conditions=expand_between_conditions, expand_case_statements=expand_case_statements, max_line_width=max_line_width)
         pprint(api_response)
     except ApiException as e:

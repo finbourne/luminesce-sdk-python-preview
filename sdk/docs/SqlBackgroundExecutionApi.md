@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**fetch_query_result_pipe**](SqlBackgroundExecutionApi.md#fetch_query_result_pipe) | **GET** /api/SqlBackground/{executionId}/pipe | FetchQueryResultPipe: Fetches the result from a previously started query, in pipe-delimited format.
 [**fetch_query_result_sqlite**](SqlBackgroundExecutionApi.md#fetch_query_result_sqlite) | **GET** /api/SqlBackground/{executionId}/sqlite | FetchQueryResultSqlite: Fetches the result from a previously started query, in SqLite format.
 [**get_progress_of**](SqlBackgroundExecutionApi.md#get_progress_of) | **GET** /api/SqlBackground/{executionId} | GetProgressOf: View progress information (up until this point)
-[**start_query**](SqlBackgroundExecutionApi.md#start_query) | **PUT** /api/SqlBackground | StartQuery: Starts to Execute HoneycombSql in the background.
+[**start_query**](SqlBackgroundExecutionApi.md#start_query) | **PUT** /api/SqlBackground | StartQuery: Starts to Execute LuminesceSql in the background.
 
 
 # **cancel_query**
@@ -765,7 +765,7 @@ Name | Type | Description  | Notes
 # **start_query**
 > BackgroundQueryResponse start_query(body, query_name=query_name, timeout_seconds=timeout_seconds, keep_for_seconds=keep_for_seconds)
 
-StartQuery: Starts to Execute HoneycombSql in the background.
+StartQuery: Starts to Execute LuminesceSql in the background.
 
  Allow for starting a potentially long running query and getting back an immediate response with how to  - fetch the data in various formats (if available, or if not simply being informed it is not yet ready) - view progress information (up until this point) - cancel the query (if still running) / clear the data (if already returned)  This can still error on things like an outright syntax error, but more runtime errors (e.g. from providers) will not cause this to error (that will happen when attempting to fetch data)  Here is an example that intentionally takes one minute to run:  ```sql select Str, Takes500Ms from Testing1K where UseLinq = true and [Int] <= 120 ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time) - 401 Unauthorized 
 
@@ -799,13 +799,13 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
-    body = 'body_example' # str | The HoneycombSql query to kick off.
+    body = 'body_example' # str | The LuminesceSql query to kick off.
 query_name = 'Intentionally slow test query' # str | A name for this query.  This goes into logs and is available in `Sys.Logs.HcQueryStart`. (optional)
 timeout_seconds = 0 # int | Maximum time the query may run for, in seconds: <0 → ∞, 0 → 7200 (2h) (optional) (default to 0)
 keep_for_seconds = 0 # int | Maximum time the result may be kept for, in seconds: <0 → 1200 (20m), 0 → 28800 (8h), max = 2,678,400 (31d) (optional) (default to 0)
 
     try:
-        # StartQuery: Starts to Execute HoneycombSql in the background.
+        # StartQuery: Starts to Execute LuminesceSql in the background.
         api_response = api_instance.start_query(body, query_name=query_name, timeout_seconds=timeout_seconds, keep_for_seconds=keep_for_seconds)
         pprint(api_response)
     except ApiException as e:
@@ -816,7 +816,7 @@ keep_for_seconds = 0 # int | Maximum time the result may be kept for, in seconds
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| The HoneycombSql query to kick off. | 
+ **body** | **str**| The LuminesceSql query to kick off. | 
  **query_name** | **str**| A name for this query.  This goes into logs and is available in &#x60;Sys.Logs.HcQueryStart&#x60;. | [optional] 
  **timeout_seconds** | **int**| Maximum time the query may run for, in seconds: &lt;0 → ∞, 0 → 7200 (2h) | [optional] [default to 0]
  **keep_for_seconds** | **int**| Maximum time the result may be kept for, in seconds: &lt;0 → 1200 (20m), 0 → 28800 (8h), max &#x3D; 2,678,400 (31d) | [optional] [default to 0]

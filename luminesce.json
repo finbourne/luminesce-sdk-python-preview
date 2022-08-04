@@ -1,14 +1,14 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "FINBOURNE Honeycomb Web API",
+    "title": "FINBOURNE Luminesce Web API",
     "termsOfService": "https://www.finbourne.com/legal/terms-conditions",
     "contact": {
       "name": "FINBOURNE Technology",
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.11.79",
+    "version": "1.11.89",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -27,7 +27,7 @@
           "Current Table/Field Catalog"
         ],
         "summary": "GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)",
-        "description": "\nThe following HoneycombSql is executed to return this information:\n\n```sql\nselect\n    coalesce(f.TableName, r.Name) as TableName,\n    coalesce(f.FieldName, 'N/A') as FieldName,\n    f.DataType,\n    f.FieldType,\n    f.IsPrimaryKey,\n    f.IsMain,\n    case \n        when f.TableName is not null \n            then f.Description\n        else\n            r.Name || ' returns a different set of columns depending on use.'\n        end as Description,\n    f.ParamDefaultValue,\n    f.TableParamColumns,\n    min(r.Description) as ProviderDescription\nfrom\n    Sys.Registration r\n    left outer join Sys.Field f\n        on r.Name = f.TableName\nwhere\n    r.Type in ('DirectProvider', 'DataProvider')\n    and \n    r.ShowAll = false\ngroup by\n    1, 2, 3, 4, 5, 6, 8, 9\norder by\n    1, 5 desc, 6 desc, 2\n   \n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
+        "description": "\nThe following LuminesceSql is executed to return this information:\n\n```sql\nselect\n    coalesce(f.TableName, r.Name) as TableName,\n    coalesce(f.FieldName, 'N/A') as FieldName,\n    f.DataType,\n    f.FieldType,\n    f.IsPrimaryKey,\n    f.IsMain,\n    case \n        when f.TableName is not null \n            then f.Description\n        else\n            r.Name || ' returns a different set of columns depending on use.'\n        end as Description,\n    f.ParamDefaultValue,\n    f.TableParamColumns,\n    min(r.Description) as ProviderDescription\nfrom\n    Sys.Registration r\n    left outer join Sys.Field f\n        on r.Name = f.TableName\nwhere\n    r.Type in ('DirectProvider', 'DataProvider')\n    and \n    r.ShowAll = false\ngroup by\n    1, 2, 3, 4, 5, 6, 8, 9\norder by\n    1, 5 desc, 6 desc, 2\n   \n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
         "operationId": "GetCatalog",
         "parameters": [
           {
@@ -518,7 +518,7 @@
           "Application Metadata"
         ],
         "summary": "GetServicesAsAccessControlledResources: Get resources available for access control",
-        "description": "Get the comprehensive set of resources that are available for access control",
+        "description": "\nGet the comprehensive set of resources that are available for access control.\n\nThe following LuminesceSql is executed to return this information, \nwhich is then packaged up as AccessControlledResource:\n\n```sql\nselect\n    Name,\n    min(coalesce(Description, Name) || ' (' || Type || ')') as Description\nfrom\n    Sys.Registration\nwhere\n    Type in ('DirectProvider', 'DataProvider')\n    and\n    ShowAll = true\ngroup by 1\norder by 1\n   \n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
         "operationId": "GetServicesAsAccessControlledResources",
         "responses": {
           "200": {
@@ -555,7 +555,7 @@
         "tags": [
           "Multi-Query Execution"
         ],
-        "summary": "StartQueries: Starts to Execute the HoneycombSql statements in the background.",
+        "summary": "StartQueries: Starts to Execute the LuminesceSql statements in the background.",
         "description": "\nAllow for starting a potentially long running query and getting back an immediate response with how to \n- fetch the data in various formats (if available, or if not simply being informed it is not yet ready), on a per result basis\n- view progress information (up until this point), for all results in one go\n- cancel the queries (if still running) / clear the data (if already returned)\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time)\n- 401 Unauthorized\n",
         "operationId": "StartQueries",
         "parameters": [
@@ -840,7 +840,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.",
-        "description": "\nFor more complex HoneycombSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
         "operationId": "PutByQueryCsv",
         "parameters": [
           {
@@ -880,12 +880,12 @@
           }
         ],
         "requestBody": {
-          "description": "HoneycombSql to Execute (may be multi-line)",
+          "description": "LuminesceSql to Execute (may be multi-line)",
           "content": {
             "text/plain": {
               "schema": {
                 "type": "string",
-                "description": "HoneycombSql to Execute (may be multi-line)",
+                "description": "LuminesceSql to Execute (may be multi-line)",
                 "example": "select * from sys.field"
               }
             }
@@ -954,11 +954,11 @@
           {
             "name": "query",
             "in": "path",
-            "description": "HoneycombSql to Execute (must be one line only)",
+            "description": "LuminesceSql to Execute (must be one line only)",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "HoneycombSql to Execute (must be one line only)",
+              "description": "LuminesceSql to Execute (must be one line only)",
               "example": "select ^ from Sys.Field order by 1, 2"
             }
           },
@@ -1054,7 +1054,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.",
-        "description": "\nFor more complex HoneycombSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
         "operationId": "PutByQueryExcel",
         "parameters": [
           {
@@ -1083,12 +1083,12 @@
           }
         ],
         "requestBody": {
-          "description": "HoneycombSql to Execute (may be multi-line)",
+          "description": "LuminesceSql to Execute (may be multi-line)",
           "content": {
             "text/plain": {
               "schema": {
                 "type": "string",
-                "description": "HoneycombSql to Execute (may be multi-line)",
+                "description": "LuminesceSql to Execute (may be multi-line)",
                 "example": "select * from sys.field"
               }
             }
@@ -1157,11 +1157,11 @@
           {
             "name": "query",
             "in": "path",
-            "description": "HoneycombSql to Execute (must be one line only)",
+            "description": "LuminesceSql to Execute (must be one line only)",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "HoneycombSql to Execute (must be one line only)",
+              "description": "LuminesceSql to Execute (must be one line only)",
               "example": "select ^ from Sys.Field order by 1, 2"
             }
           },
@@ -1246,7 +1246,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.",
-        "description": "\nFor more complex HoneycombSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
         "operationId": "PutByQueryJson",
         "parameters": [
           {
@@ -1286,12 +1286,12 @@
           }
         ],
         "requestBody": {
-          "description": "HoneycombSql to Execute (may be multi-line)",
+          "description": "LuminesceSql to Execute (may be multi-line)",
           "content": {
             "text/plain": {
               "schema": {
                 "type": "string",
-                "description": "HoneycombSql to Execute (may be multi-line)",
+                "description": "LuminesceSql to Execute (may be multi-line)",
                 "example": "select * from sys.field"
               }
             }
@@ -1360,11 +1360,11 @@
           {
             "name": "query",
             "in": "path",
-            "description": "HoneycombSql to Execute (must be one line only)",
+            "description": "LuminesceSql to Execute (must be one line only)",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "HoneycombSql to Execute (must be one line only)",
+              "description": "LuminesceSql to Execute (must be one line only)",
               "example": "select ^ from Sys.Field order by 1, 2"
             }
           },
@@ -1460,7 +1460,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.",
-        "description": "\nFor more complex HoneycombSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
         "operationId": "PutByQueryPipe",
         "parameters": [
           {
@@ -1500,12 +1500,12 @@
           }
         ],
         "requestBody": {
-          "description": "HoneycombSql to Execute (may be multi-line)",
+          "description": "LuminesceSql to Execute (may be multi-line)",
           "content": {
             "text/plain": {
               "schema": {
                 "type": "string",
-                "description": "HoneycombSql to Execute (may be multi-line)",
+                "description": "LuminesceSql to Execute (may be multi-line)",
                 "example": "select * from sys.field"
               }
             }
@@ -1574,11 +1574,11 @@
           {
             "name": "query",
             "in": "path",
-            "description": "HoneycombSql to Execute (must be one line only)",
+            "description": "LuminesceSql to Execute (must be one line only)",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "HoneycombSql to Execute (must be one line only)",
+              "description": "LuminesceSql to Execute (must be one line only)",
               "example": "select ^ from Sys.Field order by 1, 2"
             }
           },
@@ -1801,12 +1801,12 @@
           }
         ],
         "requestBody": {
-          "description": "HoneycombSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it",
+          "description": "LuminesceSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it",
           "content": {
             "text/plain": {
               "schema": {
                 "type": "string",
-                "description": "HoneycombSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it",
+                "description": "LuminesceSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it",
                 "example": "select * from sys.field"
               }
             }
@@ -1869,7 +1869,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.",
-        "description": "\nFor more complex HoneycombSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
         "operationId": "PutByQuerySqlite",
         "parameters": [
           {
@@ -1898,12 +1898,12 @@
           }
         ],
         "requestBody": {
-          "description": "HoneycombSql to Execute (may be multi-line)",
+          "description": "LuminesceSql to Execute (may be multi-line)",
           "content": {
             "text/plain": {
               "schema": {
                 "type": "string",
-                "description": "HoneycombSql to Execute (may be multi-line)",
+                "description": "LuminesceSql to Execute (may be multi-line)",
                 "example": "select * from sys.field"
               }
             }
@@ -1972,11 +1972,11 @@
           {
             "name": "query",
             "in": "path",
-            "description": "HoneycombSql to Execute (must be one line only)",
+            "description": "LuminesceSql to Execute (must be one line only)",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "HoneycombSql to Execute (must be one line only)",
+              "description": "LuminesceSql to Execute (must be one line only)",
               "example": "select ^ from Sys.Field order by 1, 2"
             }
           },
@@ -2060,7 +2060,7 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "StartQuery: Starts to Execute HoneycombSql in the background.",
+        "summary": "StartQuery: Starts to Execute LuminesceSql in the background.",
         "description": "\nAllow for starting a potentially long running query and getting back an immediate response with how to \n- fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\n- view progress information (up until this point)\n- cancel the query (if still running) / clear the data (if already returned)\n\nThis can still error on things like an outright syntax error, but more runtime errors (e.g. from providers) will not\ncause this to error (that will happen when attempting to fetch data)\n\nHere is an example that intentionally takes one minute to run:\n\n```sql\nselect Str, Takes500Ms from Testing1K where UseLinq = true and [Int] <= 120\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time)\n- 401 Unauthorized\n",
         "operationId": "StartQuery",
         "parameters": [
@@ -2103,12 +2103,12 @@
           }
         ],
         "requestBody": {
-          "description": "The HoneycombSql query to kick off.",
+          "description": "The LuminesceSql query to kick off.",
           "content": {
             "text/plain": {
               "schema": {
                 "type": "string",
-                "description": "The HoneycombSql query to kick off.",
+                "description": "The LuminesceSql query to kick off.",
                 "example": "select Str, Takes500Ms from Testing1K where UseLinq = true and [Int] <= 120"
               }
             }
@@ -3465,7 +3465,7 @@
           },
           "query": {
             "type": "string",
-            "description": "The HoneycombSql of the original request",
+            "description": "The LuminesceSql of the original request",
             "nullable": true
           },
           "queryName": {
@@ -3883,15 +3883,15 @@
     },
     {
       "name": "Multi-Query Execution",
-      "description": "This executes a series of internally defined HoneycombSql statements in the background"
+      "description": "This executes a series of internally defined LuminesceSql statements in the background"
     },
     {
       "name": "Sql Background Execution",
-      "description": "This executes HoneycombSql and allows monitoring its completion"
+      "description": "This executes LuminesceSql and allows monitoring its completion"
     },
     {
       "name": "Sql Execution",
-      "description": "This executes HoneycombSql synchronously, allows for returning the resulting data in various formats and for pretty-printing of sql."
+      "description": "This executes LuminesceSql synchronously, allows for returning the resulting data in various formats and for pretty-printing of sql."
     }
   ],
   "x-tagGroups": {

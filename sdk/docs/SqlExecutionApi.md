@@ -54,7 +54,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
+    query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -71,7 +71,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | **str**| HoneycombSql to Execute (must be one line only) | 
+ **query** | **str**| LuminesceSql to Execute (must be one line only) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
@@ -134,7 +134,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
+    query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -150,7 +150,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | **str**| HoneycombSql to Execute (must be one line only) | 
+ **query** | **str**| LuminesceSql to Execute (must be one line only) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -212,7 +212,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
+    query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
@@ -229,7 +229,7 @@ json_proper = False # bool | Should this be text/json (not json-encoded-as-a-str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | **str**| HoneycombSql to Execute (must be one line only) | 
+ **query** | **str**| LuminesceSql to Execute (must be one line only) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
  **json_proper** | **bool**| Should this be text/json (not json-encoded-as-a-string) | [optional] [default to False]
@@ -292,7 +292,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
+    query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -309,7 +309,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | **str**| HoneycombSql to Execute (must be one line only) | 
+ **query** | **str**| LuminesceSql to Execute (must be one line only) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
@@ -372,7 +372,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    query = 'select ^ from Sys.Field order by 1, 2' # str | HoneycombSql to Execute (must be one line only)
+    query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -388,7 +388,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | **str**| HoneycombSql to Execute (must be one line only) | 
+ **query** | **str**| LuminesceSql to Execute (must be one line only) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 
 PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
 
- For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
+ For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
 ### Example
 
@@ -450,7 +450,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
+    body = 'body_example' # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -467,7 +467,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| HoneycombSql to Execute (may be multi-line) | 
+ **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
@@ -498,7 +498,7 @@ Name | Type | Description  | Notes
 
 PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
 
- For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
+ For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
 ### Example
 
@@ -530,7 +530,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
+    body = 'body_example' # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -546,7 +546,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| HoneycombSql to Execute (may be multi-line) | 
+ **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -576,7 +576,7 @@ Name | Type | Description  | Notes
 
 PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
 
- For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
+ For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
 ### Example
 
@@ -608,7 +608,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
+    body = 'body_example' # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
@@ -625,7 +625,7 @@ json_proper = False # bool | Should this be text/json (not json-encoded-as-a-str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| HoneycombSql to Execute (may be multi-line) | 
+ **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
  **json_proper** | **bool**| Should this be text/json (not json-encoded-as-a-string) | [optional] [default to False]
@@ -656,7 +656,7 @@ Name | Type | Description  | Notes
 
 PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
 
- For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
+ For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
 ### Example
 
@@ -688,7 +688,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
+    body = 'body_example' # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -705,7 +705,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| HoneycombSql to Execute (may be multi-line) | 
+ **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
@@ -736,7 +736,7 @@ Name | Type | Description  | Notes
 
 PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
 
- For more complex HoneycombSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
+ For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized 
 
 ### Example
 
@@ -768,7 +768,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 'body_example' # str | HoneycombSql to Execute (may be multi-line)
+    body = 'body_example' # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -784,7 +784,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| HoneycombSql to Execute (may be multi-line) | 
+ **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -846,7 +846,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 'body_example' # str | HoneycombSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it
+    body = 'body_example' # str | LuminesceSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it
 trailing_commas = True # bool | Should commas be after an expression (as opposed to before) (optional) (default to True)
 uppercase_keywords = False # bool | Should key words be capitalized (optional) (default to False)
 break_join_on_sections = True # bool | Should clauses on joins be given line breaks? (optional) (default to True)
@@ -871,7 +871,7 @@ max_line_width = 120 # int | Maximum number of characters to allow on one line (
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| HoneycombSql to Pretty-Print. Even if it doesn&#39;t parse an attempt will be made to format it | 
+ **body** | **str**| LuminesceSql to Pretty-Print. Even if it doesn&#39;t parse an attempt will be made to format it | 
  **trailing_commas** | **bool**| Should commas be after an expression (as opposed to before) | [optional] [default to True]
  **uppercase_keywords** | **bool**| Should key words be capitalized | [optional] [default to False]
  **break_join_on_sections** | **bool**| Should clauses on joins be given line breaks? | [optional] [default to True]

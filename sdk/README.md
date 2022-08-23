@@ -163,5 +163,3 @@ Class | Method | HTTP request | Description
 ## Author
 
 info@finbourne.com
-
-

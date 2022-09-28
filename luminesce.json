@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.11.248",
+    "version": "1.11.261",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -3664,11 +3664,11 @@
           "Information",
           "Warning",
           "Error",
-          "ExecutionKeepAlive",
-          "ProgressAndDebug",
-          "ProgressAndInformation",
+          "ProgressAndError",
           "ProgressAndWarning",
-          "ProgressAndError"
+          "ProgressAndInformation",
+          "ProgressAndDebug",
+          "ExecutionKeepAlive"
         ],
         "type": "string"
       },

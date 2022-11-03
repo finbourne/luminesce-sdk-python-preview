@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.11.439",
+    "version": "1.11.440",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -3598,13 +3598,13 @@
       "DataType": {
         "enum": [
           "Boolean",
-          "Date",
-          "DateTime",
-          "Decimal",
-          "Double",
           "Int",
           "BigInt",
+          "Double",
+          "Decimal",
           "Text",
+          "Date",
+          "DateTime",
           "Table"
         ],
         "type": "string"

@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.11.442",
+    "version": "1.11.447",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1454,6 +1454,198 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/Sql/parquet": {
+      "put": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "PutByQueryParquet: Executes Sql, returned in Parquet format, where the sql is the post-body url.",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "operationId": "PutByQueryParquet",
+        "parameters": [
+          {
+            "name": "queryName",
+            "in": "query",
+            "description": "Name to apply to the query in logs and `Sys.Logs.HcQueryStart`",
+            "schema": {
+              "type": "string",
+              "description": "Name to apply to the query in logs and `Sys.Logs.HcQueryStart`",
+              "nullable": true,
+              "example": "Get tables/fields"
+            }
+          },
+          {
+            "name": "timeoutSeconds",
+            "in": "query",
+            "description": "In seconds: <0 → ∞, 0 → 120s",
+            "schema": {
+              "type": "integer",
+              "description": "In seconds: <0 → ∞, 0 → 120s",
+              "format": "int32",
+              "default": 0,
+              "example": 120
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "LuminesceSql to Execute (may be multi-line)",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string",
+                "description": "LuminesceSql to Execute (may be multi-line)",
+                "example": "select * from sys.field"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/Sql/parquet/{query}": {
+      "get": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "GetByQueryParquet: Executes Sql, returned in Parquet (.parquet) format (as a file to be downloaded) format, where the sql is simply in the url.",
+        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "operationId": "GetByQueryParquet",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "description": "LuminesceSql to Execute (must be one line only)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "LuminesceSql to Execute (must be one line only)",
+              "example": "select ^ from Sys.Field order by 1, 2"
+            }
+          },
+          {
+            "name": "queryName",
+            "in": "query",
+            "description": "Name to apply to the query in logs and `Sys.Logs.HcQueryStart`",
+            "schema": {
+              "type": "string",
+              "description": "Name to apply to the query in logs and `Sys.Logs.HcQueryStart`",
+              "nullable": true,
+              "example": "Get tables/fields"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "In seconds: <0 → ∞, 0 → 120s",
+            "schema": {
+              "type": "integer",
+              "description": "In seconds: <0 → ∞, 0 → 120s",
+              "format": "int32",
+              "default": 0,
+              "example": 120
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
     "/api/Sql/pipe": {
       "put": {
         "tags": [
@@ -1990,6 +2182,220 @@
               "nullable": true,
               "example": "Get tables/fields"
             }
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "In seconds: <0 → ∞, 0 → 120s",
+            "schema": {
+              "type": "integer",
+              "description": "In seconds: <0 → ∞, 0 → 120s",
+              "format": "int32",
+              "default": 0,
+              "example": 120
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/Sql/xml": {
+      "put": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "PutByQueryXml: Executes Sql, returned in Xml format, where the sql is the post-body url.",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "operationId": "PutByQueryXml",
+        "parameters": [
+          {
+            "name": "queryName",
+            "in": "query",
+            "description": "Name to apply to the query in logs and `Sys.Logs.HcQueryStart`",
+            "schema": {
+              "type": "string",
+              "description": "Name to apply to the query in logs and `Sys.Logs.HcQueryStart`",
+              "nullable": true,
+              "example": "Get tables/fields"
+            }
+          },
+          {
+            "name": "download",
+            "in": "query",
+            "description": "Makes this a file-download request (as opposed to returning the data in the response-body)",
+            "schema": {
+              "type": "boolean",
+              "description": "Makes this a file-download request (as opposed to returning the data in the response-body)",
+              "default": false
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "timeoutSeconds",
+            "in": "query",
+            "description": "In seconds: <0 → ∞, 0 → 120s",
+            "schema": {
+              "type": "integer",
+              "description": "In seconds: <0 → ∞, 0 → 120s",
+              "format": "int32",
+              "default": 0,
+              "example": 120
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "LuminesceSql to Execute (may be multi-line)",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string",
+                "description": "LuminesceSql to Execute (may be multi-line)",
+                "example": "select * from sys.field"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/Sql/xml/{query}": {
+      "get": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "GetByQueryXml: Executes Sql, returned in Xml format, where the sql is simply in the url.",
+        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "operationId": "GetByQueryXml",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "description": "LuminesceSql to Execute (must be one line only)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "LuminesceSql to Execute (must be one line only)",
+              "example": "select ^ from Sys.Field order by 1, 2"
+            }
+          },
+          {
+            "name": "queryName",
+            "in": "query",
+            "description": "Name to apply to the query in logs and `Sys.Logs.HcQueryStart`",
+            "schema": {
+              "type": "string",
+              "description": "Name to apply to the query in logs and `Sys.Logs.HcQueryStart`",
+              "nullable": true,
+              "example": "Get tables/fields"
+            }
+          },
+          {
+            "name": "download",
+            "in": "query",
+            "description": "Makes this a file-download request (as opposed to returning the data in the response-body)",
+            "schema": {
+              "type": "boolean",
+              "description": "Makes this a file-download request (as opposed to returning the data in the response-body)",
+              "default": false
+            },
+            "x-nullable": true
           },
           {
             "name": "timeout",
@@ -2933,6 +3339,116 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/SqlBackground/{executionId}/parquet": {
+      "get": {
+        "tags": [
+          "Sql Background Execution"
+        ],
+        "summary": "FetchQueryResultParquet: Fetches the result from a previously started query, in Parquet format.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "operationId": "FetchQueryResultParquet",
+        "parameters": [
+          {
+            "name": "executionId",
+            "in": "path",
+            "description": "ExecutionId returned when starting the query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "ExecutionId returned when starting the query"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
+            "schema": {
+              "type": "string",
+              "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "An ODATA filter per Finbourne.Filtering syntax.",
+            "schema": {
+              "type": "string",
+              "description": "An ODATA filter per Finbourne.Filtering syntax.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Default is null (meaning return all columns in the original query itself).\r\nThe values are in terms of the result column name from the original data set and are comma delimited.\r\nThe power of this comes in that you may aggregate the data if you wish\r\n(that is the main reason for allowing this, in fact).\r\ne.g.:\r\n- `MyField`\r\n- `Max(x) FILTER (WHERE y > 12) as ABC` (max of a field, if another field lets it qualify, with a nice column name)\r\n- `count(*)` (count the rows for the given group, that would produce a rather ugly column name, but  it works)\r\n- `count(distinct x) as numOfXs`\r\nIf there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ]. \r\ne.g.\r\n- `some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name`\r\n  where you would likely want to pass `1` as the `groupBy` also.",
+            "schema": {
+              "type": "string",
+              "description": "Default is null (meaning return all columns in the original query itself).\r\nThe values are in terms of the result column name from the original data set and are comma delimited.\r\nThe power of this comes in that you may aggregate the data if you wish\r\n(that is the main reason for allowing this, in fact).\r\ne.g.:\r\n- `MyField`\r\n- `Max(x) FILTER (WHERE y > 12) as ABC` (max of a field, if another field lets it qualify, with a nice column name)\r\n- `count(*)` (count the rows for the given group, that would produce a rather ugly column name, but  it works)\r\n- `count(distinct x) as numOfXs`\r\nIf there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ]. \r\ne.g.\r\n- `some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name`\r\n  where you would likely want to pass `1` as the `groupBy` also.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "Groups by the specified fields.\r\n            A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).\r\n            e.g. `2,3`, `myColumn`.\r\n            Default is null (meaning no grouping will be performed on the selected columns).\r\n            This applies only over the result set being requested here, meaning indexes into the \"select\" parameter fields.\r\n            Only specify this if you are selecting aggregations in the \"select\" parameter.",
+            "schema": {
+              "type": "string",
+              "description": "Groups by the specified fields.\r\n            A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).\r\n            e.g. `2,3`, `myColumn`.\r\n            Default is null (meaning no grouping will be performed on the selected columns).\r\n            This applies only over the result set being requested here, meaning indexes into the \"select\" parameter fields.\r\n            Only specify this if you are selecting aggregations in the \"select\" parameter.",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
+    },
     "/api/SqlBackground/{executionId}/pipe": {
       "get": {
         "tags": [
@@ -3187,6 +3703,151 @@
         ],
         "x-fbn-apistatus": "Stable"
       }
+    },
+    "/api/SqlBackground/{executionId}/xml": {
+      "get": {
+        "tags": [
+          "Sql Background Execution"
+        ],
+        "summary": "FetchQueryResultXml: Fetches the result from a previously started query, in Xml format.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "operationId": "FetchQueryResultXml",
+        "parameters": [
+          {
+            "name": "executionId",
+            "in": "path",
+            "description": "ExecutionId returned when starting the query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "ExecutionId returned when starting the query"
+            }
+          },
+          {
+            "name": "download",
+            "in": "query",
+            "description": "Makes this a file-download request (as opposed to returning the data in the response-body)",
+            "schema": {
+              "type": "boolean",
+              "description": "Makes this a file-download request (as opposed to returning the data in the response-body)",
+              "default": false
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
+            "schema": {
+              "type": "string",
+              "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "An ODATA filter per Finbourne.Filtering syntax.",
+            "schema": {
+              "type": "string",
+              "description": "An ODATA filter per Finbourne.Filtering syntax.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Default is null (meaning return all columns in the original query itself).\r\nThe values are in terms of the result column name from the original data set and are comma delimited.\r\nThe power of this comes in that you may aggregate the data if you wish\r\n(that is the main reason for allowing this, in fact).\r\ne.g.:\r\n- `MyField`\r\n- `Max(x) FILTER (WHERE y > 12) as ABC` (max of a field, if another field lets it qualify, with a nice column name)\r\n- `count(*)` (count the rows for the given group, that would produce a rather ugly column name, but  it works)\r\n- `count(distinct x) as numOfXs`\r\nIf there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ]. \r\ne.g.\r\n- `some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name`\r\n  where you would likely want to pass `1` as the `groupBy` also.",
+            "schema": {
+              "type": "string",
+              "description": "Default is null (meaning return all columns in the original query itself).\r\nThe values are in terms of the result column name from the original data set and are comma delimited.\r\nThe power of this comes in that you may aggregate the data if you wish\r\n(that is the main reason for allowing this, in fact).\r\ne.g.:\r\n- `MyField`\r\n- `Max(x) FILTER (WHERE y > 12) as ABC` (max of a field, if another field lets it qualify, with a nice column name)\r\n- `count(*)` (count the rows for the given group, that would produce a rather ugly column name, but  it works)\r\n- `count(distinct x) as numOfXs`\r\nIf there was an illegal character in a field you are selecting from, you are responsible for bracketing it with [ ]. \r\ne.g.\r\n- `some_field, count(*) as a, max(x) as b, min([column with space in name]) as nice_name`\r\n  where you would likely want to pass `1` as the `groupBy` also.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "groupBy",
+            "in": "query",
+            "description": "Groups by the specified fields.\r\n            A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).\r\n            e.g. `2,3`, `myColumn`.\r\n            Default is null (meaning no grouping will be performed on the selected columns).\r\n            This applies only over the result set being requested here, meaning indexes into the \"select\" parameter fields.\r\n            Only specify this if you are selecting aggregations in the \"select\" parameter.",
+            "schema": {
+              "type": "string",
+              "description": "Groups by the specified fields.\r\n            A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).\r\n            e.g. `2,3`, `myColumn`.\r\n            Default is null (meaning no grouping will be performed on the selected columns).\r\n            This applies only over the result set being requested here, meaning indexes into the \"select\" parameter fields.\r\n            Only specify this if you are selecting aggregations in the \"select\" parameter.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "When paginating, only return this number of records, page should also be specified.",
+            "schema": {
+              "type": "integer",
+              "description": "When paginating, only return this number of records, page should also be specified.",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "0-N based on chunk sized determined by the limit, ignored if limit < 1.",
+            "schema": {
+              "type": "integer",
+              "description": "0-N based on chunk sized determined by the limit, ignored if limit < 1.",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Stable"
+      }
     }
   },
   "components": {
@@ -3365,6 +4026,24 @@
             "nullable": true,
             "readOnly": true
           },
+          "fetchXml": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Xml data request links for all of the child queries",
+            "nullable": true,
+            "readOnly": true
+          },
+          "fetchParquet": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            },
+            "description": "Parquet data request links for all of the child queries",
+            "nullable": true,
+            "readOnly": true
+          },
           "fetchCsv": {
             "type": "array",
             "items": {
@@ -3501,6 +4180,12 @@
             "$ref": "#/components/schemas/Link"
           },
           "fetchJsonProper": {
+            "$ref": "#/components/schemas/Link"
+          },
+          "fetchXml": {
+            "$ref": "#/components/schemas/Link"
+          },
+          "fetchParquet": {
             "$ref": "#/components/schemas/Link"
           },
           "fetchCsv": {

@@ -1,10 +1,11 @@
 # BackgroundQueryResponse
 
+Response for Background Query Start requests
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**execution_id** | **str** |  | [optional] 
+**execution_id** | **str** | ExecutionId of the started-query | [optional] 
 **progress** | [**Link**](Link.md) |  | [optional] 
 **cancel** | [**Link**](Link.md) |  | [optional] 
 **fetch_json** | [**Link**](Link.md) |  | [optional] 

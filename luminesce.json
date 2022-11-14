@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.11.469",
+    "version": "1.11.470",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -300,6 +300,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -391,6 +394,9 @@
             "in": "query",
             "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
               "nullable": true
@@ -401,6 +407,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -2704,6 +2713,9 @@
             "in": "query",
             "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
               "nullable": true
@@ -2714,6 +2726,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -2838,6 +2853,9 @@
             "in": "query",
             "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
               "nullable": true
@@ -2848,6 +2866,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -2993,6 +3014,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -3084,6 +3108,9 @@
             "in": "query",
             "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
               "nullable": true
@@ -3094,6 +3121,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -3229,6 +3259,9 @@
             "in": "query",
             "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
               "nullable": true
@@ -3239,6 +3272,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -3363,6 +3399,9 @@
             "in": "query",
             "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
               "nullable": true
@@ -3373,6 +3412,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -3484,6 +3526,9 @@
             "in": "query",
             "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
               "nullable": true
@@ -3494,6 +3539,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -3618,6 +3666,9 @@
             "in": "query",
             "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
               "nullable": true
@@ -3628,6 +3679,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -3739,6 +3793,9 @@
             "in": "query",
             "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "Order the results by these fields.\r\n            Use the `-` sign to denote descending order, e.g. `-MyFieldName`.  Numeric indexes may be used also, e.g. `2,-3`.\r\n            Multiple fields can be denoted by a comma e.g. `-MyFieldName,AnotherFieldName,-AFurtherFieldName`.\r\n            Default is null, the sort order specified in the query itself.",
               "nullable": true
@@ -3749,6 +3806,9 @@
             "in": "query",
             "description": "An ODATA filter per Finbourne.Filtering syntax.",
             "schema": {
+              "maxLength": 16384,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
               "type": "string",
               "description": "An ODATA filter per Finbourne.Filtering syntax.",
               "nullable": true
@@ -4285,13 +4345,13 @@
       "DataType": {
         "enum": [
           "Boolean",
-          "Date",
-          "DateTime",
-          "Decimal",
-          "Double",
           "Int",
           "BigInt",
+          "Double",
+          "Decimal",
           "Text",
+          "Date",
+          "DateTime",
           "Table"
         ],
         "type": "string"
@@ -4351,11 +4411,11 @@
           "Information",
           "Warning",
           "Error",
-          "ProgressAndError",
-          "ProgressAndWarning",
-          "ProgressAndInformation",
+          "ExecutionKeepAlive",
           "ProgressAndDebug",
-          "ExecutionKeepAlive"
+          "ProgressAndInformation",
+          "ProgressAndWarning",
+          "ProgressAndError"
         ],
         "type": "string"
       },

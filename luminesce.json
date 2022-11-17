@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.11.499",
+    "version": "1.11.501",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -4345,13 +4345,13 @@
       "DataType": {
         "enum": [
           "Boolean",
-          "Int",
-          "BigInt",
-          "Double",
-          "Decimal",
-          "Text",
           "Date",
           "DateTime",
+          "Decimal",
+          "Double",
+          "Int",
+          "BigInt",
+          "Text",
           "Table"
         ],
         "type": "string"
@@ -4411,11 +4411,11 @@
           "Information",
           "Warning",
           "Error",
-          "ExecutionKeepAlive",
-          "ProgressAndDebug",
-          "ProgressAndInformation",
+          "ProgressAndError",
           "ProgressAndWarning",
-          "ProgressAndError"
+          "ProgressAndInformation",
+          "ProgressAndDebug",
+          "ExecutionKeepAlive"
         ],
         "type": "string"
       },

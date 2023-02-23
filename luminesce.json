@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.12.388",
+    "version": "1.12.390",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -834,6 +834,22 @@
             },
             "example": 120,
             "x-nullable": true
+          },
+          {
+            "name": "delimiter",
+            "in": "query",
+            "description": "Delimiter string to override the default",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "escape",
+            "in": "query",
+            "description": "Escape character to override the default",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -947,6 +963,22 @@
             },
             "example": 120,
             "x-nullable": true
+          },
+          {
+            "name": "delimiter",
+            "in": "query",
+            "description": "Delimiter string to override the default",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "escape",
+            "in": "query",
+            "description": "Escape character to override the default",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2634,6 +2666,22 @@
               "default": 0
             },
             "x-nullable": true
+          },
+          {
+            "name": "delimiter",
+            "in": "query",
+            "description": "Delimiter string to override the default",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "escape",
+            "in": "query",
+            "description": "Escape character to override the default",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {

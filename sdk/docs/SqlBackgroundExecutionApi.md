@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **fetch_query_result_csv**
-> str fetch_query_result_csv(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
+> str fetch_query_result_csv(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page, delimiter=delimiter, escape=escape)
 
 FetchQueryResultCsv: Fetches the result from a previously started query, in CSV format.
 
@@ -136,10 +136,12 @@ select = 'select_example' # str | Default is null (meaning return all columns in
 group_by = 'group_by_example' # str | Groups by the specified fields.              A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).              e.g. `2,3`, `myColumn`.              Default is null (meaning no grouping will be performed on the selected columns).              This applies only over the result set being requested here, meaning indexes into the \"select\" parameter fields.              Only specify this if you are selecting aggregations in the \"select\" parameter. (optional)
 limit = 0 # int | When paginating, only return this number of records, page should also be specified. (optional) (default to 0)
 page = 0 # int | 0-N based on chunk sized determined by the limit, ignored if limit < 1. (optional) (default to 0)
+delimiter = 'delimiter_example' # str | Delimiter string to override the default (optional)
+escape = 'escape_example' # str | Escape character to override the default (optional)
 
     try:
         # FetchQueryResultCsv: Fetches the result from a previously started query, in CSV format.
-        api_response = api_instance.fetch_query_result_csv(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
+        api_response = api_instance.fetch_query_result_csv(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page, delimiter=delimiter, escape=escape)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlBackgroundExecutionApi->fetch_query_result_csv: %s\n" % e)
@@ -157,6 +159,8 @@ Name | Type | Description  | Notes
  **group_by** | **str**| Groups by the specified fields.              A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).              e.g. &#x60;2,3&#x60;, &#x60;myColumn&#x60;.              Default is null (meaning no grouping will be performed on the selected columns).              This applies only over the result set being requested here, meaning indexes into the \&quot;select\&quot; parameter fields.              Only specify this if you are selecting aggregations in the \&quot;select\&quot; parameter. | [optional] 
  **limit** | **int**| When paginating, only return this number of records, page should also be specified. | [optional] [default to 0]
  **page** | **int**| 0-N based on chunk sized determined by the limit, ignored if limit &lt; 1. | [optional] [default to 0]
+ **delimiter** | **str**| Delimiter string to override the default | [optional] 
+ **escape** | **str**| Escape character to override the default | [optional] 
 
 ### Return type
 

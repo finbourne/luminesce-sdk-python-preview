@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 
 # **get_by_query_csv**
-> str get_by_query_csv(query, query_name=query_name, download=download, timeout=timeout)
+> str get_by_query_csv(query, query_name=query_name, download=download, timeout=timeout, delimiter=delimiter, escape=escape)
 
 GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
 
@@ -62,10 +62,12 @@ with luminesce.ApiClient(configuration) as api_client:
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
+delimiter = 'delimiter_example' # str | Delimiter string to override the default (optional)
+escape = 'escape_example' # str | Escape character to override the default (optional)
 
     try:
         # GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
-        api_response = api_instance.get_by_query_csv(query, query_name=query_name, download=download, timeout=timeout)
+        api_response = api_instance.get_by_query_csv(query, query_name=query_name, download=download, timeout=timeout, delimiter=delimiter, escape=escape)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->get_by_query_csv: %s\n" % e)
@@ -79,6 +81,8 @@ Name | Type | Description  | Notes
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
+ **delimiter** | **str**| Delimiter string to override the default | [optional] 
+ **escape** | **str**| Escape character to override the default | [optional] 
 
 ### Return type
 
@@ -576,7 +580,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_csv**
-> str put_by_query_csv(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
+> str put_by_query_csv(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds, delimiter=delimiter, escape=escape)
 
 PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
 
@@ -616,10 +620,12 @@ with luminesce.ApiClient(configuration) as api_client:
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
+delimiter = 'delimiter_example' # str | Delimiter string to override the default (optional)
+escape = 'escape_example' # str | Escape character to override the default (optional)
 
     try:
         # PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
-        api_response = api_instance.put_by_query_csv(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
+        api_response = api_instance.put_by_query_csv(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds, delimiter=delimiter, escape=escape)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_by_query_csv: %s\n" % e)
@@ -633,6 +639,8 @@ Name | Type | Description  | Notes
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
+ **delimiter** | **str**| Delimiter string to override the default | [optional] 
+ **escape** | **str**| Escape character to override the default | [optional] 
 
 ### Return type
 

@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.12.649",
+    "version": "1.12.650",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -27,7 +27,7 @@
           "Current Table/Field Catalog"
         ],
         "summary": "GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)",
-        "description": "\nThe following LuminesceSql is executed to return this information:\n\n```sql\n@reg =\nselect\n    r.Name,\n    min(r.Description) as Description\nfrom\n    Sys.Registration r\nwhere\n    r.Type in ('DirectProvider', 'DataProvider')\n    and \n    r.ShowAll = false\ngroup by\n    1\n    ;\n\n@fld =\nselect\n    f.TableName,\n    f.FieldName,\n    f.DataType,\n    f.FieldType,\n    f.IsPrimaryKey,\n    f.IsMain,\n    f.Description,\n    f.ParamDefaultValue,\n    f.TableParamColumns\nfrom\n    Sys.Field f\n    ;\n\n@x =\nselect\n    coalesce(f.TableName, r.Name) as TableName,\n    coalesce(f.FieldName, 'N/A') as FieldName,\n    f.DataType,\n    f.FieldType,\n    f.IsPrimaryKey,\n    f.IsMain,\n    case \n        when f.TableName is not null \n            then f.Description\n        else\n            r.Name || ' returns a different set of columns depending on use.'\n        end as Description,\n    f.ParamDefaultValue,\n    f.TableParamColumns,\n    r.Description as ProviderDescription\nfrom\n    @reg r\n    left outer join @fld f\n        on r.Name = f.TableName\norder by\n    1, 5 desc, 6 desc, 2\n    ;\n   \n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
+        "description": "\nThe following LuminesceSql is executed to return this information:\n\n```sql\n@reg =\nselect\n    Name,\n    min(Description) as Description,\n    iif(Category = 'View' and Client is null, true, false) as IsView\nfrom\n    Sys.Registration\nwhere\n    Type in ('DirectProvider', 'DataProvider')\n    and \n    ShowAll = false\ngroup by\n    1\n    ;\n\n@fld =\nselect\n    TableName,\n    FieldName,\n    DataType,\n    FieldType,\n    IsPrimaryKey,\n    IsMain,\n    Description,\n    ParamDefaultValue,\n    TableParamColumns\nfrom\n    Sys.Field\n    ;\n\n@x =\nselect\n    coalesce(f.TableName, r.Name) as TableName,\n    coalesce(f.FieldName, 'N/A') as FieldName,\n    f.DataType,\n    f.FieldType,\n    f.IsPrimaryKey,\n    f.IsMain,\n    case \n        when f.TableName is not null then\n            f.Description\n        else\n            r.Name || ' returns a different set of columns depending on use.'\n        end as Description,\n    f.ParamDefaultValue,\n    f.TableParamColumns,\n    r.Description as ProviderDescription,\n    r.IsView\nfrom\n    @reg r\n    left outer join @fld f\n        on r.Name = f.TableName\norder by\n    1, 5 desc, 6 desc, 2\n    ;\n   \n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
         "operationId": "GetCatalog",
         "parameters": [
           {

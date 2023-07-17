@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.13.153",
+    "version": "1.13.161",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1215,6 +1215,82 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/Sql/fromdesign": {
+      "put": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "[EXPERIMENTAL] PutQueryDesignToSql: Generates SQL from a structured query design",
+        "description": "SQL Designer specification to generate SQL from",
+        "operationId": "PutQueryDesignToSql",
+        "parameters": [
+          {
+            "name": "prettyPrint",
+            "in": "query",
+            "description": "Should this additionally be pretty-printed, or simply returned in the generated format",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "Structured Query design object to generate SQL from",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryDesign"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryDesign"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryDesign"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryDesign"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
     "/api/Sql/json": {
       "put": {
         "tags": [
@@ -2172,6 +2248,95 @@
           }
         ],
         "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/Sql/todesign": {
+      "put": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "[EXPERIMENTAL] PutSqlToQueryDesign: Generates a SQL-design object from SQL string, if possible.",
+        "description": "SQL to attempt to create a Design object from",
+        "operationId": "PutSqlToQueryDesign",
+        "requestBody": {
+          "description": "SQL query to generate the design object from",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
       }
     },
     "/api/Sql/xml": {
@@ -3843,6 +4008,37 @@
         },
         "additionalProperties": false
       },
+      "AggregateFunction": {
+        "enum": [
+          "count",
+          "count_distinct",
+          "sum",
+          "total",
+          "avg",
+          "min",
+          "max",
+          "group_concat"
+        ],
+        "type": "string"
+      },
+      "Aggregation": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AggregateFunction"
+          },
+          "alias": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "BackgroundMultiQueryProgressResponse": {
         "type": "object",
         "properties": {
@@ -4103,6 +4299,39 @@
         ],
         "type": "string"
       },
+      "BinaryOperator": {
+        "enum": [
+          "And",
+          "Or",
+          "Add",
+          "Subtract",
+          "Multiply",
+          "Divide",
+          "Mod",
+          "Lt",
+          "Lte",
+          "Gt",
+          "Gte",
+          "Eq",
+          "Neq",
+          "In",
+          "NotIn",
+          "Is",
+          "IsNot",
+          "BitShiftLeft",
+          "BitShiftRight",
+          "BitwiseAnd",
+          "BitwiseOr",
+          "Concatenate",
+          "Like",
+          "NotLike",
+          "Glob",
+          "NotGlob",
+          "Regexp",
+          "NotRegexp"
+        ],
+        "type": "string"
+      },
       "Column": {
         "type": "object",
         "properties": {
@@ -4235,6 +4464,61 @@
         ],
         "type": "string"
       },
+      "FieldDesign": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string"
+          },
+          "alias": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "dataType": {
+            "$ref": "#/components/schemas/DataType"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterTermDesign"
+            },
+            "nullable": true
+          },
+          "aggregations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Aggregation"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterTermDesign": {
+        "required": [
+          "operator",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/BinaryOperator"
+          },
+          "value": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "IdSelectorDefinition": {
         "required": [
           "actions",
@@ -4359,6 +4643,69 @@
           "InstrumentUpsert"
         ],
         "type": "string"
+      },
+      "OrderByDirection": {
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "type": "string"
+      },
+      "OrderByTermDesign": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/OrderByDirection"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QueryDesign": {
+        "required": [
+          "fields",
+          "tableName"
+        ],
+        "type": "object",
+        "properties": {
+          "tableName": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string"
+          },
+          "alias": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldDesign"
+            }
+          },
+          "orderBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderByTermDesign"
+            },
+            "nullable": true
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "ResourceListOfAccessControlledResource": {
         "required": [

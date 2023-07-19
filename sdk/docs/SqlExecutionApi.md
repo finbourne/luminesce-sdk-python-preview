@@ -618,7 +618,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+    body = 
+SELECT
+   [TableName],
+   Count(distinct [FieldName]) as [NumberOfFields]
+FROM
+   [Sys.Field]
+WHERE
+   ([TableName] = 'Sys.Registration')
+GROUP BY
+   [TableName]
+ORDER BY
+   [DataType]
+LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -702,7 +714,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+    body = 
+SELECT
+   [TableName],
+   Count(distinct [FieldName]) as [NumberOfFields]
+FROM
+   [Sys.Field]
+WHERE
+   ([TableName] = 'Sys.Registration')
+GROUP BY
+   [TableName]
+ORDER BY
+   [DataType]
+LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -780,7 +804,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+    body = 
+SELECT
+   [TableName],
+   Count(distinct [FieldName]) as [NumberOfFields]
+FROM
+   [Sys.Field]
+WHERE
+   ([TableName] = 'Sys.Registration')
+GROUP BY
+   [TableName]
+ORDER BY
+   [DataType]
+LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
@@ -860,7 +896,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+    body = 
+SELECT
+   [TableName],
+   Count(distinct [FieldName]) as [NumberOfFields]
+FROM
+   [Sys.Field]
+WHERE
+   ([TableName] = 'Sys.Registration')
+GROUP BY
+   [TableName]
+ORDER BY
+   [DataType]
+LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -938,7 +986,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+    body = 
+SELECT
+   [TableName],
+   Count(distinct [FieldName]) as [NumberOfFields]
+FROM
+   [Sys.Field]
+WHERE
+   ([TableName] = 'Sys.Registration')
+GROUP BY
+   [TableName]
+ORDER BY
+   [DataType]
+LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -1018,7 +1078,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+    body = 
+SELECT
+   [TableName],
+   Count(distinct [FieldName]) as [NumberOfFields]
+FROM
+   [Sys.Field]
+WHERE
+   ([TableName] = 'Sys.Registration')
+GROUP BY
+   [TableName]
+ORDER BY
+   [DataType]
+LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -1096,7 +1168,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+    body = 
+SELECT
+   [TableName],
+   Count(distinct [FieldName]) as [NumberOfFields]
+FROM
+   [Sys.Field]
+WHERE
+   ([TableName] = 'Sys.Registration')
+GROUP BY
+   [TableName]
+ORDER BY
+   [DataType]
+LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -1140,7 +1224,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_query_design_to_sql**
-> str put_query_design_to_sql(query_design, pretty_print=pretty_print)
+> str put_query_design_to_sql(query_design)
 
 [EXPERIMENTAL] PutQueryDesignToSql: Generates SQL from a structured query design
 
@@ -1176,12 +1260,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    query_design = luminesce.QueryDesign() # QueryDesign | Structured Query design object to generate SQL from
-pretty_print = True # bool | Should this additionally be pretty-printed, or simply returned in the generated format (optional) (default to True)
+    query_design = {"tableName":"Sys.Field","fields":[{"name":"TableName","dataType":"Text","filters":[{"operator":"Eq","value":"Sys.Registration"}],"aggregations":[]},{"name":"FieldName","dataType":"Text","filters":[],"aggregations":[{"type":"count_distinct","alias":"NumberOfFields"}]}],"orderBy":[{"field":"DataType","direction":"asc"}],"limit":42} # QueryDesign | Structured Query design object to generate SQL from
 
     try:
         # [EXPERIMENTAL] PutQueryDesignToSql: Generates SQL from a structured query design
-        api_response = api_instance.put_query_design_to_sql(query_design, pretty_print=pretty_print)
+        api_response = api_instance.put_query_design_to_sql(query_design)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_query_design_to_sql: %s\n" % e)
@@ -1192,7 +1275,6 @@ pretty_print = True # bool | Should this additionally be pretty-printed, or simp
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query_design** | [**QueryDesign**](QueryDesign.md)| Structured Query design object to generate SQL from | 
- **pretty_print** | **bool**| Should this additionally be pretty-printed, or simply returned in the generated format | [optional] [default to True]
 
 ### Return type
 
@@ -1211,6 +1293,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
+**400** | Bad Request |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1251,7 +1334,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = select * from sys.field # str | LuminesceSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it
+    body = 
+SELECT
+   [TableName],
+   Count(distinct [FieldName]) as [NumberOfFields]
+FROM
+   [Sys.Field]
+WHERE
+   ([TableName] = 'Sys.Registration')
+GROUP BY
+   [TableName]
+ORDER BY
+   [DataType]
+LIMIT 42 # str | LuminesceSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it
 trailing_commas = True # bool | Should commas be after an expression (as opposed to before) (optional) (default to True)
 uppercase_keywords = False # bool | Should key words be capitalized (optional) (default to False)
 break_join_on_sections = True # bool | Should clauses on joins be given line breaks? (optional) (default to True)
@@ -1347,7 +1442,19 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 'body_example' # str | SQL query to generate the design object from
+    body = 
+SELECT
+   [TableName],
+   Count(distinct [FieldName]) as [NumberOfFields]
+FROM
+   [Sys.Field]
+WHERE
+   ([TableName] = 'Sys.Registration')
+GROUP BY
+   [TableName]
+ORDER BY
+   [DataType]
+LIMIT 42 # str | SQL query to generate the design object from
 
     try:
         # [EXPERIMENTAL] PutSqlToQueryDesign: Generates a SQL-design object from SQL string, if possible.
@@ -1373,7 +1480,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json, text/plain
+ - **Content-Type**: text/plain
  - **Accept**: text/plain, application/json, text/json
 
 ### HTTP response details

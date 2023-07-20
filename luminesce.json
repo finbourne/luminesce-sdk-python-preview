@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.13.181",
+    "version": "1.13.182",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1257,6 +1257,7 @@
                   {
                     "name": "TableName",
                     "dataType": "Text",
+                    "shouldSelect": true,
                     "filters": [
                       {
                         "operator": "Eq",
@@ -1268,6 +1269,7 @@
                   {
                     "name": "FieldName",
                     "dataType": "Text",
+                    "shouldSelect": true,
                     "filters": [],
                     "aggregations": [
                       {
@@ -1283,7 +1285,8 @@
                     "direction": "asc"
                   }
                 ],
-                "limit": 42
+                "limit": 42,
+                "warnings": []
               }
             },
             "application/json": {
@@ -1296,6 +1299,7 @@
                   {
                     "name": "TableName",
                     "dataType": "Text",
+                    "shouldSelect": true,
                     "filters": [
                       {
                         "operator": "Eq",
@@ -1307,6 +1311,7 @@
                   {
                     "name": "FieldName",
                     "dataType": "Text",
+                    "shouldSelect": true,
                     "filters": [],
                     "aggregations": [
                       {
@@ -1322,7 +1327,8 @@
                     "direction": "asc"
                   }
                 ],
-                "limit": 42
+                "limit": 42,
+                "warnings": []
               }
             },
             "text/json": {
@@ -1335,6 +1341,7 @@
                   {
                     "name": "TableName",
                     "dataType": "Text",
+                    "shouldSelect": true,
                     "filters": [
                       {
                         "operator": "Eq",
@@ -1346,6 +1353,7 @@
                   {
                     "name": "FieldName",
                     "dataType": "Text",
+                    "shouldSelect": true,
                     "filters": [],
                     "aggregations": [
                       {
@@ -1361,7 +1369,8 @@
                     "direction": "asc"
                   }
                 ],
-                "limit": 42
+                "limit": 42,
+                "warnings": []
               }
             },
             "application/*+json": {
@@ -1374,6 +1383,7 @@
                   {
                     "name": "TableName",
                     "dataType": "Text",
+                    "shouldSelect": true,
                     "filters": [
                       {
                         "operator": "Eq",
@@ -1385,6 +1395,7 @@
                   {
                     "name": "FieldName",
                     "dataType": "Text",
+                    "shouldSelect": true,
                     "filters": [],
                     "aggregations": [
                       {
@@ -1400,7 +1411,8 @@
                     "direction": "asc"
                   }
                 ],
-                "limit": 42
+                "limit": 42,
+                "warnings": []
               }
             }
           },
@@ -2453,6 +2465,18 @@
         "summary": "[EXPERIMENTAL] PutSqlToQueryDesign: Generates a SQL-design object from SQL string, if possible.",
         "description": "SQL to attempt to create a Design object from",
         "operationId": "PutSqlToQueryDesign",
+        "parameters": [
+          {
+            "name": "validateWithMetadata",
+            "in": "query",
+            "description": "Should the table be validated against the users' view of Sys.Field to fill in DataTypes, etc.?",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "x-nullable": true
+          }
+        ],
         "requestBody": {
           "description": "SQL query to generate the design object from",
           "content": {
@@ -2479,6 +2503,7 @@
                     {
                       "name": "TableName",
                       "dataType": "Text",
+                      "shouldSelect": true,
                       "filters": [
                         {
                           "operator": "Eq",
@@ -2490,6 +2515,7 @@
                     {
                       "name": "FieldName",
                       "dataType": "Text",
+                      "shouldSelect": true,
                       "filters": [],
                       "aggregations": [
                         {
@@ -2505,7 +2531,8 @@
                       "direction": "asc"
                     }
                   ],
-                  "limit": 42
+                  "limit": 42,
+                  "warnings": []
                 }
               },
               "application/json": {
@@ -2518,6 +2545,7 @@
                     {
                       "name": "TableName",
                       "dataType": "Text",
+                      "shouldSelect": true,
                       "filters": [
                         {
                           "operator": "Eq",
@@ -2529,6 +2557,7 @@
                     {
                       "name": "FieldName",
                       "dataType": "Text",
+                      "shouldSelect": true,
                       "filters": [],
                       "aggregations": [
                         {
@@ -2544,7 +2573,8 @@
                       "direction": "asc"
                     }
                   ],
-                  "limit": 42
+                  "limit": 42,
+                  "warnings": []
                 }
               },
               "text/json": {
@@ -2557,6 +2587,7 @@
                     {
                       "name": "TableName",
                       "dataType": "Text",
+                      "shouldSelect": true,
                       "filters": [
                         {
                           "operator": "Eq",
@@ -2568,6 +2599,7 @@
                     {
                       "name": "FieldName",
                       "dataType": "Text",
+                      "shouldSelect": true,
                       "filters": [],
                       "aggregations": [
                         {
@@ -2583,7 +2615,8 @@
                       "direction": "asc"
                     }
                   ],
-                  "limit": 42
+                  "limit": 42,
+                  "warnings": []
                 }
               }
             }
@@ -4795,6 +4828,9 @@
           "dataType": {
             "$ref": "#/components/schemas/DataType"
           },
+          "shouldSelect": {
+            "type": "boolean"
+          },
           "filters": {
             "type": "array",
             "items": {
@@ -5013,6 +5049,13 @@
           "limit": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           }
         },

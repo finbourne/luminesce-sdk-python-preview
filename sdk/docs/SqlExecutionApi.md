@@ -1260,7 +1260,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    query_design = {"tableName":"Sys.Field","fields":[{"name":"TableName","dataType":"Text","filters":[{"operator":"Eq","value":"Sys.Registration"}],"aggregations":[]},{"name":"FieldName","dataType":"Text","filters":[],"aggregations":[{"type":"count_distinct","alias":"NumberOfFields"}]}],"orderBy":[{"field":"DataType","direction":"asc"}],"limit":42} # QueryDesign | Structured Query design object to generate SQL from
+    query_design = {"tableName":"Sys.Field","fields":[{"name":"TableName","dataType":"Text","shouldSelect":true,"filters":[{"operator":"Eq","value":"Sys.Registration"}],"aggregations":[]},{"name":"FieldName","dataType":"Text","shouldSelect":true,"filters":[],"aggregations":[{"type":"count_distinct","alias":"NumberOfFields"}]}],"orderBy":[{"field":"DataType","direction":"asc"}],"limit":42,"warnings":[]} # QueryDesign | Structured Query design object to generate SQL from
 
     try:
         # [EXPERIMENTAL] PutQueryDesignToSql: Generates SQL from a structured query design
@@ -1406,7 +1406,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_sql_to_query_design**
-> str put_sql_to_query_design(body)
+> str put_sql_to_query_design(body, validate_with_metadata=validate_with_metadata)
 
 [EXPERIMENTAL] PutSqlToQueryDesign: Generates a SQL-design object from SQL string, if possible.
 
@@ -1455,10 +1455,11 @@ GROUP BY
 ORDER BY
    [DataType]
 LIMIT 42 # str | SQL query to generate the design object from
+validate_with_metadata = True # bool | Should the table be validated against the users' view of Sys.Field to fill in DataTypes, etc.? (optional) (default to True)
 
     try:
         # [EXPERIMENTAL] PutSqlToQueryDesign: Generates a SQL-design object from SQL string, if possible.
-        api_response = api_instance.put_sql_to_query_design(body)
+        api_response = api_instance.put_sql_to_query_design(body, validate_with_metadata=validate_with_metadata)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_sql_to_query_design: %s\n" % e)
@@ -1469,6 +1470,7 @@ LIMIT 42 # str | SQL query to generate the design object from
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| SQL query to generate the design object from | 
+ **validate_with_metadata** | **bool**| Should the table be validated against the users&#39; view of Sys.Field to fill in DataTypes, etc.? | [optional] [default to True]
 
 ### Return type
 

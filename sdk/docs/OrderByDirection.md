@@ -1,5 +1,6 @@
 # OrderByDirection
 
+Direction of Order By terms in the Order By clause
 
 ## Properties
 Name | Type | Description | Notes

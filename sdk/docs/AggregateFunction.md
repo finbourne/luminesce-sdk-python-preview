@@ -1,5 +1,6 @@
 # AggregateFunction
 
+Aggregation function type
 
 ## Properties
 Name | Type | Description | Notes

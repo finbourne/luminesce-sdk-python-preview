@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.13.182",
+    "version": "1.13.184",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -4363,7 +4363,8 @@
           "max",
           "group_concat"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "Aggregation function type"
       },
       "Aggregation": {
         "required": [
@@ -4378,10 +4379,12 @@
             "maxLength": 256,
             "minLength": 0,
             "type": "string",
+            "description": "Alias, if any, for the Aggregate expression when selected",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "How to aggregate over a field"
       },
       "BackgroundMultiQueryProgressResponse": {
         "type": "object",
@@ -4817,25 +4820,29 @@
           "name": {
             "maxLength": 256,
             "minLength": 0,
-            "type": "string"
+            "type": "string",
+            "description": "Name of the Field"
           },
           "alias": {
             "maxLength": 256,
             "minLength": 0,
             "type": "string",
+            "description": "Alias if any (if none the Name is used)",
             "nullable": true
           },
           "dataType": {
             "$ref": "#/components/schemas/DataType"
           },
           "shouldSelect": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Should this be selected? False would imply it is only being filtered on.\r\nIgnored when Aggregations are present"
           },
           "filters": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterTermDesign"
             },
+            "description": "Filter clauses to apply to this field (And'ed together)",
             "nullable": true
           },
           "aggregations": {
@@ -4843,10 +4850,12 @@
             "items": {
               "$ref": "#/components/schemas/Aggregation"
             },
+            "description": "Aggregations to apply (as opposed to simply selecting)",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Treatment of a single field within a QueryDesign"
       },
       "FilterTermDesign": {
         "required": [
@@ -4861,10 +4870,12 @@
           "value": {
             "maxLength": 2048,
             "minLength": 0,
-            "type": "string"
+            "type": "string",
+            "description": "The value to compare against (always as a string, but will be formatted to the correct type)"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A single filter clause"
       },
       "IdSelectorDefinition": {
         "required": [
@@ -4996,7 +5007,8 @@
           "asc",
           "desc"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "Direction of Order By terms in the Order By clause"
       },
       "OrderByTermDesign": {
         "required": [
@@ -5007,13 +5019,15 @@
           "field": {
             "maxLength": 256,
             "minLength": 0,
-            "type": "string"
+            "type": "string",
+            "description": "Name of the field to order by"
           },
           "direction": {
             "$ref": "#/components/schemas/OrderByDirection"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A single clause within an Order BY"
       },
       "QueryDesign": {
         "required": [
@@ -5025,29 +5039,34 @@
           "tableName": {
             "maxLength": 256,
             "minLength": 0,
-            "type": "string"
+            "type": "string",
+            "description": "Name of the table being designed"
           },
           "alias": {
             "maxLength": 256,
             "minLength": 0,
             "type": "string",
+            "description": "Alias for the table in the generated SQL, if any",
             "nullable": true
           },
           "fields": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldDesign"
-            }
+            },
+            "description": "Fields to be selected, aggregated over and/or filtered on"
           },
           "orderBy": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OrderByTermDesign"
             },
+            "description": "Order By clauses to apply",
             "nullable": true
           },
           "limit": {
             "type": "integer",
+            "description": "Row limit to apply, if any",
             "format": "int32",
             "nullable": true
           },
@@ -5056,10 +5075,12 @@
             "items": {
               "type": "string"
             },
+            "description": "And warnings to show the user when converting from SQL to this representation",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Representation of a \"designable Query\" suitable for formatting to SQL or being built from compliant SQL."
       },
       "ResourceListOfAccessControlledResource": {
         "required": [

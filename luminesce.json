@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.13.186",
+    "version": "1.13.188",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1286,7 +1286,8 @@
                   }
                 ],
                 "limit": 42,
-                "warnings": []
+                "warnings": [],
+                "availableFields": []
               }
             },
             "application/json": {
@@ -1328,7 +1329,8 @@
                   }
                 ],
                 "limit": 42,
-                "warnings": []
+                "warnings": [],
+                "availableFields": []
               }
             },
             "text/json": {
@@ -1370,7 +1372,8 @@
                   }
                 ],
                 "limit": 42,
-                "warnings": []
+                "warnings": [],
+                "availableFields": []
               }
             },
             "application/*+json": {
@@ -1412,7 +1415,8 @@
                   }
                 ],
                 "limit": 42,
-                "warnings": []
+                "warnings": [],
+                "availableFields": []
               }
             }
           },
@@ -2532,7 +2536,8 @@
                     }
                   ],
                   "limit": 42,
-                  "warnings": []
+                  "warnings": [],
+                  "availableFields": []
                 }
               },
               "application/json": {
@@ -2574,7 +2579,8 @@
                     }
                   ],
                   "limit": 42,
-                  "warnings": []
+                  "warnings": [],
+                  "availableFields": []
                 }
               },
               "text/json": {
@@ -2616,7 +2622,8 @@
                     }
                   ],
                   "limit": 42,
-                  "warnings": []
+                  "warnings": [],
+                  "availableFields": []
                 }
               }
             }
@@ -4386,6 +4393,39 @@
         "additionalProperties": false,
         "description": "How to aggregate over a field"
       },
+      "AvailableField": {
+        "required": [
+          "fieldType",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of the Field"
+          },
+          "dataType": {
+            "$ref": "#/components/schemas/DataType"
+          },
+          "fieldType": {
+            "$ref": "#/components/schemas/FieldType"
+          },
+          "isMain": {
+            "type": "boolean",
+            "description": "Is this a Main Field within the Provider",
+            "nullable": true
+          },
+          "isPrimaryKey": {
+            "type": "boolean",
+            "description": "Is this a member of the PrimaryKey of the Provider",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a field that can be designed on (regardless if it currently is)\r\nKind of a \"mini-available catalog entry\""
+      },
       "BackgroundMultiQueryProgressResponse": {
         "type": "object",
         "properties": {
@@ -4857,6 +4897,13 @@
         "additionalProperties": false,
         "description": "Treatment of a single field within a QueryDesign"
       },
+      "FieldType": {
+        "enum": [
+          "Column",
+          "Parameter"
+        ],
+        "type": "string"
+      },
       "FilterTermDesign": {
         "required": [
           "operator",
@@ -5075,7 +5122,15 @@
             "items": {
               "type": "string"
             },
-            "description": "And warnings to show the user when converting from SQL to this representation",
+            "description": "Any warnings to show the user when converting from SQL to this representation",
+            "nullable": true
+          },
+          "availableFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvailableField"
+            },
+            "description": "Fields that are known to be available for design when parsing SQL",
             "nullable": true
           }
         },

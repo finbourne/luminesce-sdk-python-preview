@@ -108,7 +108,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_query_excel**
-> str get_by_query_excel(query, query_name=query_name, timeout=timeout)
+> file get_by_query_excel(query, query_name=query_name, timeout=timeout)
 
 GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
 
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**file**
 
 ### Authorization
 
@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_query_parquet**
-> str get_by_query_parquet(query, query_name=query_name, timeout=timeout)
+> file get_by_query_parquet(query, query_name=query_name, timeout=timeout)
 
 GetByQueryParquet: Executes Sql, returned in Parquet (.parquet) format (as a file to be downloaded) format, where the sql is simply in the url.
 
@@ -324,7 +324,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**file**
 
 ### Authorization
 
@@ -424,7 +424,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_query_sqlite**
-> str get_by_query_sqlite(query, query_name=query_name, timeout=timeout)
+> file get_by_query_sqlite(query, query_name=query_name, timeout=timeout)
 
 GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
 
@@ -482,7 +482,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**file**
 
 ### Authorization
 
@@ -618,19 +618,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
-FROM
-   [Sys.Field]
-WHERE
-   ([TableName] = 'Sys.Registration')
-GROUP BY
-   [TableName]
-ORDER BY
-   [DataType]
-LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
+    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -678,7 +666,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_excel**
-> str put_by_query_excel(body, query_name=query_name, timeout_seconds=timeout_seconds)
+> file put_by_query_excel(body, query_name=query_name, timeout_seconds=timeout_seconds)
 
 PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
 
@@ -714,19 +702,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
-FROM
-   [Sys.Field]
-WHERE
-   ([TableName] = 'Sys.Registration')
-GROUP BY
-   [TableName]
-ORDER BY
-   [DataType]
-LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
+    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -748,7 +724,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**file**
 
 ### Authorization
 
@@ -804,19 +780,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
-FROM
-   [Sys.Field]
-WHERE
-   ([TableName] = 'Sys.Registration')
-GROUP BY
-   [TableName]
-ORDER BY
-   [DataType]
-LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
+    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
@@ -860,7 +824,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_parquet**
-> str put_by_query_parquet(body, query_name=query_name, timeout_seconds=timeout_seconds)
+> file put_by_query_parquet(body, query_name=query_name, timeout_seconds=timeout_seconds)
 
 PutByQueryParquet: Executes Sql, returned in Parquet format, where the sql is the post-body url.
 
@@ -896,19 +860,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
-FROM
-   [Sys.Field]
-WHERE
-   ([TableName] = 'Sys.Registration')
-GROUP BY
-   [TableName]
-ORDER BY
-   [DataType]
-LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
+    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -930,7 +882,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**file**
 
 ### Authorization
 
@@ -986,19 +938,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
-FROM
-   [Sys.Field]
-WHERE
-   ([TableName] = 'Sys.Registration')
-GROUP BY
-   [TableName]
-ORDER BY
-   [DataType]
-LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
+    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -1042,7 +982,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_sqlite**
-> str put_by_query_sqlite(body, query_name=query_name, timeout_seconds=timeout_seconds)
+> file put_by_query_sqlite(body, query_name=query_name, timeout_seconds=timeout_seconds)
 
 PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
 
@@ -1078,19 +1018,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
-FROM
-   [Sys.Field]
-WHERE
-   ([TableName] = 'Sys.Registration')
-GROUP BY
-   [TableName]
-ORDER BY
-   [DataType]
-LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
+    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
@@ -1112,7 +1040,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**file**
 
 ### Authorization
 
@@ -1168,19 +1096,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
-FROM
-   [Sys.Field]
-WHERE
-   ([TableName] = 'Sys.Registration')
-GROUP BY
-   [TableName]
-ORDER BY
-   [DataType]
-LIMIT 42 # str | LuminesceSql to Execute (may be multi-line)
+    body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -1334,19 +1250,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
-FROM
-   [Sys.Field]
-WHERE
-   ([TableName] = 'Sys.Registration')
-GROUP BY
-   [TableName]
-ORDER BY
-   [DataType]
-LIMIT 42 # str | LuminesceSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it
+    body = select * from sys.field # str | LuminesceSql to Pretty-Print. Even if it doesn't parse an attempt will be made to format it
 trailing_commas = True # bool | Should commas be after an expression (as opposed to before) (optional) (default to True)
 uppercase_keywords = False # bool | Should key words be capitalized (optional) (default to False)
 break_join_on_sections = True # bool | Should clauses on joins be given line breaks? (optional) (default to True)
@@ -1442,18 +1346,17 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
+    body = SELECT
+    [TableName],
+    Count(distinct [FieldName]) as [NumberOfFields]
 FROM
-   [Sys.Field]
+    [Sys.Field]
 WHERE
-   ([TableName] = 'Sys.Registration')
+    ([TableName] = 'Sys.Registration')
 GROUP BY
-   [TableName]
+    [TableName]
 ORDER BY
-   [DataType]
+    [DataType]
 LIMIT 42 # str | SQL query to generate the design object from
 validate_with_metadata = True # bool | Should the table be validated against the users' view of Sys.Field to fill in DataTypes, etc.? (optional) (default to True)
 

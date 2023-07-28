@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **fetch_query_result_excel**
-> str fetch_query_result_excel(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
+> file fetch_query_result_excel(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
 
 FetchQueryResultExcel: Fetches the result from a previously started query, in Excel format.
 
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**file**
 
 ### Authorization
 
@@ -526,7 +526,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **fetch_query_result_parquet**
-> str fetch_query_result_parquet(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
+> file fetch_query_result_parquet(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
 
 FetchQueryResultParquet: Fetches the result from a previously started query, in Parquet format.
 
@@ -588,7 +588,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**file**
 
 ### Authorization
 
@@ -696,7 +696,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **fetch_query_result_sqlite**
-> str fetch_query_result_sqlite(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
+> file fetch_query_result_sqlite(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
 
 FetchQueryResultSqlite: Fetches the result from a previously started query, in SqLite format.
 
@@ -758,7 +758,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**str**
+**file**
 
 ### Authorization
 
@@ -975,19 +975,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
-    body = 
-SELECT
-   [TableName],
-   Count(distinct [FieldName]) as [NumberOfFields]
-FROM
-   [Sys.Field]
-WHERE
-   ([TableName] = 'Sys.Registration')
-GROUP BY
-   [TableName]
-ORDER BY
-   [DataType]
-LIMIT 42 # str | The LuminesceSql query to kick off.
+    body = select Str, Takes500Ms from Testing1K where UseLinq = true and [Int] <= 120 # str | The LuminesceSql query to kick off.
 query_name = 'Intentionally slow test query' # str | A name for this query.  This goes into logs and is available in `Sys.Logs.HcQueryStart`. (optional)
 timeout_seconds = 0 # int | Maximum time the query may run for, in seconds: <0 → ∞, 0 → 7200 (2h) (optional) (default to 0)
 keep_for_seconds = 0 # int | Maximum time the result may be kept for, in seconds: <0 → 1200 (20m), 0 → 28800 (8h), max = 2,678,400 (31d) (optional) (default to 0)

@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.13.352",
+    "version": "1.13.353",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2172,6 +2172,26 @@
               "type": "integer",
               "format": "int32",
               "default": 120
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "spaceBeforeTrailingSingleLineComments",
+            "in": "query",
+            "description": "Should the be a space before trailing single line comments?",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "multilineCommentExtraLineBreak",
+            "in": "query",
+            "description": "Should an additional line break be added after multi-line comments?",
+            "schema": {
+              "type": "boolean",
+              "default": false
             },
             "x-nullable": true
           }

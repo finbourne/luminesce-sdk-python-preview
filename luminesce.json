@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.13.459",
+    "version": "1.13.463",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -4649,39 +4649,6 @@
         ],
         "type": "string"
       },
-      "BinaryOperator": {
-        "enum": [
-          "And",
-          "Or",
-          "Add",
-          "Subtract",
-          "Multiply",
-          "Divide",
-          "Mod",
-          "Lt",
-          "Lte",
-          "Gt",
-          "Gte",
-          "Eq",
-          "Neq",
-          "In",
-          "NotIn",
-          "Is",
-          "IsNot",
-          "BitShiftLeft",
-          "BitShiftRight",
-          "BitwiseAnd",
-          "BitwiseOr",
-          "Concatenate",
-          "Like",
-          "NotLike",
-          "Glob",
-          "NotGlob",
-          "Regexp",
-          "NotRegexp"
-        ],
-        "type": "string"
-      },
       "Column": {
         "type": "object",
         "properties": {
@@ -4875,7 +4842,7 @@
         "type": "object",
         "properties": {
           "operator": {
-            "$ref": "#/components/schemas/BinaryOperator"
+            "$ref": "#/components/schemas/QueryDesignerBinaryOperator"
           },
           "value": {
             "maxLength": 2048,
@@ -5099,6 +5066,21 @@
         },
         "additionalProperties": false,
         "description": "Representation of a \"designable Query\" suitable for formatting to SQL or being built from compliant SQL."
+      },
+      "QueryDesignerBinaryOperator": {
+        "enum": [
+          "Lt",
+          "Lte",
+          "Gt",
+          "Gte",
+          "Eq",
+          "Neq",
+          "Like",
+          "Contains",
+          "StartsWith",
+          "EndsWith"
+        ],
+        "type": "string"
       },
       "ResourceListOfAccessControlledResource": {
         "required": [

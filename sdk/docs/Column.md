@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **is_primary_key** | **bool** |  | [optional] 
 **is_main** | **bool** |  | [optional] 
 **is_required_by_provider** | **bool** |  | [optional] 
+**mandatory_for_actions** | **str** |  | [optional] 
 **client_ids** | **list[str]** |  | [optional] 
 **name** | **str** |  | [optional] [readonly] 
 **type** | [**DataType**](DataType.md) |  | [optional] 

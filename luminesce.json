@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.13.834",
+    "version": "1.13.838",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1457,6 +1457,142 @@
         "x-fbn-apistatus": "Experimental"
       }
     },
+    "/api/Sql/fromfilereaddesign": {
+      "put": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "[EXPERIMENTAL] PutFileReadDesignToSql: Generates file read SQL from a structured query design",
+        "description": "SQL Designer specification to generate SQL from",
+        "operationId": "PutFileReadDesignToSql",
+        "parameters": [
+          {
+            "name": "executeQuery",
+            "in": "query",
+            "description": "Should the generated query be executed to build preview data or determine errors.>",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "Structured file read design object to generate SQL from",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileReaderBuilderDef"
+              },
+              "example": {
+                "limit": 0,
+                "source": {
+                  "location": "Drive",
+                  "type": "Csv"
+                },
+                "filePath": "/some/folder",
+                "folderFilter": ".*\\.csv",
+                "addFileName": true
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileReaderBuilderDef"
+              },
+              "example": {
+                "limit": 0,
+                "source": {
+                  "location": "Drive",
+                  "type": "Csv"
+                },
+                "filePath": "/some/folder",
+                "folderFilter": ".*\\.csv",
+                "addFileName": true
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileReaderBuilderDef"
+              },
+              "example": {
+                "limit": 0,
+                "source": {
+                  "location": "Drive",
+                  "type": "Csv"
+                },
+                "filePath": "/some/folder",
+                "folderFilter": ".*\\.csv",
+                "addFileName": true
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileReaderBuilderDef"
+              },
+              "example": {
+                "limit": 0,
+                "source": {
+                  "location": "Drive",
+                  "type": "Csv"
+                },
+                "filePath": "/some/folder",
+                "folderFilter": ".*\\.csv",
+                "addFileName": true
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
     "/api/Sql/fromviewdesign": {
       "put": {
         "tags": [
@@ -2839,6 +2975,118 @@
                   "limit": 42,
                   "warnings": [],
                   "availableFields": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
+    "/api/Sql/tofilereaddesign": {
+      "put": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "[EXPERIMENTAL] PutSqlToFileReadDesign: Generates a SQL-file-read-design object from SQL string, if possible.",
+        "description": "SQL to attempt to create a Design object from",
+        "operationId": "PutSqlToFileReadDesign",
+        "parameters": [
+          {
+            "name": "determineAvailableSources",
+            "in": "query",
+            "description": "Should the available sources be determined from `Sys.Registration`",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "x-nullable": true
+          }
+        ],
+        "requestBody": {
+          "description": "SQL query to generate the file read design object from",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "@x = \nuse Drive.Csv\n  --file=/some/folder/somefile.csv\nenduse;\n\nselect * from @x;"
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "limit": 0,
+                  "source": {
+                    "location": "Drive",
+                    "type": "Csv"
+                  },
+                  "filePath": "/some/folder",
+                  "folderFilter": ".*\\.csv",
+                  "addFileName": true
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "limit": 0,
+                  "source": {
+                    "location": "Drive",
+                    "type": "Csv"
+                  },
+                  "filePath": "/some/folder",
+                  "folderFilter": ".*\\.csv",
+                  "addFileName": true
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "limit": 0,
+                  "source": {
+                    "location": "Drive",
+                    "type": "Csv"
+                  },
+                  "filePath": "/some/folder",
+                  "folderFilter": ".*\\.csv",
+                  "addFileName": true
                 }
               }
             }
@@ -4584,6 +4832,15 @@
         "additionalProperties": false,
         "description": "How to aggregate over a field"
       },
+      "AutoDetectType": {
+        "enum": [
+          "Auto",
+          "SpecifyColumnsYetInferTypes",
+          "SpecifyColumnsAndTypes"
+        ],
+        "type": "string",
+        "description": "The method of name/type column inference being used"
+      },
       "AvailableField": {
         "required": [
           "fieldType",
@@ -4930,6 +5187,27 @@
         },
         "additionalProperties": false
       },
+      "ColumnInfo": {
+        "type": "object",
+        "properties": {
+          "select": {
+            "type": "boolean",
+            "description": "Should the column be used/selected?"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DataType"
+          },
+          "name": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "The name of the column",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information on how to construct a file-read sql query"
+      },
       "ConditionAttributes": {
         "enum": [
           "None",
@@ -5110,6 +5388,87 @@
         ],
         "type": "string"
       },
+      "FileReaderBuilderDef": {
+        "type": "object",
+        "properties": {
+          "autoDetect": {
+            "$ref": "#/components/schemas/AutoDetectType"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColumnInfo"
+            },
+            "description": "Column information for the results",
+            "nullable": true
+          },
+          "limit": {
+            "type": "integer",
+            "description": "What limit be added to the load query?  Less than or equal to zero means none",
+            "format": "int32"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "availableSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "description": "The source locations the user has access to.  The provider in essence.",
+            "nullable": true
+          },
+          "variableName": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "The name of the variable for the `use` statement",
+            "nullable": true
+          },
+          "filePath": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "The file (or folder) path",
+            "nullable": true
+          },
+          "folderFilter": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "The filter to apply to a folder (all matching files then being read) a RegExp",
+            "nullable": true
+          },
+          "zipFilter": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "The filter to apply to folder structures with zip archives (all matching files then being read) a RegExp",
+            "nullable": true
+          },
+          "addFileName": {
+            "type": "boolean",
+            "description": "Should a file name column be added to the output?"
+          },
+          "csv": {
+            "$ref": "#/components/schemas/OptionsCsv"
+          },
+          "excel": {
+            "$ref": "#/components/schemas/OptionsExcel"
+          },
+          "sqLite": {
+            "$ref": "#/components/schemas/OptionsSqLite"
+          },
+          "xml": {
+            "$ref": "#/components/schemas/OptionsXml"
+          },
+          "parquet": {
+            "$ref": "#/components/schemas/OptionsParquet"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information on how to construct a file-read sql query"
+      },
       "FilterTermDesign": {
         "required": [
           "operator",
@@ -5255,6 +5614,183 @@
         ],
         "type": "string"
       },
+      "OptionsCsv": {
+        "type": "object",
+        "properties": {
+          "columnNames": {
+            "type": "string",
+            "description": "Column Names either overrides the header row or steps in when there is no header row (comma delimited list)",
+            "nullable": true
+          },
+          "columnNamesWanted": {
+            "type": "string",
+            "description": "Column (by Name) that should be returned (comma delimited list)",
+            "nullable": true
+          },
+          "columnTypes": {
+            "type": "string",
+            "description": "Column types (comma delimited list of: '{types}', some columns may be left blank while others are specified)",
+            "nullable": true
+          },
+          "inferTypeRowCount": {
+            "type": "integer",
+            "description": "If non-zero and 'types' is not specified (or not specified for some columns) this will look through N rows to attempt to work out the column types for columns not pre-specified",
+            "format": "int32"
+          },
+          "noHeader": {
+            "type": "boolean",
+            "description": "Set this if there is no header row"
+          },
+          "delimiter": {
+            "type": "string",
+            "description": "The delimiter between values (\\t for tab)",
+            "nullable": true
+          },
+          "escape": {
+            "type": "string",
+            "description": "Character used to escape the 'Quote' character when within a value",
+            "nullable": true
+          },
+          "quote": {
+            "type": "string",
+            "description": "Character used around any field containing the 'delimiter' or a line break.",
+            "nullable": true
+          },
+          "valuesToMakeNull": {
+            "type": "string",
+            "description": "Regex of values to map to 'null' in the returned data.",
+            "nullable": true
+          },
+          "skipPreHeader": {
+            "type": "boolean",
+            "description": "Number of rows to ignore before the header row"
+          },
+          "skipPostHeader": {
+            "type": "boolean",
+            "description": "Number of rows to ignore after the header row"
+          },
+          "skipInvalidRows": {
+            "type": "boolean",
+            "description": "Skip invalid data rows (totally invalid ones), \r\nThis also allows for potentially wrong data if it can be handled somewhat e.g. embedded quotes misused (and still returns such rows).\r\nIn either case a warning will show in the progress feedback."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Additional options applicable to the given SourceType"
+      },
+      "OptionsExcel": {
+        "type": "object",
+        "properties": {
+          "columnNames": {
+            "type": "string",
+            "description": "Column Names either overrides the header row or steps in when there is no header row (comma delimited list)",
+            "nullable": true
+          },
+          "columnTypes": {
+            "type": "string",
+            "description": "Column types (comma delimited list of: '{types}', some columns may be left blank while others are specified)",
+            "nullable": true
+          },
+          "inferTypeRowCount": {
+            "type": "integer",
+            "description": "If non-zero and 'types' is not specified (or not specified for some columns) this will look through N rows to attempt to work out the column types for columns not pre-specified",
+            "format": "int32"
+          },
+          "noHeader": {
+            "type": "boolean",
+            "description": "Set this if there is no header row"
+          },
+          "calculate": {
+            "type": "boolean",
+            "description": "Whether to attempt a calculation of the imported cell range prior to import"
+          },
+          "password": {
+            "type": "string",
+            "description": "If specified will be used as the password used for password protected workbooks",
+            "nullable": true
+          },
+          "worksheet": {
+            "type": "string",
+            "description": "The worksheet containing the cell range to import (name or index, will default to first)",
+            "nullable": true
+          },
+          "rangeOrTable": {
+            "type": "string",
+            "description": "The cell range to import as either a specified range or a table name",
+            "nullable": true
+          },
+          "ignoreInvalidCells": {
+            "type": "boolean",
+            "description": "If specified cells which can not be successfully converted to the target type will be ignored"
+          },
+          "ignoreBlankRows": {
+            "type": "boolean",
+            "description": "If the entire rows has only blank cells it will be ignored will be ignored"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Additional options applicable to the given SourceType"
+      },
+      "OptionsParquet": {
+        "type": "object",
+        "properties": {
+          "columnNamesWanted": {
+            "type": "string",
+            "description": "Column (by Name) that should be returned (comma delimited list)",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Additional options applicable to the given SourceType"
+      },
+      "OptionsSqLite": {
+        "type": "object",
+        "properties": {
+          "table": {
+            "type": "string",
+            "description": "Table name to read.  If missing then an error will be raised if there is any number of tables other than one.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Additional options applicable to the given SourceType"
+      },
+      "OptionsXml": {
+        "type": "object",
+        "properties": {
+          "columnTypes": {
+            "type": "string",
+            "description": "Column types (comma delimited list of: '{types}', some columns may be left blank while others are specified)",
+            "nullable": true
+          },
+          "inferTypeRowCount": {
+            "type": "integer",
+            "description": "If non-zero and 'types' is not specified (or not specified for some columns) this will look through N rows to attempt to work out the column types for columns not pre-specified",
+            "format": "int32"
+          },
+          "valuesToMakeNull": {
+            "type": "string",
+            "description": "Regex of values to map to 'null' in the returned data.",
+            "nullable": true
+          },
+          "columnNames": {
+            "type": "string",
+            "description": "Column Names either overrides the header row or steps in when there is no header row (comma delimited list)",
+            "nullable": true
+          },
+          "nodePath": {
+            "type": "string",
+            "description": "XPath query that selects the nodes to map to rows",
+            "nullable": true
+          },
+          "namespaces": {
+            "type": "string",
+            "description": "Selected prefix(es) and namespace(s):prefix1=namespace1-uri1,prefix2=namespace2-uri2,...prefixN=namespaceN-uriN",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Additional options applicable to the given SourceType"
+      },
       "OrderByDirection": {
         "enum": [
           "asc",
@@ -5392,6 +5928,36 @@
           }
         },
         "additionalProperties": false
+      },
+      "Source": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "The source location.  Start of a provider name, `Drive`, `LocalFs`, `AwsS3` etc.",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/SourceType"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information leading to choosing the provider"
+      },
+      "SourceType": {
+        "enum": [
+          "Unknown",
+          "Csv",
+          "Excel",
+          "SqLite",
+          "Xml",
+          "Parquet",
+          "RawText"
+        ],
+        "type": "string",
+        "description": "The file type of a source"
       },
       "TaskStatus": {
         "enum": [

@@ -18,8 +18,10 @@ Method | HTTP request | Description
 [**put_by_query_pipe**](SqlExecutionApi.md#put_by_query_pipe) | **PUT** /api/Sql/pipe | PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
 [**put_by_query_sqlite**](SqlExecutionApi.md#put_by_query_sqlite) | **PUT** /api/Sql/sqlite | PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
 [**put_by_query_xml**](SqlExecutionApi.md#put_by_query_xml) | **PUT** /api/Sql/xml | PutByQueryXml: Executes Sql, returned in Xml format, where the sql is the post-body url.
+[**put_file_read_design_to_sql**](SqlExecutionApi.md#put_file_read_design_to_sql) | **PUT** /api/Sql/fromfilereaddesign | [EXPERIMENTAL] PutFileReadDesignToSql: Generates file read SQL from a structured query design
 [**put_query_design_to_sql**](SqlExecutionApi.md#put_query_design_to_sql) | **PUT** /api/Sql/fromdesign | [EXPERIMENTAL] PutQueryDesignToSql: Generates SQL from a structured query design
 [**put_query_to_format**](SqlExecutionApi.md#put_query_to_format) | **PUT** /api/Sql/pretty | PutQueryToFormat: Executes Sql, returned in JSON format, where the sql is the post-body url.
+[**put_sql_to_file_read_design**](SqlExecutionApi.md#put_sql_to_file_read_design) | **PUT** /api/Sql/tofilereaddesign | [EXPERIMENTAL] PutSqlToFileReadDesign: Generates a SQL-file-read-design object from SQL string, if possible.
 [**put_sql_to_query_design**](SqlExecutionApi.md#put_sql_to_query_design) | **PUT** /api/Sql/todesign | [EXPERIMENTAL] PutSqlToQueryDesign: Generates a SQL-design object from SQL string, if possible.
 [**put_view_design_to_sql**](SqlExecutionApi.md#put_view_design_to_sql) | **PUT** /api/Sql/fromviewdesign | [EXPERIMENTAL] PutViewDesignToSql: Generates view creation sql from a structured view creation design
 
@@ -1140,6 +1142,82 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **put_file_read_design_to_sql**
+> str put_file_read_design_to_sql(file_reader_builder_def, execute_query=execute_query)
+
+[EXPERIMENTAL] PutFileReadDesignToSql: Generates file read SQL from a structured query design
+
+SQL Designer specification to generate SQL from
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import luminesce
+from luminesce.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/honeycomb
+# See configuration.py for a list of all supported configuration parameters.
+configuration = luminesce.Configuration(
+    host = "https://www.lusid.com/honeycomb"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = luminesce.Configuration(
+    host = "https://www.lusid.com/honeycomb"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with luminesce.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = luminesce.SqlExecutionApi(api_client)
+    file_reader_builder_def = {"limit":0,"source":{"location":"Drive","type":"Csv"},"filePath":"/some/folder","folderFilter":".*\\.csv","addFileName":true} # FileReaderBuilderDef | Structured file read design object to generate SQL from
+execute_query = True # bool | Should the generated query be executed to build preview data or determine errors.> (optional) (default to True)
+
+    try:
+        # [EXPERIMENTAL] PutFileReadDesignToSql: Generates file read SQL from a structured query design
+        api_response = api_instance.put_file_read_design_to_sql(file_reader_builder_def, execute_query=execute_query)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SqlExecutionApi->put_file_read_design_to_sql: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_reader_builder_def** | [**FileReaderBuilderDef**](FileReaderBuilderDef.md)| Structured file read design object to generate SQL from | 
+ **execute_query** | **bool**| Should the generated query be executed to build preview data or determine errors.&gt; | [optional] [default to True]
+
+### Return type
+
+**str**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **put_query_design_to_sql**
 > str put_query_design_to_sql(query_design)
 
@@ -1292,6 +1370,87 @@ Name | Type | Description  | Notes
  **max_line_width** | **int**| Maximum number of characters to allow on one line (if possible) | [optional] [default to 120]
  **space_before_trailing_single_line_comments** | **bool**| Should the be a space before trailing single line comments? | [optional] [default to True]
  **multiline_comment_extra_line_break** | **bool**| Should an additional line break be added after multi-line comments? | [optional] [default to False]
+
+### Return type
+
+**str**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: text/plain
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **put_sql_to_file_read_design**
+> str put_sql_to_file_read_design(body, determine_available_sources=determine_available_sources)
+
+[EXPERIMENTAL] PutSqlToFileReadDesign: Generates a SQL-file-read-design object from SQL string, if possible.
+
+SQL to attempt to create a Design object from
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import luminesce
+from luminesce.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/honeycomb
+# See configuration.py for a list of all supported configuration parameters.
+configuration = luminesce.Configuration(
+    host = "https://www.lusid.com/honeycomb"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = luminesce.Configuration(
+    host = "https://www.lusid.com/honeycomb"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with luminesce.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = luminesce.SqlExecutionApi(api_client)
+    body = @x = 
+use Drive.Csv
+  --file=/some/folder/somefile.csv
+enduse;
+
+select * from @x; # str | SQL query to generate the file read design object from
+determine_available_sources = True # bool | Should the available sources be determined from `Sys.Registration` (optional) (default to True)
+
+    try:
+        # [EXPERIMENTAL] PutSqlToFileReadDesign: Generates a SQL-file-read-design object from SQL string, if possible.
+        api_response = api_instance.put_sql_to_file_read_design(body, determine_available_sources=determine_available_sources)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SqlExecutionApi->put_sql_to_file_read_design: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | **str**| SQL query to generate the file read design object from | 
+ **determine_available_sources** | **bool**| Should the available sources be determined from &#x60;Sys.Registration&#x60; | [optional] [default to True]
 
 ### Return type
 

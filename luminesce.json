@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.13.954",
+    "version": "1.14.1",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -3037,8 +3037,7 @@
               },
               "example": "@x = \nuse Drive.Csv\n  --file=/some/folder/somefile.csv\nenduse;\n\nselect * from @x;"
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -5662,12 +5661,14 @@
             "nullable": true
           },
           "skipPreHeader": {
-            "type": "boolean",
-            "description": "Number of rows to ignore before the header row"
+            "type": "integer",
+            "description": "Number of rows to ignore before the header row",
+            "format": "int32"
           },
           "skipPostHeader": {
-            "type": "boolean",
-            "description": "Number of rows to ignore after the header row"
+            "type": "integer",
+            "description": "Number of rows to ignore after the header row",
+            "format": "int32"
           },
           "skipInvalidRows": {
             "type": "boolean",

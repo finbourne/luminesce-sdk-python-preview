@@ -1393,7 +1393,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_sql_to_file_read_design**
-> str put_sql_to_file_read_design(body, determine_available_sources=determine_available_sources)
+> str put_sql_to_file_read_design(determine_available_sources=determine_available_sources, body=body)
 
 [EXPERIMENTAL] PutSqlToFileReadDesign: Generates a SQL-file-read-design object from SQL string, if possible.
 
@@ -1429,17 +1429,17 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    body = @x = 
+    determine_available_sources = True # bool | Should the available sources be determined from `Sys.Registration` (optional) (default to True)
+body = @x = 
 use Drive.Csv
   --file=/some/folder/somefile.csv
 enduse;
 
-select * from @x; # str | SQL query to generate the file read design object from
-determine_available_sources = True # bool | Should the available sources be determined from `Sys.Registration` (optional) (default to True)
+select * from @x; # str | SQL query to generate the file read design object from (optional)
 
     try:
         # [EXPERIMENTAL] PutSqlToFileReadDesign: Generates a SQL-file-read-design object from SQL string, if possible.
-        api_response = api_instance.put_sql_to_file_read_design(body, determine_available_sources=determine_available_sources)
+        api_response = api_instance.put_sql_to_file_read_design(determine_available_sources=determine_available_sources, body=body)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_sql_to_file_read_design: %s\n" % e)
@@ -1449,8 +1449,8 @@ determine_available_sources = True # bool | Should the available sources be dete
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **str**| SQL query to generate the file read design object from | 
  **determine_available_sources** | **bool**| Should the available sources be determined from &#x60;Sys.Registration&#x60; | [optional] [default to True]
+ **body** | **str**| SQL query to generate the file read design object from | [optional] 
 
 ### Return type
 

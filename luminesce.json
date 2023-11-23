@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.22",
+    "version": "1.14.25",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1642,7 +1642,8 @@
                     "isTableDataMandatory": true,
                     "description": "This is a parameter tooltip"
                   }
-                ]
+                ],
+                "otherParameters": {}
               }
             },
             "application/json": {
@@ -1683,7 +1684,8 @@
                     "isTableDataMandatory": true,
                     "description": "This is a parameter tooltip"
                   }
-                ]
+                ],
+                "otherParameters": {}
               }
             },
             "text/json": {
@@ -1724,7 +1726,8 @@
                     "isTableDataMandatory": true,
                     "description": "This is a parameter tooltip"
                   }
-                ]
+                ],
+                "otherParameters": {}
               }
             },
             "application/*+json": {
@@ -1765,7 +1768,8 @@
                     "isTableDataMandatory": true,
                     "description": "This is a parameter tooltip"
                   }
-                ]
+                ],
+                "otherParameters": {}
               }
             }
           },
@@ -3086,6 +3090,187 @@
                   "filePath": "/some/folder",
                   "folderFilter": ".*\\.csv",
                   "addFileName": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
+    "/api/Sql/toviewdesign": {
+      "put": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "[EXPERIMENTAL] PutSqlToViewDesign: Generates a structured view creation design from existing view creation SQL.",
+        "description": "SQL which creates a view into a structured ConvertToViewData object",
+        "operationId": "PutSqlToViewDesign",
+        "requestBody": {
+          "description": "SQL Query to generate the ConvertToViewData object from",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "@x = \nuse Sys.Admin.SetupView\n  --provider=YourView\n----\nselect * from Lusid.Instrument\nenduse;\n\nselect * from @x;"
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "query": "select * from Lusid.Instrument.bond",
+                  "name": "Views.MyView",
+                  "description": "This is a tooltip for the view as a whole",
+                  "documentationLink": "https://mydocumentationlink.com",
+                  "viewParameters": [
+                    {
+                      "name": "MyTextParam",
+                      "dataType": "Text",
+                      "value": "Portfolio",
+                      "isTableDataMandatory": false,
+                      "description": "This is a parameter tooltip"
+                    },
+                    {
+                      "name": "EffectiveAt",
+                      "dataType": "Date",
+                      "value": "2023-05-03",
+                      "isTableDataMandatory": false,
+                      "description": "This is a parameter tooltip"
+                    },
+                    {
+                      "name": "IsActive",
+                      "dataType": "Boolean",
+                      "value": "true",
+                      "isTableDataMandatory": true,
+                      "description": "This is a parameter tooltip"
+                    },
+                    {
+                      "name": "EndUserTable",
+                      "dataType": "Table",
+                      "value": "@end_user_table",
+                      "isTableDataMandatory": true,
+                      "description": "This is a parameter tooltip"
+                    }
+                  ],
+                  "otherParameters": {}
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "query": "select * from Lusid.Instrument.bond",
+                  "name": "Views.MyView",
+                  "description": "This is a tooltip for the view as a whole",
+                  "documentationLink": "https://mydocumentationlink.com",
+                  "viewParameters": [
+                    {
+                      "name": "MyTextParam",
+                      "dataType": "Text",
+                      "value": "Portfolio",
+                      "isTableDataMandatory": false,
+                      "description": "This is a parameter tooltip"
+                    },
+                    {
+                      "name": "EffectiveAt",
+                      "dataType": "Date",
+                      "value": "2023-05-03",
+                      "isTableDataMandatory": false,
+                      "description": "This is a parameter tooltip"
+                    },
+                    {
+                      "name": "IsActive",
+                      "dataType": "Boolean",
+                      "value": "true",
+                      "isTableDataMandatory": true,
+                      "description": "This is a parameter tooltip"
+                    },
+                    {
+                      "name": "EndUserTable",
+                      "dataType": "Table",
+                      "value": "@end_user_table",
+                      "isTableDataMandatory": true,
+                      "description": "This is a parameter tooltip"
+                    }
+                  ],
+                  "otherParameters": {}
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "query": "select * from Lusid.Instrument.bond",
+                  "name": "Views.MyView",
+                  "description": "This is a tooltip for the view as a whole",
+                  "documentationLink": "https://mydocumentationlink.com",
+                  "viewParameters": [
+                    {
+                      "name": "MyTextParam",
+                      "dataType": "Text",
+                      "value": "Portfolio",
+                      "isTableDataMandatory": false,
+                      "description": "This is a parameter tooltip"
+                    },
+                    {
+                      "name": "EffectiveAt",
+                      "dataType": "Date",
+                      "value": "2023-05-03",
+                      "isTableDataMandatory": false,
+                      "description": "This is a parameter tooltip"
+                    },
+                    {
+                      "name": "IsActive",
+                      "dataType": "Boolean",
+                      "value": "true",
+                      "isTableDataMandatory": true,
+                      "description": "This is a parameter tooltip"
+                    },
+                    {
+                      "name": "EndUserTable",
+                      "dataType": "Table",
+                      "value": "@end_user_table",
+                      "isTableDataMandatory": true,
+                      "description": "This is a parameter tooltip"
+                    }
+                  ],
+                  "otherParameters": {}
                 }
               }
             }
@@ -5254,6 +5439,20 @@
               "$ref": "#/components/schemas/ViewParameter"
             },
             "description": "View parameters",
+            "nullable": true
+          },
+          "otherParameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "description": "Other parameters not explicitly handled by the ConvertToView generation.\r\nThese will be populated by the \"From SQL\" and should simply be returned by\r\nthe web GUI should the user edit / update / regenerate",
+            "nullable": true
+          },
+          "startingVariableName": {
+            "type": "string",
+            "description": "Which variable the this start with, null if not started from a full Create View Sql Statement.",
             "nullable": true
           }
         },

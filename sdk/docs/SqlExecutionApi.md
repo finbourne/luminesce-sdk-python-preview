@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**put_query_to_format**](SqlExecutionApi.md#put_query_to_format) | **PUT** /api/Sql/pretty | PutQueryToFormat: Executes Sql, returned in JSON format, where the sql is the post-body url.
 [**put_sql_to_file_read_design**](SqlExecutionApi.md#put_sql_to_file_read_design) | **PUT** /api/Sql/tofilereaddesign | [EXPERIMENTAL] PutSqlToFileReadDesign: Generates a SQL-file-read-design object from SQL string, if possible.
 [**put_sql_to_query_design**](SqlExecutionApi.md#put_sql_to_query_design) | **PUT** /api/Sql/todesign | [EXPERIMENTAL] PutSqlToQueryDesign: Generates a SQL-design object from SQL string, if possible.
+[**put_sql_to_view_design**](SqlExecutionApi.md#put_sql_to_view_design) | **PUT** /api/Sql/toviewdesign | [EXPERIMENTAL] PutSqlToViewDesign: Generates a structured view creation design from existing view creation SQL.
 [**put_view_design_to_sql**](SqlExecutionApi.md#put_view_design_to_sql) | **PUT** /api/Sql/fromviewdesign | [EXPERIMENTAL] PutViewDesignToSql: Generates view creation sql from a structured view creation design
 
 
@@ -1560,6 +1561,87 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **put_sql_to_view_design**
+> str put_sql_to_view_design(body)
+
+[EXPERIMENTAL] PutSqlToViewDesign: Generates a structured view creation design from existing view creation SQL.
+
+SQL which creates a view into a structured ConvertToViewData object
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import luminesce
+from luminesce.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/honeycomb
+# See configuration.py for a list of all supported configuration parameters.
+configuration = luminesce.Configuration(
+    host = "https://www.lusid.com/honeycomb"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = luminesce.Configuration(
+    host = "https://www.lusid.com/honeycomb"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with luminesce.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = luminesce.SqlExecutionApi(api_client)
+    body = @x = 
+use Sys.Admin.SetupView
+  --provider=YourView
+----
+select * from Lusid.Instrument
+enduse;
+
+select * from @x; # str | SQL Query to generate the ConvertToViewData object from
+
+    try:
+        # [EXPERIMENTAL] PutSqlToViewDesign: Generates a structured view creation design from existing view creation SQL.
+        api_response = api_instance.put_sql_to_view_design(body)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling SqlExecutionApi->put_sql_to_view_design: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | **str**| SQL Query to generate the ConvertToViewData object from | 
+
+### Return type
+
+**str**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: text/plain
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **put_view_design_to_sql**
 > str put_view_design_to_sql(convert_to_view_data)
 
@@ -1597,7 +1679,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
-    convert_to_view_data = {"query":"select * from Lusid.Instrument.bond","name":"Views.MyView","description":"This is a tooltip for the view as a whole","documentationLink":"https://mydocumentationlink.com","viewParameters":[{"name":"MyTextParam","dataType":"Text","value":"Portfolio","isTableDataMandatory":false,"description":"This is a parameter tooltip"},{"name":"EffectiveAt","dataType":"Date","value":"2023-05-03","isTableDataMandatory":false,"description":"This is a parameter tooltip"},{"name":"IsActive","dataType":"Boolean","value":"true","isTableDataMandatory":true,"description":"This is a parameter tooltip"},{"name":"EndUserTable","dataType":"Table","value":"@end_user_table","isTableDataMandatory":true,"description":"This is a parameter tooltip"}]} # ConvertToViewData | Structured Query design object to generate SQL from
+    convert_to_view_data = {"query":"select * from Lusid.Instrument.bond","name":"Views.MyView","description":"This is a tooltip for the view as a whole","documentationLink":"https://mydocumentationlink.com","viewParameters":[{"name":"MyTextParam","dataType":"Text","value":"Portfolio","isTableDataMandatory":false,"description":"This is a parameter tooltip"},{"name":"EffectiveAt","dataType":"Date","value":"2023-05-03","isTableDataMandatory":false,"description":"This is a parameter tooltip"},{"name":"IsActive","dataType":"Boolean","value":"true","isTableDataMandatory":true,"description":"This is a parameter tooltip"},{"name":"EndUserTable","dataType":"Table","value":"@end_user_table","isTableDataMandatory":true,"description":"This is a parameter tooltip"}],"otherParameters":{}} # ConvertToViewData | Structured Query design object to generate SQL from
 
     try:
         # [EXPERIMENTAL] PutViewDesignToSql: Generates view creation sql from a structured view creation design

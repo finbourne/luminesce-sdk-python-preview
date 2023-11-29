@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.53",
+    "version": "1.14.60",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -5386,6 +5386,13 @@
             "minLength": 0,
             "type": "string",
             "description": "The name of the column",
+            "nullable": true
+          },
+          "xPath": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Xpath for the column (only applicable to XML defined columns)",
             "nullable": true
           }
         },

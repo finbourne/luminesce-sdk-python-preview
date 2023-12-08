@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.127",
+    "version": "1.14.131",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -191,15 +191,6 @@
             "schema": {
               "type": "boolean",
               "default": true
-            },
-            "x-nullable": true
-          },
-          {
-            "name": "skipSystems",
-            "in": "query",
-            "description": "Any systems that should be skipped\r\n(if any are the certificate will not function, but can be useful for certain forms of validation)",
-            "schema": {
-              "$ref": "#/components/schemas/CertificateStatus"
             },
             "x-nullable": true
           }

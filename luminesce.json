@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.138",
+    "version": "1.14.140",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -79,14 +79,95 @@
         "x-fbn-apistatus": "Stable"
       }
     },
+    "/api/Certificate/certificate": {
+      "get": {
+        "tags": [
+          "Certificate Management"
+        ],
+        "summary": "[EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate's public or private key - if any.",
+        "description": "\nDownloads your latest Domain or User certificate's public or private key - if any.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - certificate is not available for some reason\n- 401 Unauthorized\n",
+        "operationId": "DownloadCertificate",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "User or Domain level cert (Domain level requires additional entitlements)",
+            "schema": {
+              "$ref": "#/components/schemas/CertificateType"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "fileType",
+            "in": "query",
+            "description": "Should the public key or private key be downloaded? (both must be in place to run providers)",
+            "schema": {
+              "$ref": "#/components/schemas/CertificateFileType"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
     "/api/Certificate/certificates": {
       "get": {
         "tags": [
-          "Luminesce Certificate Management"
+          "Certificate Management"
         ],
-        "summary": "[EXPERIMENTAL] GetCertificates: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)",
+        "summary": "[EXPERIMENTAL] ListCertificates: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)",
         "description": "\nLists all the certificates previously minted to which you have access.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
-        "operationId": "GetCertificates",
+        "operationId": "ListCertificates",
         "responses": {
           "200": {
             "description": "Success",
@@ -116,6 +197,26 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -129,7 +230,7 @@
     "/api/Certificate/manage": {
       "put": {
         "tags": [
-          "Luminesce Certificate Management"
+          "Certificate Management"
         ],
         "summary": "[EXPERIMENTAL] ManageCertificate: Manages a new certificate (Create / Renew / Revoke)",
         "description": "\nManages a certificate.  This could be creating a new one, renewing an old one or revoking one explicitly.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something about the request cannot be processed\n- 401 Unauthorized\n",
@@ -212,6 +313,26 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CertificateState"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
                 }
               }
             }
@@ -5474,6 +5595,14 @@
         "type": "string",
         "description": "The action to take with a certificate"
       },
+      "CertificateFileType": {
+        "enum": [
+          "Public",
+          "Private"
+        ],
+        "type": "string",
+        "description": "The type of the certificate file to be downloaded (both public and private are needed to connect)"
+      },
       "CertificateState": {
         "type": "object",
         "properties": {
@@ -6494,16 +6623,16 @@
       "description": "Metadata about the application"
     },
     {
+      "name": "Certificate Management",
+      "description": "List, Mint, Renew and Revoke your Honeycomb / Luminesce TLS Certificates."
+    },
+    {
       "name": "Current Table/Field Catalog",
       "description": "Shows Table and Field level information on Providers that are currently running that you have access to."
     },
     {
       "name": "Historically Executed Queries",
       "description": "Shows queries executed at some point and details about them"
-    },
-    {
-      "name": "Luminesce Certificate Management",
-      "description": "List, Mint, Renew and Revoke your Luminesce TLS Certificates."
     },
     {
       "name": "Multi-Query Execution",
@@ -6522,9 +6651,9 @@
     "name": "API",
     "tags": [
       "Application Metadata",
+      "Certificate Management",
       "Current Table/Field Catalog",
       "Historically Executed Queries",
-      "Luminesce Certificate Management",
       "Multi-Query Execution",
       "Sql Background Execution",
       "Sql Execution"

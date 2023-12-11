@@ -1,3 +1,9 @@
+# Deprecated
+
+Please note that this repository is deprecated and will be archived early 2024.
+
+All functionality is now contained, in the [luminesce-sdk-python](https://github.com/finbourne/luminesce-sdk-python) repository on the `main` branch.
+
 # LUMINESCE<sup>®</sup> Python Preview SDK
 This is the Python Preview SDK for [LUMINESCE by FINBOURNE](https://www.finbourne.com/luminesce/), a data virtualisation platform that lets you explore, query, fetch and combine data from multiple sources and systems, including LUSID, into an integrated view for interrogation. To use it you'll need a LUSID account. [Sign up for free at lusid.com](https://www.lusid.com/app/signup)
 

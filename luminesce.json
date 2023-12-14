@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.152",
+    "version": "1.14.154",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -103,6 +103,16 @@
             "description": "Should the public key or private key be downloaded? (both must be in place to run providers)",
             "schema": {
               "$ref": "#/components/schemas/CertificateFileType"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "mayAutoCreate",
+            "in": "query",
+            "description": "If no matching cert is available, should an attempt be made to Create/Renew it with default options?",
+            "schema": {
+              "type": "boolean",
+              "default": false
             },
             "x-nullable": true
           }

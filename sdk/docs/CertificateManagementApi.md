@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **download_certificate**
-> file download_certificate(type=type, file_type=file_type)
+> file download_certificate(type=type, file_type=file_type, may_auto_create=may_auto_create)
 
 [EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate's public or private key - if any.
 
@@ -48,10 +48,11 @@ with luminesce.ApiClient(configuration) as api_client:
     api_instance = luminesce.CertificateManagementApi(api_client)
     type = luminesce.CertificateType() # CertificateType | User or Domain level cert (Domain level requires additional entitlements) (optional)
 file_type = luminesce.CertificateFileType() # CertificateFileType | Should the public key or private key be downloaded? (both must be in place to run providers) (optional)
+may_auto_create = False # bool | If no matching cert is available, should an attempt be made to Create/Renew it with default options? (optional) (default to False)
 
     try:
         # [EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate's public or private key - if any.
-        api_response = api_instance.download_certificate(type=type, file_type=file_type)
+        api_response = api_instance.download_certificate(type=type, file_type=file_type, may_auto_create=may_auto_create)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling CertificateManagementApi->download_certificate: %s\n" % e)
@@ -63,6 +64,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **type** | [**CertificateType**](.md)| User or Domain level cert (Domain level requires additional entitlements) | [optional] 
  **file_type** | [**CertificateFileType**](.md)| Should the public key or private key be downloaded? (both must be in place to run providers) | [optional] 
+ **may_auto_create** | **bool**| If no matching cert is available, should an attempt be made to Create/Renew it with default options? | [optional] [default to False]
 
 ### Return type
 

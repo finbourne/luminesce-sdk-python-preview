@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.361",
+    "version": "1.14.370",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -323,6 +323,74 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CertificateState"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
+    "/api/Download/download": {
+      "get": {
+        "tags": [
+          "Binary Downloading"
+        ],
+        "summary": "[EXPERIMENTAL] DownloadBinary: Downloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.",
+        "description": "\nDownloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.\n\nOnce a file has been downloaded the following steps can be used to install it:\n\n1. Open a terminal and cd to the directory you downloaded it to\n2. Install / extract files from that package via:\n```\ndotnet tool install NameOfFileWithoutExtension -g --add-source \".\"\n```\n3. Execute them (see documentation for specific binary)...\n\nThe installed binaries can then be found in\n- Windows - `%USERPROFILE%\\.dotnet\\tools\\.store\\`\n- Linux/macOS - `$HOME/.dotnet/tools/.store/`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - binary file is not available for some reason (e.g. permissions or invalid version)\n- 401 Unauthorized\n",
+        "operationId": "DownloadBinary",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Type of binary to download (each requires separate licenses and entitlements)",
+            "schema": {
+              "$ref": "#/components/schemas/LuminesceBinaryType"
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "An explicit version of the binary.  Leave blank to get the latest version (recommended)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The .nupkg file of the requested binary",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -6148,6 +6216,25 @@
         },
         "additionalProperties": false
       },
+      "LuminesceBinaryType": {
+        "enum": [
+          "CommandLineTool",
+          "LocalFileSystem_Providers",
+          "Email_Providers",
+          "Python_Providers",
+          "AwsS3_Providers",
+          "SqlDb_Providers_Db2Linux",
+          "SqlDb_Providers_MySql",
+          "SqlDb_Providers_Oracle",
+          "SqlDb_Providers_Oracle_Snowflake",
+          "SqlDb_Providers_Postgresql",
+          "SqlDb_Providers_Snowflake",
+          "SqlDb_Providers_SqlServer",
+          "SqlDb_Providers_SybaseAse"
+        ],
+        "type": "string",
+        "description": "Binaries that can be downloaded"
+      },
       "LusidProblemDetails": {
         "required": [
           "code",
@@ -6633,6 +6720,10 @@
       "description": "Metadata about the application"
     },
     {
+      "name": "Binary Downloading",
+      "description": "Allows for the downloading of Luminesce Binaries, given the required entitlements.\nThese are to allow various functionalities to be run outside of Finbourne cloud infrastructure.\nFor example to connection to internal databases, run providers on users' machines, or obtain the LuminesceCLI."
+    },
+    {
       "name": "Certificate Management",
       "description": "List, Mint, Renew and Revoke your Honeycomb / Luminesce TLS Certificates."
     },
@@ -6661,6 +6752,7 @@
     "name": "API",
     "tags": [
       "Application Metadata",
+      "Binary Downloading",
       "Certificate Management",
       "Current Table/Field Catalog",
       "Historically Executed Queries",

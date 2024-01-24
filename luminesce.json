@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.380",
+    "version": "1.14.385",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -362,7 +362,7 @@
           "Binary Downloading"
         ],
         "summary": "[EXPERIMENTAL] DownloadBinary: Downloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.",
-        "description": "\nDownloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.\n\nOnce a file has been downloaded the following steps can be used to install it:\n\n1. Open a terminal and cd to the directory you downloaded it to\n2. Install / extract files from that package via:\n```\ndotnet tool install NameOfFileWithoutExtension -g --add-source \".\"\n```\n3. Execute them (see documentation for specific binary)...\n\nThe installed binaries can then be found in\n- Windows - `%USERPROFILE%\\.dotnet\\tools\\.store\\`\n- Linux/macOS - `$HOME/.dotnet/tools/.store/`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - binary file is not available for some reason (e.g. permissions or invalid version)\n- 401 Unauthorized\n",
+        "description": "\nDownloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.\n\n*NOTE:* This endpoint is an alternative to time-consuming manual distribution via Drive or Email.\n> it relies on as underlying datastore that is not quite as \"Highly Available\" to the degree \n> that FINBOURNE services generally are.  \n> Thus it is not subject to the same SLAs as other API endpoints are.\n> *If you perceive an outage, please try again later.*\n\nOnce a file has been downloaded the following steps can be used to install it:\n\n1. Open a terminal and cd to the directory you downloaded it to\n2. Install / extract files from that package via:\n```\ndotnet tool install NameOfFileWithoutExtension -g --add-source \".\"\n```\n3. Execute them (see documentation for specific binary)...\n\nThe installed binaries can then be found in\n- Windows - `%USERPROFILE%\\.dotnet\\tools\\.store\\`\n- Linux/macOS - `$HOME/.dotnet/tools/.store/`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - binary file is not available for some reason (e.g. permissions or invalid version)\n- 401 Unauthorized\n",
         "operationId": "DownloadBinary",
         "parameters": [
           {

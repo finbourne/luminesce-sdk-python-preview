@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.436",
+    "version": "1.14.442",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -6230,7 +6230,8 @@
           "SqlDb_Providers_Postgresql",
           "SqlDb_Providers_Snowflake",
           "SqlDb_Providers_SqlServer",
-          "SqlDb_Providers_SybaseAse"
+          "SqlDb_Providers_SybaseAse",
+          "Jdbc_Driver"
         ],
         "type": "string",
         "description": "Binaries that can be downloaded"

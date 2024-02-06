@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.453",
+    "version": "1.14.457",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2170,6 +2170,342 @@
         "x-fbn-apistatus": "Experimental"
       }
     },
+    "/api/Sql/fromwriterdesign": {
+      "put": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "[EXPERIMENTAL] PutWriterDesignToSql: Generates writer SQL from a valid writer-design structure",
+        "description": "SQL Writer Design specification to generate Writer SQL from",
+        "operationId": "PutWriterDesignToSql",
+        "requestBody": {
+          "description": "Structured Writer Design design object to generate Writer SQL from",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WriterDesign"
+              },
+              "example": {
+                "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
+                "availableToMapFrom": [
+                  {
+                    "expression": "SomeScope",
+                    "alias": "Scope"
+                  }
+                ],
+                "parameter": {
+                  "providerName": "Lusid.Instrument.Bond",
+                  "parameterName": "ToWrite",
+                  "fields": [
+                    {
+                      "name": "Scope",
+                      "type": "Text",
+                      "description": "Scope of the instrument",
+                      "mapping": {
+                        "expression": "SomeScope",
+                        "alias": "Scope"
+                      }
+                    },
+                    {
+                      "name": "DisplayName",
+                      "type": "Text"
+                    }
+                  ]
+                },
+                "availableParameters": [
+                  {
+                    "providerName": "Lusid.Instrument.Bond",
+                    "parameterName": "ToWrite",
+                    "fields": [
+                      {
+                        "name": "Scope",
+                        "type": "Text",
+                        "description": "Scope of the instrument",
+                        "mapping": {
+                          "expression": "SomeScope",
+                          "alias": "Scope"
+                        }
+                      },
+                      {
+                        "name": "DisplayName",
+                        "type": "Text"
+                      }
+                    ]
+                  },
+                  {
+                    "providerName": "Email.Send",
+                    "parameterName": "ToSend",
+                    "fields": [
+                      {
+                        "name": "Subject",
+                        "type": "Text"
+                      },
+                      {
+                        "name": "Body",
+                        "type": "Text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WriterDesign"
+              },
+              "example": {
+                "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
+                "availableToMapFrom": [
+                  {
+                    "expression": "SomeScope",
+                    "alias": "Scope"
+                  }
+                ],
+                "parameter": {
+                  "providerName": "Lusid.Instrument.Bond",
+                  "parameterName": "ToWrite",
+                  "fields": [
+                    {
+                      "name": "Scope",
+                      "type": "Text",
+                      "description": "Scope of the instrument",
+                      "mapping": {
+                        "expression": "SomeScope",
+                        "alias": "Scope"
+                      }
+                    },
+                    {
+                      "name": "DisplayName",
+                      "type": "Text"
+                    }
+                  ]
+                },
+                "availableParameters": [
+                  {
+                    "providerName": "Lusid.Instrument.Bond",
+                    "parameterName": "ToWrite",
+                    "fields": [
+                      {
+                        "name": "Scope",
+                        "type": "Text",
+                        "description": "Scope of the instrument",
+                        "mapping": {
+                          "expression": "SomeScope",
+                          "alias": "Scope"
+                        }
+                      },
+                      {
+                        "name": "DisplayName",
+                        "type": "Text"
+                      }
+                    ]
+                  },
+                  {
+                    "providerName": "Email.Send",
+                    "parameterName": "ToSend",
+                    "fields": [
+                      {
+                        "name": "Subject",
+                        "type": "Text"
+                      },
+                      {
+                        "name": "Body",
+                        "type": "Text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WriterDesign"
+              },
+              "example": {
+                "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
+                "availableToMapFrom": [
+                  {
+                    "expression": "SomeScope",
+                    "alias": "Scope"
+                  }
+                ],
+                "parameter": {
+                  "providerName": "Lusid.Instrument.Bond",
+                  "parameterName": "ToWrite",
+                  "fields": [
+                    {
+                      "name": "Scope",
+                      "type": "Text",
+                      "description": "Scope of the instrument",
+                      "mapping": {
+                        "expression": "SomeScope",
+                        "alias": "Scope"
+                      }
+                    },
+                    {
+                      "name": "DisplayName",
+                      "type": "Text"
+                    }
+                  ]
+                },
+                "availableParameters": [
+                  {
+                    "providerName": "Lusid.Instrument.Bond",
+                    "parameterName": "ToWrite",
+                    "fields": [
+                      {
+                        "name": "Scope",
+                        "type": "Text",
+                        "description": "Scope of the instrument",
+                        "mapping": {
+                          "expression": "SomeScope",
+                          "alias": "Scope"
+                        }
+                      },
+                      {
+                        "name": "DisplayName",
+                        "type": "Text"
+                      }
+                    ]
+                  },
+                  {
+                    "providerName": "Email.Send",
+                    "parameterName": "ToSend",
+                    "fields": [
+                      {
+                        "name": "Subject",
+                        "type": "Text"
+                      },
+                      {
+                        "name": "Body",
+                        "type": "Text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WriterDesign"
+              },
+              "example": {
+                "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
+                "availableToMapFrom": [
+                  {
+                    "expression": "SomeScope",
+                    "alias": "Scope"
+                  }
+                ],
+                "parameter": {
+                  "providerName": "Lusid.Instrument.Bond",
+                  "parameterName": "ToWrite",
+                  "fields": [
+                    {
+                      "name": "Scope",
+                      "type": "Text",
+                      "description": "Scope of the instrument",
+                      "mapping": {
+                        "expression": "SomeScope",
+                        "alias": "Scope"
+                      }
+                    },
+                    {
+                      "name": "DisplayName",
+                      "type": "Text"
+                    }
+                  ]
+                },
+                "availableParameters": [
+                  {
+                    "providerName": "Lusid.Instrument.Bond",
+                    "parameterName": "ToWrite",
+                    "fields": [
+                      {
+                        "name": "Scope",
+                        "type": "Text",
+                        "description": "Scope of the instrument",
+                        "mapping": {
+                          "expression": "SomeScope",
+                          "alias": "Scope"
+                        }
+                      },
+                      {
+                        "name": "DisplayName",
+                        "type": "Text"
+                      }
+                    ]
+                  },
+                  {
+                    "providerName": "Email.Send",
+                    "parameterName": "ToSend",
+                    "fields": [
+                      {
+                        "name": "Subject",
+                        "type": "Text"
+                      },
+                      {
+                        "name": "Body",
+                        "type": "Text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
     "/api/Sql/json": {
       "put": {
         "tags": [
@@ -3616,6 +3952,265 @@
                     }
                   ],
                   "otherParameters": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
+    "/api/Sql/towriterdesign": {
+      "put": {
+        "tags": [
+          "Sql Execution"
+        ],
+        "summary": "[EXPERIMENTAL] PutSqlToWriterDesign: Generates a SQL-writer-design object from SQL string, if possible.",
+        "description": "SQL to attempt to create a Writer Design object from",
+        "operationId": "PutSqlToWriterDesign",
+        "requestBody": {
+          "description": "SQL query to generate the writer design object from",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "Select abc from xyz"
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
+                  "availableToMapFrom": [
+                    {
+                      "expression": "SomeScope",
+                      "alias": "Scope"
+                    }
+                  ],
+                  "parameter": {
+                    "providerName": "Lusid.Instrument.Bond",
+                    "parameterName": "ToWrite",
+                    "fields": [
+                      {
+                        "name": "Scope",
+                        "type": "Text",
+                        "description": "Scope of the instrument",
+                        "mapping": {
+                          "expression": "SomeScope",
+                          "alias": "Scope"
+                        }
+                      },
+                      {
+                        "name": "DisplayName",
+                        "type": "Text"
+                      }
+                    ]
+                  },
+                  "availableParameters": [
+                    {
+                      "providerName": "Lusid.Instrument.Bond",
+                      "parameterName": "ToWrite",
+                      "fields": [
+                        {
+                          "name": "Scope",
+                          "type": "Text",
+                          "description": "Scope of the instrument",
+                          "mapping": {
+                            "expression": "SomeScope",
+                            "alias": "Scope"
+                          }
+                        },
+                        {
+                          "name": "DisplayName",
+                          "type": "Text"
+                        }
+                      ]
+                    },
+                    {
+                      "providerName": "Email.Send",
+                      "parameterName": "ToSend",
+                      "fields": [
+                        {
+                          "name": "Subject",
+                          "type": "Text"
+                        },
+                        {
+                          "name": "Body",
+                          "type": "Text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
+                  "availableToMapFrom": [
+                    {
+                      "expression": "SomeScope",
+                      "alias": "Scope"
+                    }
+                  ],
+                  "parameter": {
+                    "providerName": "Lusid.Instrument.Bond",
+                    "parameterName": "ToWrite",
+                    "fields": [
+                      {
+                        "name": "Scope",
+                        "type": "Text",
+                        "description": "Scope of the instrument",
+                        "mapping": {
+                          "expression": "SomeScope",
+                          "alias": "Scope"
+                        }
+                      },
+                      {
+                        "name": "DisplayName",
+                        "type": "Text"
+                      }
+                    ]
+                  },
+                  "availableParameters": [
+                    {
+                      "providerName": "Lusid.Instrument.Bond",
+                      "parameterName": "ToWrite",
+                      "fields": [
+                        {
+                          "name": "Scope",
+                          "type": "Text",
+                          "description": "Scope of the instrument",
+                          "mapping": {
+                            "expression": "SomeScope",
+                            "alias": "Scope"
+                          }
+                        },
+                        {
+                          "name": "DisplayName",
+                          "type": "Text"
+                        }
+                      ]
+                    },
+                    {
+                      "providerName": "Email.Send",
+                      "parameterName": "ToSend",
+                      "fields": [
+                        {
+                          "name": "Subject",
+                          "type": "Text"
+                        },
+                        {
+                          "name": "Body",
+                          "type": "Text"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
+                  "availableToMapFrom": [
+                    {
+                      "expression": "SomeScope",
+                      "alias": "Scope"
+                    }
+                  ],
+                  "parameter": {
+                    "providerName": "Lusid.Instrument.Bond",
+                    "parameterName": "ToWrite",
+                    "fields": [
+                      {
+                        "name": "Scope",
+                        "type": "Text",
+                        "description": "Scope of the instrument",
+                        "mapping": {
+                          "expression": "SomeScope",
+                          "alias": "Scope"
+                        }
+                      },
+                      {
+                        "name": "DisplayName",
+                        "type": "Text"
+                      }
+                    ]
+                  },
+                  "availableParameters": [
+                    {
+                      "providerName": "Lusid.Instrument.Bond",
+                      "parameterName": "ToWrite",
+                      "fields": [
+                        {
+                          "name": "Scope",
+                          "type": "Text",
+                          "description": "Scope of the instrument",
+                          "mapping": {
+                            "expression": "SomeScope",
+                            "alias": "Scope"
+                          }
+                        },
+                        {
+                          "name": "DisplayName",
+                          "type": "Text"
+                        }
+                      ]
+                    },
+                    {
+                      "providerName": "Email.Send",
+                      "parameterName": "ToSend",
+                      "fields": [
+                        {
+                          "name": "Subject",
+                          "type": "Text"
+                        },
+                        {
+                          "name": "Body",
+                          "type": "Text"
+                        }
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -5403,6 +5998,37 @@
         "additionalProperties": false,
         "description": "Information about a field that can be designed on (regardless if it currently is)\r\nKind of a \"mini-available catalog entry\""
       },
+      "AvailableParameter": {
+        "required": [
+          "fields",
+          "parameterName",
+          "providerName"
+        ],
+        "type": "object",
+        "properties": {
+          "providerName": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of the Provider with a TableParameter"
+          },
+          "parameterName": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of the TableParameter on the Provider"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappableField"
+            },
+            "description": "Fields that can be mapped to"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a field that can be designed on (regardless if it currently is)\r\nKind of a \"mini-available catalog entry\""
+      },
       "BackgroundMultiQueryProgressResponse": {
         "type": "object",
         "properties": {
@@ -5941,6 +6567,29 @@
         ],
         "type": "string"
       },
+      "ExpressionWithAlias": {
+        "required": [
+          "expression"
+        ],
+        "type": "object",
+        "properties": {
+          "expression": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Expression (column name, constant, complex expression, etc.)"
+          },
+          "alias": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Column Alias for the expression",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Contract for an expression of data we \"have\" that we may \"want to map to a table-parameter's column\""
+      },
       "FeedbackEventArgs": {
         "type": "object",
         "properties": {
@@ -6284,6 +6933,61 @@
           }
         },
         "additionalProperties": false
+      },
+      "MappableField": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of the field in need of mapping (The field name from within the Table Parameter itself)",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/DataType"
+          },
+          "description": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Description of the field (just for rendering to the user)",
+            "nullable": true
+          },
+          "displayName": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Display Name of the field (just for rendering to the user)",
+            "nullable": true
+          },
+          "sampleValues": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Example values for the field (just for rendering to the user)",
+            "nullable": true
+          },
+          "allowedValues": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Any set of exactly allowed values for the field (perhaps just for rendering to the user, if nothing else)",
+            "nullable": true
+          },
+          "mandatoryForActions": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Which `Actions` is this mandatory for? If any (and potentially when), perhaps just for rendering to the user, if nothing else",
+            "nullable": true
+          },
+          "mapping": {
+            "$ref": "#/components/schemas/ExpressionWithAlias"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a field that can be designed on (regardless if it currently is)\r\nKind of a \"mini-available catalog entry\""
       },
       "MultiQueryDefinitionType": {
         "enum": [
@@ -6697,6 +7401,40 @@
         },
         "additionalProperties": false,
         "description": "Parameters of view"
+      },
+      "WriterDesign": {
+        "required": [
+          "sql"
+        ],
+        "type": "object",
+        "properties": {
+          "sql": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Original SQL that started this off"
+          },
+          "availableToMapFrom": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExpressionWithAlias"
+            },
+            "description": "The data able to be mapped from as derived from the Sql",
+            "nullable": true
+          },
+          "parameter": {
+            "$ref": "#/components/schemas/AvailableParameter"
+          },
+          "availableParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvailableParameter"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representation of a \"designable Query for a writer\" suitable for formatting to SQL or being built from compliant SQL."
       }
     },
     "securitySchemes": {

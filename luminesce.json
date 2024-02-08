@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.458",
+    "version": "1.14.470",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -84,7 +84,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "summary": "[EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate's public or private key - if any.",
+        "summary": "[EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate's public or private key - if any",
         "description": "\nDownloads your latest Domain or User certificate's public or private key - if any.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - certificate is not available for some reason\n- 401 Unauthorized\n",
         "operationId": "DownloadCertificate",
         "parameters": [
@@ -175,7 +175,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "summary": "[EXPERIMENTAL] ListCertificates: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)",
+        "summary": "[EXPERIMENTAL] ListCertificates: Lists all the certificates previously minted to which you have access",
         "description": "\nLists all the certificates previously minted to which you have access.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
         "operationId": "ListCertificates",
         "responses": {
@@ -6007,14 +6007,12 @@
         "type": "object",
         "properties": {
           "providerName": {
-            "maxLength": 256,
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
             "description": "Name of the Provider with a TableParameter"
           },
           "parameterName": {
-            "maxLength": 256,
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
             "description": "Name of the TableParameter on the Provider"
           },
@@ -6574,14 +6572,11 @@
         "type": "object",
         "properties": {
           "expression": {
-            "maxLength": 256,
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
             "description": "Expression (column name, constant, complex expression, etc.)"
           },
           "alias": {
-            "maxLength": 256,
-            "minLength": 0,
             "type": "string",
             "description": "Column Alias for the expression",
             "nullable": true
@@ -6938,8 +6933,6 @@
         "type": "object",
         "properties": {
           "name": {
-            "maxLength": 256,
-            "minLength": 0,
             "type": "string",
             "description": "Name of the field in need of mapping (The field name from within the Table Parameter itself)",
             "nullable": true
@@ -6948,36 +6941,26 @@
             "$ref": "#/components/schemas/DataType"
           },
           "description": {
-            "maxLength": 256,
-            "minLength": 0,
             "type": "string",
             "description": "Description of the field (just for rendering to the user)",
             "nullable": true
           },
           "displayName": {
-            "maxLength": 256,
-            "minLength": 0,
             "type": "string",
             "description": "Display Name of the field (just for rendering to the user)",
             "nullable": true
           },
           "sampleValues": {
-            "maxLength": 256,
-            "minLength": 0,
             "type": "string",
             "description": "Example values for the field (just for rendering to the user)",
             "nullable": true
           },
           "allowedValues": {
-            "maxLength": 256,
-            "minLength": 0,
             "type": "string",
             "description": "Any set of exactly allowed values for the field (perhaps just for rendering to the user, if nothing else)",
             "nullable": true
           },
           "mandatoryForActions": {
-            "maxLength": 256,
-            "minLength": 0,
             "type": "string",
             "description": "Which `Actions` is this mandatory for? If any (and potentially when), perhaps just for rendering to the user, if nothing else",
             "nullable": true
@@ -7409,8 +7392,7 @@
         "type": "object",
         "properties": {
           "sql": {
-            "maxLength": 256,
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
             "description": "Original SQL that started this off"
           },
@@ -7430,6 +7412,7 @@
             "items": {
               "$ref": "#/components/schemas/AvailableParameter"
             },
+            "description": "All the parameter the user may wish to design",
             "nullable": true
           }
         },

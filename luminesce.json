@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.478",
+    "version": "1.14.486",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1569,7 +1569,7 @@
     "/api/Sql/fromdesign": {
       "put": {
         "tags": [
-          "Sql Execution"
+          "Sql Design"
         ],
         "summary": "[EXPERIMENTAL] PutQueryDesignToSql: Generates SQL from a structured query design",
         "description": "SQL Designer specification to generate SQL from",
@@ -1805,7 +1805,7 @@
     "/api/Sql/fromfilereaddesign": {
       "put": {
         "tags": [
-          "Sql Execution"
+          "Sql Design"
         ],
         "summary": "[EXPERIMENTAL] PutFileReadDesignToSql: Generates file read SQL from a structured query design",
         "description": "SQL Designer specification to generate SQL from",
@@ -1941,7 +1941,7 @@
     "/api/Sql/fromviewdesign": {
       "put": {
         "tags": [
-          "Sql Execution"
+          "Sql Design"
         ],
         "summary": "[EXPERIMENTAL] PutViewDesignToSql: Generates view creation sql from a structured view creation design",
         "description": "Converts a ConvertToView specification into SQL that creates a view",
@@ -2173,7 +2173,7 @@
     "/api/Sql/fromwriterdesign": {
       "put": {
         "tags": [
-          "Sql Execution"
+          "Sql Design"
         ],
         "summary": "[EXPERIMENTAL] PutWriterDesignToSql: Generates writer SQL from a valid writer-design structure",
         "description": "SQL Writer Design specification to generate Writer SQL from",
@@ -3107,9 +3107,9 @@
     "/api/Sql/pretty": {
       "put": {
         "tags": [
-          "Sql Execution"
+          "Sql Design"
         ],
-        "summary": "PutQueryToFormat: Executes Sql, returned in JSON format, where the sql is the post-body url.",
+        "summary": "PutQueryToFormat: Formats SQL into a more readable form, a.k.a. Pretty-Print the SQL.",
         "description": "\nThis formats SQL (given a set of options as to how to do so).\nIt takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly)\nand returns the reformatted version.\ne.g.\n```sql\nselect x,y,z from a inner join b on a.x=b.x where x>y or y!=z\n```\nbecomes\n```sql\nselect x, y, z\nfrom a\ninner join b\n   on a.x = b.x\nwhere x > y\n   or y != z\n```\n",
         "operationId": "PutQueryToFormat",
         "parameters": [
@@ -3500,7 +3500,7 @@
     "/api/Sql/todesign": {
       "put": {
         "tags": [
-          "Sql Execution"
+          "Sql Design"
         ],
         "summary": "[EXPERIMENTAL] PutSqlToQueryDesign: Generates a SQL-design object from SQL string, if possible.",
         "description": "SQL to attempt to create a Design object from",
@@ -3696,7 +3696,7 @@
     "/api/Sql/tofilereaddesign": {
       "put": {
         "tags": [
-          "Sql Execution"
+          "Sql Design"
         ],
         "summary": "[EXPERIMENTAL] PutSqlToFileReadDesign: Generates a SQL-file-read-design object from SQL string, if possible.",
         "description": "SQL to attempt to create a Design object from",
@@ -3807,7 +3807,7 @@
     "/api/Sql/toviewdesign": {
       "put": {
         "tags": [
-          "Sql Execution"
+          "Sql Design"
         ],
         "summary": "[EXPERIMENTAL] PutSqlToViewDesign: Generates a structured view creation design from existing view creation SQL.",
         "description": "SQL which creates a view into a structured ConvertToViewData object",
@@ -3988,7 +3988,7 @@
     "/api/Sql/towriterdesign": {
       "put": {
         "tags": [
-          "Sql Execution"
+          "Sql Design"
         ],
         "summary": "[EXPERIMENTAL] PutSqlToWriterDesign: Generates a SQL-writer-design object from SQL string, if possible.",
         "description": "SQL to attempt to create a Writer Design object from",
@@ -7466,8 +7466,12 @@
       "description": "This executes LuminesceSql and allows monitoring its completion"
     },
     {
+      "name": "Sql Design",
+      "description": "This has methods for Designing SQL (to support the Web GUI designer interfaces) for pretty-printing of sql, etc."
+    },
+    {
       "name": "Sql Execution",
-      "description": "This executes LuminesceSql synchronously, allows for returning the resulting data in various formats and for pretty-printing of sql."
+      "description": "This executes LuminesceSql synchronously, allows for returning the resulting data in various formats."
     }
   ],
   "x-tagGroups": {
@@ -7480,6 +7484,7 @@
       "Historically Executed Queries",
       "Multi-Query Execution",
       "Sql Background Execution",
+      "Sql Design",
       "Sql Execution"
     ]
   }

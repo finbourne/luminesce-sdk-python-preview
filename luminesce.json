@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.511",
+    "version": "1.14.519",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2190,7 +2190,8 @@
                 "availableToMapFrom": [
                   {
                     "expression": "SomeScope",
-                    "alias": "Scope"
+                    "alias": "Scope",
+                    "flags": "None"
                   }
                 ],
                 "parameter": {
@@ -2203,7 +2204,8 @@
                       "description": "Scope of the instrument",
                       "mapping": {
                         "expression": "SomeScope",
-                        "alias": "Scope"
+                        "alias": "Scope",
+                        "flags": "None"
                       }
                     },
                     {
@@ -2223,7 +2225,8 @@
                         "description": "Scope of the instrument",
                         "mapping": {
                           "expression": "SomeScope",
-                          "alias": "Scope"
+                          "alias": "Scope",
+                          "flags": "None"
                         }
                       },
                       {
@@ -2258,7 +2261,8 @@
                 "availableToMapFrom": [
                   {
                     "expression": "SomeScope",
-                    "alias": "Scope"
+                    "alias": "Scope",
+                    "flags": "None"
                   }
                 ],
                 "parameter": {
@@ -2271,7 +2275,8 @@
                       "description": "Scope of the instrument",
                       "mapping": {
                         "expression": "SomeScope",
-                        "alias": "Scope"
+                        "alias": "Scope",
+                        "flags": "None"
                       }
                     },
                     {
@@ -2291,7 +2296,8 @@
                         "description": "Scope of the instrument",
                         "mapping": {
                           "expression": "SomeScope",
-                          "alias": "Scope"
+                          "alias": "Scope",
+                          "flags": "None"
                         }
                       },
                       {
@@ -2326,7 +2332,8 @@
                 "availableToMapFrom": [
                   {
                     "expression": "SomeScope",
-                    "alias": "Scope"
+                    "alias": "Scope",
+                    "flags": "None"
                   }
                 ],
                 "parameter": {
@@ -2339,7 +2346,8 @@
                       "description": "Scope of the instrument",
                       "mapping": {
                         "expression": "SomeScope",
-                        "alias": "Scope"
+                        "alias": "Scope",
+                        "flags": "None"
                       }
                     },
                     {
@@ -2359,7 +2367,8 @@
                         "description": "Scope of the instrument",
                         "mapping": {
                           "expression": "SomeScope",
-                          "alias": "Scope"
+                          "alias": "Scope",
+                          "flags": "None"
                         }
                       },
                       {
@@ -2394,7 +2403,8 @@
                 "availableToMapFrom": [
                   {
                     "expression": "SomeScope",
-                    "alias": "Scope"
+                    "alias": "Scope",
+                    "flags": "None"
                   }
                 ],
                 "parameter": {
@@ -2407,7 +2417,8 @@
                       "description": "Scope of the instrument",
                       "mapping": {
                         "expression": "SomeScope",
-                        "alias": "Scope"
+                        "alias": "Scope",
+                        "flags": "None"
                       }
                     },
                     {
@@ -2427,7 +2438,8 @@
                         "description": "Scope of the instrument",
                         "mapping": {
                           "expression": "SomeScope",
-                          "alias": "Scope"
+                          "alias": "Scope",
+                          "flags": "None"
                         }
                       },
                       {
@@ -3993,6 +4005,18 @@
         "summary": "[EXPERIMENTAL] PutSqlToWriterDesign: Generates a SQL-writer-design object from SQL string, if possible.",
         "description": "SQL to attempt to create a Writer Design object from",
         "operationId": "PutSqlToWriterDesign",
+        "parameters": [
+          {
+            "name": "mergeAdditionalMappingFields",
+            "in": "query",
+            "description": "Should `Sys.Field` be used to find additional potential fields to map from? (not always possible)",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "x-nullable": true
+          }
+        ],
         "requestBody": {
           "description": "SQL query to generate the writer design object from",
           "content": {
@@ -4018,7 +4042,8 @@
                   "availableToMapFrom": [
                     {
                       "expression": "SomeScope",
-                      "alias": "Scope"
+                      "alias": "Scope",
+                      "flags": "None"
                     }
                   ],
                   "parameter": {
@@ -4031,7 +4056,8 @@
                         "description": "Scope of the instrument",
                         "mapping": {
                           "expression": "SomeScope",
-                          "alias": "Scope"
+                          "alias": "Scope",
+                          "flags": "None"
                         }
                       },
                       {
@@ -4051,7 +4077,8 @@
                           "description": "Scope of the instrument",
                           "mapping": {
                             "expression": "SomeScope",
-                            "alias": "Scope"
+                            "alias": "Scope",
+                            "flags": "None"
                           }
                         },
                         {
@@ -4086,7 +4113,8 @@
                   "availableToMapFrom": [
                     {
                       "expression": "SomeScope",
-                      "alias": "Scope"
+                      "alias": "Scope",
+                      "flags": "None"
                     }
                   ],
                   "parameter": {
@@ -4099,7 +4127,8 @@
                         "description": "Scope of the instrument",
                         "mapping": {
                           "expression": "SomeScope",
-                          "alias": "Scope"
+                          "alias": "Scope",
+                          "flags": "None"
                         }
                       },
                       {
@@ -4119,7 +4148,8 @@
                           "description": "Scope of the instrument",
                           "mapping": {
                             "expression": "SomeScope",
-                            "alias": "Scope"
+                            "alias": "Scope",
+                            "flags": "None"
                           }
                         },
                         {
@@ -4154,7 +4184,8 @@
                   "availableToMapFrom": [
                     {
                       "expression": "SomeScope",
-                      "alias": "Scope"
+                      "alias": "Scope",
+                      "flags": "None"
                     }
                   ],
                   "parameter": {
@@ -4167,7 +4198,8 @@
                         "description": "Scope of the instrument",
                         "mapping": {
                           "expression": "SomeScope",
-                          "alias": "Scope"
+                          "alias": "Scope",
+                          "flags": "None"
                         }
                       },
                       {
@@ -4187,7 +4219,8 @@
                           "description": "Scope of the instrument",
                           "mapping": {
                             "expression": "SomeScope",
-                            "alias": "Scope"
+                            "alias": "Scope",
+                            "flags": "None"
                           }
                         },
                         {
@@ -6580,6 +6613,9 @@
             "type": "string",
             "description": "Column Alias for the expression",
             "nullable": true
+          },
+          "flags": {
+            "$ref": "#/components/schemas/MappingFlags"
           }
         },
         "additionalProperties": false,
@@ -6971,6 +7007,15 @@
         },
         "additionalProperties": false,
         "description": "Information about a field that can be designed on (regardless if it currently is)\r\nKind of a \"mini-available catalog entry\""
+      },
+      "MappingFlags": {
+        "enum": [
+          "None",
+          "Exact",
+          "Similar",
+          "Additional"
+        ],
+        "type": "string"
       },
       "MultiQueryDefinitionType": {
         "enum": [

@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.519",
+    "version": "1.14.526",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -468,6 +468,16 @@
             "schema": {
               "type": "boolean",
               "default": false
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "mayUseNativeStore",
+            "in": "query",
+            "description": "Should a native data store (e.g. Athena or Fabric) be used over Elastic Search if available?",
+            "schema": {
+              "type": "boolean",
+              "default": true
             },
             "x-nullable": true
           }

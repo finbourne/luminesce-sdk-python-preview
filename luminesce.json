@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.683",
+    "version": "1.14.688",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -1904,17 +1904,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/FileReaderBuilderResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/FileReaderBuilderResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/FileReaderBuilderResponse"
                 }
               }
             }
@@ -2495,6 +2495,195 @@
               "text/json": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
+    "/api/Sql/intellisense": {
+      "put": {
+        "tags": [
+          "Sql Design"
+        ],
+        "summary": "[EXPERIMENTAL] PutIntellisense: Generate a set of possible intellisense prompts given a SQL snipit (in need not yet be valid) and cursor location",
+        "description": "SQL and a row/colum position within it from which to determine intellisense options for the user to potentially choose from.",
+        "operationId": "PutIntellisense",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntellisenseRequest"
+              },
+              "example": {
+                "lines": [
+                  "select *",
+                  "from somewhere"
+                ],
+                "position": {
+                  "row": 0,
+                  "column": 4
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntellisenseRequest"
+              },
+              "example": {
+                "lines": [
+                  "select *",
+                  "from somewhere"
+                ],
+                "position": {
+                  "row": 0,
+                  "column": 4
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntellisenseRequest"
+              },
+              "example": {
+                "lines": [
+                  "select *",
+                  "from somewhere"
+                ],
+                "position": {
+                  "row": 0,
+                  "column": 4
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntellisenseRequest"
+              },
+              "example": {
+                "lines": [
+                  "select *",
+                  "from somewhere"
+                ],
+                "position": {
+                  "row": 0,
+                  "column": 4
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntellisenseResponse"
+                },
+                "example": {
+                  "autoCompleteList": [
+                    {
+                      "caption": "SELECT",
+                      "value": "SELECT",
+                      "meta": "select some data",
+                      "score": 100,
+                      "docHtml": "<p>Select some data!</p>",
+                      "type": "Keyword"
+                    },
+                    {
+                      "caption": "VALUES",
+                      "value": "VALUES",
+                      "meta": "some hard-coded data",
+                      "score": 100,
+                      "docHtml": "<p>values give you data</p>",
+                      "type": "Keyword"
+                    }
+                  ],
+                  "tryAgainSoonForMore": false,
+                  "sqlWithMarker": "▷select◁︎ * from somewhere"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntellisenseResponse"
+                },
+                "example": {
+                  "autoCompleteList": [
+                    {
+                      "caption": "SELECT",
+                      "value": "SELECT",
+                      "meta": "select some data",
+                      "score": 100,
+                      "docHtml": "<p>Select some data!</p>",
+                      "type": "Keyword"
+                    },
+                    {
+                      "caption": "VALUES",
+                      "value": "VALUES",
+                      "meta": "some hard-coded data",
+                      "score": 100,
+                      "docHtml": "<p>values give you data</p>",
+                      "type": "Keyword"
+                    }
+                  ],
+                  "tryAgainSoonForMore": false,
+                  "sqlWithMarker": "▷select◁︎ * from somewhere"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntellisenseResponse"
+                },
+                "example": {
+                  "autoCompleteList": [
+                    {
+                      "caption": "SELECT",
+                      "value": "SELECT",
+                      "meta": "select some data",
+                      "score": 100,
+                      "docHtml": "<p>Select some data!</p>",
+                      "type": "Keyword"
+                    },
+                    {
+                      "caption": "VALUES",
+                      "value": "VALUES",
+                      "meta": "some hard-coded data",
+                      "score": 100,
+                      "docHtml": "<p>values give you data</p>",
+                      "type": "Keyword"
+                    }
+                  ],
+                  "tryAgainSoonForMore": false,
+                  "sqlWithMarker": "▷select◁︎ * from somewhere"
                 }
               }
             }
@@ -3557,7 +3746,7 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/QueryDesign"
                 },
                 "example": {
                   "tableName": "Sys.Field",
@@ -3600,7 +3789,7 @@
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/QueryDesign"
                 },
                 "example": {
                   "tableName": "Sys.Field",
@@ -3643,7 +3832,7 @@
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/QueryDesign"
                 },
                 "example": {
                   "tableName": "Sys.Field",
@@ -3752,7 +3941,7 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/FileReaderBuilderDef"
                 },
                 "example": {
                   "limit": 0,
@@ -3767,7 +3956,7 @@
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/FileReaderBuilderDef"
                 },
                 "example": {
                   "limit": 0,
@@ -3782,7 +3971,7 @@
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/FileReaderBuilderDef"
                 },
                 "example": {
                   "limit": 0,
@@ -3852,7 +4041,7 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ConvertToViewData"
                 },
                 "example": {
                   "query": "select * from Lusid.Instrument.bond",
@@ -3894,7 +4083,7 @@
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ConvertToViewData"
                 },
                 "example": {
                   "query": "select * from Lusid.Instrument.bond",
@@ -3936,7 +4125,7 @@
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ConvertToViewData"
                 },
                 "example": {
                   "query": "select * from Lusid.Instrument.bond",
@@ -4045,7 +4234,7 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/WriterDesign"
                 },
                 "example": {
                   "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
@@ -4116,7 +4305,7 @@
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/WriterDesign"
                 },
                 "example": {
                   "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
@@ -4187,7 +4376,7 @@
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/WriterDesign"
                 },
                 "example": {
                   "sql": "\n@x = select SomeScope as Scope from Somewhere;\nselect * from Lusid.Instrument.Bond where ToWriter = @x",
@@ -6594,6 +6783,26 @@
         "additionalProperties": false,
         "description": "Representation of view data where will template the data into a 'create view' sql"
       },
+      "CursorPosition": {
+        "required": [
+          "column",
+          "row"
+        ],
+        "type": "object",
+        "properties": {
+          "row": {
+            "type": "integer",
+            "description": "Row (0 based) of the user's cursor position",
+            "format": "int32"
+          },
+          "column": {
+            "type": "integer",
+            "description": "Column (0 based) of the user's cursor position",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "DataType": {
         "enum": [
           "Boolean",
@@ -6825,6 +7034,35 @@
         "additionalProperties": false,
         "description": "Information on how to construct a file-read sql query"
       },
+      "FileReaderBuilderResponse": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The generated SQL",
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "description": "The error from running generated SQL Query, if any",
+            "nullable": true
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColumnInfo"
+            },
+            "description": "Column information for the results",
+            "nullable": true
+          },
+          "data": {
+            "description": "The resulting data from running the Query",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information on how to construct a file-read sql query"
+      },
       "FilterTermDesign": {
         "required": [
           "operator",
@@ -6880,6 +7118,105 @@
           }
         },
         "additionalProperties": false
+      },
+      "IntellisenseItem": {
+        "required": [
+          "caption",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "caption": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The value to show the user in the popup"
+          },
+          "value": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The value to substitute in"
+          },
+          "meta": {
+            "type": "string",
+            "description": "The light-grey text shown to the right of the Caption in the popup",
+            "nullable": true
+          },
+          "score": {
+            "type": "integer",
+            "description": "How important is this.  Bigger is more important.",
+            "format": "int32"
+          },
+          "docHtml": {
+            "type": "string",
+            "description": "Popup further info (as in a whole documentation article!)",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/IntellisenseType"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representation of an item in an Intellisense popup"
+      },
+      "IntellisenseRequest": {
+        "required": [
+          "lines",
+          "position"
+        ],
+        "type": "object",
+        "properties": {
+          "lines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The lines of text the user currently has in the editor"
+          },
+          "position": {
+            "$ref": "#/components/schemas/CursorPosition"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representation of a request for IntellisenseItems"
+      },
+      "IntellisenseResponse": {
+        "required": [
+          "autoCompleteList",
+          "sqlWithMarker",
+          "tryAgainSoonForMore"
+        ],
+        "type": "object",
+        "properties": {
+          "autoCompleteList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntellisenseItem"
+            },
+            "description": "The available items at this point"
+          },
+          "tryAgainSoonForMore": {
+            "type": "boolean",
+            "description": "Should the caller try again soon? (true means a cache is being built and this is a preliminary response!)"
+          },
+          "sqlWithMarker": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The overall SQL this is for with a character marker for where the Intellisense is for"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntellisenseType": {
+        "enum": [
+          "Keyword",
+          "Symbol",
+          "Function",
+          "Operator",
+          "Table",
+          "Column",
+          "Parameter"
+        ],
+        "type": "string"
       },
       "Link": {
         "required": [

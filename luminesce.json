@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.692",
+    "version": "1.14.699",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2616,7 +2616,7 @@
                       "value": "SELECT",
                       "meta": "select some data",
                       "score": 100,
-                      "docHtml": "<p>Select some data!</p>",
+                      "docHTML": "<p>Select some data!</p>",
                       "type": "Keyword"
                     },
                     {
@@ -2624,7 +2624,7 @@
                       "value": "VALUES",
                       "meta": "some hard-coded data",
                       "score": 100,
-                      "docHtml": "<p>values give you data</p>",
+                      "docHTML": "<p>values give you data</p>",
                       "type": "Keyword"
                     }
                   ],
@@ -2643,7 +2643,7 @@
                       "value": "SELECT",
                       "meta": "select some data",
                       "score": 100,
-                      "docHtml": "<p>Select some data!</p>",
+                      "docHTML": "<p>Select some data!</p>",
                       "type": "Keyword"
                     },
                     {
@@ -2651,7 +2651,7 @@
                       "value": "VALUES",
                       "meta": "some hard-coded data",
                       "score": 100,
-                      "docHtml": "<p>values give you data</p>",
+                      "docHTML": "<p>values give you data</p>",
                       "type": "Keyword"
                     }
                   ],
@@ -2670,7 +2670,7 @@
                       "value": "SELECT",
                       "meta": "select some data",
                       "score": 100,
-                      "docHtml": "<p>Select some data!</p>",
+                      "docHTML": "<p>Select some data!</p>",
                       "type": "Keyword"
                     },
                     {
@@ -2678,7 +2678,7 @@
                       "value": "VALUES",
                       "meta": "some hard-coded data",
                       "score": 100,
-                      "docHtml": "<p>values give you data</p>",
+                      "docHTML": "<p>values give you data</p>",
                       "type": "Keyword"
                     }
                   ],
@@ -7146,7 +7146,7 @@
             "description": "How important is this.  Bigger is more important.",
             "format": "int32"
           },
-          "docHtml": {
+          "docHTML": {
             "type": "string",
             "description": "Popup further info (as in a whole documentation article!)",
             "nullable": true

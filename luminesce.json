@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.703",
+    "version": "1.14.707",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2533,7 +2533,7 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutIntellisense: Generate a set of possible intellisense prompts given a SQL snipit (in need not yet be valid) and cursor location",
+        "summary": "[EXPERIMENTAL] PutIntellisense: Generate a set of possible intellisense prompts given a SQL snip-it (in need not yet be valid) and cursor location",
         "description": "SQL and a row/colum position within it from which to determine intellisense options for the user to potentially choose from.",
         "operationId": "PutIntellisense",
         "requestBody": {
@@ -2684,6 +2684,160 @@
                   ],
                   "tryAgainSoonForMore": false,
                   "sqlWithMarker": "▷select◁︎ * from somewhere"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
+    "/api/Sql/intellisenseError": {
+      "put": {
+        "tags": [
+          "Sql Design"
+        ],
+        "summary": "[EXPERIMENTAL] PutIntellisenseError: Generate a set of error ranges, if any, in the given SQL (expressed as Lines)",
+        "description": "SQL (by line) to syntax check and return error ranges from within, if any.",
+        "operationId": "PutIntellisenseError",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorHighlightRequest"
+              },
+              "example": {
+                "lines": [
+                  "select mx(x) x from y"
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorHighlightRequest"
+              },
+              "example": {
+                "lines": [
+                  "select mx(x) x from y"
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorHighlightRequest"
+              },
+              "example": {
+                "lines": [
+                  "select mx(x) x from y"
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorHighlightRequest"
+              },
+              "example": {
+                "lines": [
+                  "select mx(x) x from y"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorHighlightResponse"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "start": {
+                        "row": 0,
+                        "column": 9
+                      },
+                      "stop": {
+                        "row": 0,
+                        "column": 10
+                      },
+                      "length": 1,
+                      "message": "extraneous input '(' expecting {<EOF>, '@', '@@', ';', K_PRAGMA, K_SELECT, K_TYPES, K_VALUES, UNEXPECTED_CHAR}"
+                    }
+                  ],
+                  "sqlWithMarker": "select mx▷(◁︎x) x from y"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorHighlightResponse"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "start": {
+                        "row": 0,
+                        "column": 9
+                      },
+                      "stop": {
+                        "row": 0,
+                        "column": 10
+                      },
+                      "length": 1,
+                      "message": "extraneous input '(' expecting {<EOF>, '@', '@@', ';', K_PRAGMA, K_SELECT, K_TYPES, K_VALUES, UNEXPECTED_CHAR}"
+                    }
+                  ],
+                  "sqlWithMarker": "select mx▷(◁︎x) x from y"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorHighlightResponse"
+                },
+                "example": {
+                  "errors": [
+                    {
+                      "start": {
+                        "row": 0,
+                        "column": 9
+                      },
+                      "stop": {
+                        "row": 0,
+                        "column": 10
+                      },
+                      "length": 1,
+                      "message": "extraneous input '(' expecting {<EOF>, '@', '@@', ';', K_PRAGMA, K_SELECT, K_TYPES, K_VALUES, UNEXPECTED_CHAR}"
+                    }
+                  ],
+                  "sqlWithMarker": "select mx▷(◁︎x) x from y"
                 }
               }
             }
@@ -6817,6 +6971,73 @@
         ],
         "type": "string"
       },
+      "ErrorHighlightItem": {
+        "required": [
+          "length",
+          "message",
+          "start",
+          "stop"
+        ],
+        "type": "object",
+        "properties": {
+          "start": {
+            "$ref": "#/components/schemas/CursorPosition"
+          },
+          "stop": {
+            "$ref": "#/components/schemas/CursorPosition"
+          },
+          "length": {
+            "type": "integer",
+            "description": "The length of the error token counting line breaks if any",
+            "format": "int32"
+          },
+          "message": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The error message"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representation of a sql error"
+      },
+      "ErrorHighlightRequest": {
+        "required": [
+          "lines"
+        ],
+        "type": "object",
+        "properties": {
+          "lines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The lines of text the user currently has in the editor"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorHighlightResponse": {
+        "required": [
+          "errors",
+          "sqlWithMarker"
+        ],
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorHighlightItem"
+            },
+            "description": "The errors within the Sql"
+          },
+          "sqlWithMarker": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The SQL this is for, with characters indicating the error locations"
+          }
+        },
+        "additionalProperties": false
+      },
       "ExpressionWithAlias": {
         "required": [
           "expression"
@@ -7201,7 +7422,7 @@
           "sqlWithMarker": {
             "minLength": 1,
             "type": "string",
-            "description": "The overall SQL this is for with a character marker for where the Intellisense is for"
+            "description": "The SQL this is for with characters indicating the location the pop-up is for"
           }
         },
         "additionalProperties": false

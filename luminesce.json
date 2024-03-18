@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.14.755",
+    "version": "1.14.758",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2734,7 +2734,8 @@
               "example": {
                 "lines": [
                   "select mx(x) x from y"
-                ]
+                ],
+                "ensureSomeTextIsSelected": false
               }
             },
             "application/json": {
@@ -2744,7 +2745,8 @@
               "example": {
                 "lines": [
                   "select mx(x) x from y"
-                ]
+                ],
+                "ensureSomeTextIsSelected": false
               }
             },
             "text/json": {
@@ -2754,7 +2756,8 @@
               "example": {
                 "lines": [
                   "select mx(x) x from y"
-                ]
+                ],
+                "ensureSomeTextIsSelected": false
               }
             },
             "application/*+json": {
@@ -2764,7 +2767,8 @@
               "example": {
                 "lines": [
                   "select mx(x) x from y"
-                ]
+                ],
+                "ensureSomeTextIsSelected": false
               }
             }
           },
@@ -6955,7 +6959,8 @@
             "format": "int32"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Represents a cursor location"
       },
       "DataType": {
         "enum": [
@@ -7012,9 +7017,14 @@
               "type": "string"
             },
             "description": "The lines of text the user currently has in the editor"
+          },
+          "ensureSomeTextIsSelected": {
+            "type": "boolean",
+            "description": "If an editor requires some selection of non-whitespace this can be set to true to force\r\nat least one visible character to be selected."
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Request for Error highlighting"
       },
       "ErrorHighlightResponse": {
         "required": [
@@ -7036,7 +7046,8 @@
             "description": "The SQL this is for, with characters indicating the error locations"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Response for error highlighting"
       },
       "ExpressionWithAlias": {
         "required": [
@@ -7425,7 +7436,8 @@
             "description": "The SQL this is for with characters indicating the location the pop-up is for"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Available intellisense response information"
       },
       "IntellisenseType": {
         "enum": [

@@ -204,7 +204,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlDesignApi(api_client)
-    error_highlight_request = {"lines":["select mx(x) x from y"]} # ErrorHighlightRequest | 
+    error_highlight_request = {"lines":["select mx(x) x from y"],"ensureSomeTextIsSelected":false} # ErrorHighlightRequest | 
 
     try:
         # [EXPERIMENTAL] PutIntellisenseError: Generate a set of error ranges, if any, in the given SQL (expressed as Lines)

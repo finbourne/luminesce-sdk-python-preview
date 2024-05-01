@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.15.107",
+    "version": "1.15.113",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -7417,7 +7417,9 @@
       "IntellisenseResponse": {
         "required": [
           "autoCompleteList",
+          "endReplacementPosition",
           "sqlWithMarker",
+          "startReplacementPosition",
           "tryAgainSoonForMore"
         ],
         "type": "object",
@@ -7437,6 +7439,12 @@
             "minLength": 1,
             "type": "string",
             "description": "The SQL this is for with characters indicating the location the pop-up is for"
+          },
+          "startReplacementPosition": {
+            "$ref": "#/components/schemas/CursorPosition"
+          },
+          "endReplacementPosition": {
+            "$ref": "#/components/schemas/CursorPosition"
           }
         },
         "additionalProperties": false,

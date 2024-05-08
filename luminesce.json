@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.15.132",
+    "version": "1.15.155",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -27,7 +27,7 @@
           "Current Table/Field Catalog"
         ],
         "summary": "GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)",
-        "description": "\nThe following LuminesceSql is executed to return this information:\n\n```sql\n@reg =\nselect\n    Name,\n    min(Description) as Description,\n    min(DocumentationLink) as DocumentationLink,\n    iif(Category = 'View' and Client is not null, true, false) as IsView\nfrom\n    Sys.Registration\nwhere\n    Type in ('DirectProvider', 'DataProvider')\n    and \n    ShowAll = false\ngroup by\n    1\n    ;\n\n@fld =\nselect\n    TableName,\n    FieldName,\n    DataType,\n    FieldType,\n    IsPrimaryKey,\n    IsMain,\n    Description,\n    ParamDefaultValue,\n    TableParamColumns\nfrom\n    Sys.Field\n    ;\n\n@x =\nselect\n    coalesce(f.TableName, r.Name) as TableName,\n    coalesce(f.FieldName, 'N/A') as FieldName,\n    f.DataType,\n    f.FieldType,\n    f.IsPrimaryKey,\n    f.IsMain,\n    case \n        when f.TableName is not null then\n            f.Description\n        else\n            r.Name || ' returns a different set of columns depending on use.'\n        end as Description,\n    f.ParamDefaultValue,\n    f.TableParamColumns,\n    r.Description as ProviderDescription,\n    r.DocumentationLink,\n    r.IsView\nfrom\n    @reg r\n    left outer join @fld f\n        on r.Name = f.TableName\norder by\n    1, 5 desc, 6 desc, 2\n    ;\n   \n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
+        "description": "\nThe following LuminesceSql is executed to return this information:\n\n```sql\n@reg =\nselect\n    Name,\n    min(Description) as Description,\n    min(DocumentationLink) as DocumentationLink,\n    iif(Category = 'View' and Client is not null, true, false) as IsView\nfrom\n    Sys.Registration\nwhere\n    Type in ('DirectProvider', 'DataProvider')\n    and \n    ShowAll = false\ngroup by\n    1\n    ;\n\n@fld =\nselect\n    TableName,\n    FieldName,\n    DataType,\n    FieldType,\n    IsPrimaryKey,\n    IsMain,\n    Description,\n    ParamDefaultValue,\n    TableParamColumns\nfrom\n    Sys.Field\n    ;\n\n@x =\nselect\n    coalesce(f.TableName, r.Name) as TableName,\n    coalesce(f.FieldName, 'N/A') as FieldName,\n    f.DataType,\n    f.FieldType,\n    f.IsPrimaryKey,\n    f.IsMain,\n    case \n        when f.TableName is not null then\n            f.Description\n        else\n            r.Name || ' returns a different set of columns depending on use.'\n        end as Description,\n    f.ParamDefaultValue,\n    f.TableParamColumns,\n    r.Description as ProviderDescription,\n    r.DocumentationLink,\n    r.IsView\nfrom\n    @reg r\n    left outer join @fld f\n        on r.Name = f.TableName\norder by\n    1, 5 desc, 6 desc, 2\n    ;\n   \n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetCatalog",
         "parameters": [
           {
@@ -85,7 +85,7 @@
           "Certificate Management"
         ],
         "summary": "[EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate's public or private key - if any",
-        "description": "\nDownloads your latest Domain or User certificate's public or private key - if any.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - certificate is not available for some reason\n- 401 Unauthorized\n",
+        "description": "\nDownloads your latest Domain or User certificate's public or private key - if any.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - certificate is not available for some reason\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "DownloadCertificate",
         "parameters": [
           {
@@ -160,6 +160,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -176,7 +196,7 @@
           "Certificate Management"
         ],
         "summary": "[EXPERIMENTAL] ListCertificates: Lists all the certificates previously minted to which you have access",
-        "description": "\nLists all the certificates previously minted to which you have access.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
+        "description": "\nLists all the certificates previously minted to which you have access.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "ListCertificates",
         "responses": {
           "200": {
@@ -227,6 +247,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -243,7 +283,7 @@
           "Certificate Management"
         ],
         "summary": "[EXPERIMENTAL] ManageCertificate: Manages a new certificate (Create / Renew / Revoke)",
-        "description": "\nManages a certificate.  This could be creating a new one, renewing an old one or revoking one explicitly.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something about the request cannot be processed\n- 401 Unauthorized\n",
+        "description": "\nManages a certificate.  This could be creating a new one, renewing an old one or revoking one explicitly.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something about the request cannot be processed\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "ManageCertificate",
         "parameters": [
           {
@@ -346,6 +386,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -362,7 +422,7 @@
           "Binary Downloading"
         ],
         "summary": "[EXPERIMENTAL] DownloadBinary: Downloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.",
-        "description": "\nDownloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.\n\n*NOTE:* This endpoint is an alternative to time-consuming manual distribution via Drive or Email.\n> it relies on as underlying datastore that is not quite as \"Highly Available\" to the degree \n> that FINBOURNE services generally are.  \n> Thus it is not subject to the same SLAs as other API endpoints are.\n> *If you perceive an outage, please try again later.*\n\nOnce a file has been downloaded the following steps can be used to install it (for the dotnet tools at least):\n\n1. Open a terminal and cd to the directory you downloaded it to\n2. Install / extract files from that package via:\n```\ndotnet tool install NameOfFileWithoutVersionNumberOrExtension -g --add-source \".\"\n```\ne.g.\n```\ndotnet tool install Finbourne.Luminesce.DbProviders.Oracle_Snowflake -g --add-source \".\"\n```\n3. Execute them (see documentation for specific binary)...\n\nThe installed binaries can then be found in\n- Windows - `%USERPROFILE%\\.dotnet\\tools\\.store\\`\n- Linux/macOS - `$HOME/.dotnet/tools/.store/`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - binary file is not available for some reason (e.g. permissions or invalid version)\n- 401 Unauthorized\n",
+        "description": "\nDownloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.\n\n*NOTE:* This endpoint is an alternative to time-consuming manual distribution via Drive or Email.\n> it relies on as underlying datastore that is not quite as \"Highly Available\" to the degree \n> that FINBOURNE services generally are.  \n> Thus it is not subject to the same SLAs as other API endpoints are.\n> *If you perceive an outage, please try again later.*\n\nOnce a file has been downloaded the following steps can be used to install it (for the dotnet tools at least):\n\n1. Open a terminal and cd to the directory you downloaded it to\n2. Install / extract files from that package via:\n```\ndotnet tool install NameOfFileWithoutVersionNumberOrExtension -g --add-source \".\"\n```\ne.g.\n```\ndotnet tool install Finbourne.Luminesce.DbProviders.Oracle_Snowflake -g --add-source \".\"\n```\n3. Execute them (see documentation for specific binary)...\n\nThe installed binaries can then be found in\n- Windows - `%USERPROFILE%\\.dotnet\\tools\\.store\\`\n- Linux/macOS - `$HOME/.dotnet/tools/.store/`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - binary file is not available for some reason (e.g. permissions or invalid version)\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "DownloadBinary",
         "parameters": [
           {
@@ -414,6 +474,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -430,7 +510,7 @@
           "Historically Executed Queries"
         ],
         "summary": "GetHistory: Shows queries executed in a given historical time window (in Json format).",
-        "description": "\nStarts to load the historical query logs for a certain time range, search criteria, etc.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
+        "description": "\nStarts to load the historical query logs for a certain time range, search criteria, etc.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetHistory",
         "parameters": [
           {
@@ -518,7 +598,7 @@
           "Historically Executed Queries"
         ],
         "summary": "GetProgressOfHistory: View progress information (up until this point) of a history query",
-        "description": "View progress information (up until this point) of previously started History query\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't exist and is not running.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "View progress information (up until this point) of previously started History query\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "GetProgressOfHistory",
         "parameters": [
           {
@@ -565,7 +645,7 @@
           "Historically Executed Queries"
         ],
         "summary": "CancelHistory: Cancels (if running) or clears the data from (if completed) a previously started History query",
-        "description": "Cancel the query (if still running) / clear the data (if already returned)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't exist and is not running.\n",
+        "description": "Cancel the query (if still running) / clear the data (if already returned)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n",
         "operationId": "CancelHistory",
         "parameters": [
           {
@@ -614,7 +694,7 @@
           "Historically Executed Queries"
         ],
         "summary": "FetchHistoryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).",
-        "description": "Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchHistoryResultHistogram",
         "parameters": [
           {
@@ -697,6 +777,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -713,7 +813,7 @@
           "Historically Executed Queries"
         ],
         "summary": "FetchHistoryResultJson: Fetches the result from a previously started query, in JSON format.",
-        "description": "Fetch the data in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the data in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchHistoryResultJson",
         "parameters": [
           {
@@ -836,6 +936,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -852,7 +972,7 @@
           "Application Metadata"
         ],
         "summary": "GetServicesAsAccessControlledResources: Get resources available for access control",
-        "description": "\nGet the comprehensive set of resources that are available for access control.\n\nThe following LuminesceSql is executed to return this information, \nwhich is then packaged up as AccessControlledResource:\n\n```sql\nselect\n    Name,\n    min(coalesce(Description, Name) || ' (' || Type || ')') as Description\nfrom\n    Sys.Registration\nwhere\n    Type in ('DirectProvider', 'DataProvider')\n    and\n    ShowAll = true\ngroup by 1\norder by 1\n   \n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n",
+        "description": "\nGet the comprehensive set of resources that are available for access control.\n\nThe following LuminesceSql is executed to return this information, \nwhich is then packaged up as AccessControlledResource:\n\n```sql\nselect\n    Name,\n    min(coalesce(Description, Name) || ' (' || Type || ')') as Description\nfrom\n    Sys.Registration\nwhere\n    Type in ('DirectProvider', 'DataProvider')\n    and\n    ShowAll = true\ngroup by 1\norder by 1\n   \n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetServicesAsAccessControlledResources",
         "responses": {
           "200": {
@@ -890,7 +1010,7 @@
           "Multi-Query Execution"
         ],
         "summary": "StartQueries: Starts to Execute the LuminesceSql statements in the background.",
-        "description": "\nAllow for starting a potentially long running query and getting back an immediate response with how to \n- fetch the data in various formats (if available, or if not simply being informed it is not yet ready), on a per result basis\n- view progress information (up until this point), for all results in one go\n- cancel the queries (if still running) / clear the data (if already returned)\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time)\n- 401 Unauthorized\n",
+        "description": "\nAllow for starting a potentially long running query and getting back an immediate response with how to \n- fetch the data in various formats (if available, or if not simply being informed it is not yet ready), on a per result basis\n- view progress information (up until this point), for all results in one go\n- cancel the queries (if still running) / clear the data (if already returned)\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time)\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "StartQueries",
         "parameters": [
           {
@@ -1044,6 +1164,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1060,7 +1200,7 @@
           "Multi-Query Execution"
         ],
         "summary": "GetProgressOfMultiQuery: View progress information (up until this point) for the entire query-set",
-        "description": "View progress information (up until this point) for the entire query-set\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't exist and is not running.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "View progress information (up until this point) for the entire query-set\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "GetProgressOfMultiQuery",
         "parameters": [
           {
@@ -1107,7 +1247,7 @@
           "Multi-Query Execution"
         ],
         "summary": "CancelMultiQuery: Cancels (if running) or clears the data from (if completed) a previously started query-set",
-        "description": "Cancel the query-set (if still running) / clear the data (if already returned)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't exist and is not running.\n",
+        "description": "Cancel the query-set (if still running) / clear the data (if already returned)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n",
         "operationId": "CancelMultiQuery",
         "parameters": [
           {
@@ -1156,7 +1296,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryCsv",
         "parameters": [
           {
@@ -1259,6 +1399,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1275,7 +1435,7 @@
           "Sql Execution"
         ],
         "summary": "GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryCsv",
         "parameters": [
           {
@@ -1376,6 +1536,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1392,7 +1572,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryExcel",
         "parameters": [
           {
@@ -1472,6 +1652,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1488,7 +1688,7 @@
           "Sql Execution"
         ],
         "summary": "GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryExcel",
         "parameters": [
           {
@@ -1549,6 +1749,26 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1802,6 +2022,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1921,6 +2161,26 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2153,6 +2413,26 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2518,6 +2798,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -2707,6 +3007,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -2865,6 +3185,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -2881,7 +3221,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryJson",
         "parameters": [
           {
@@ -2968,6 +3308,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -2984,7 +3344,7 @@
           "Sql Execution"
         ],
         "summary": "GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryJson",
         "parameters": [
           {
@@ -3069,6 +3429,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -3085,7 +3465,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryParquet: Executes Sql, returned in Parquet format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryParquet",
         "parameters": [
           {
@@ -3165,6 +3545,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -3181,7 +3581,7 @@
           "Sql Execution"
         ],
         "summary": "GetByQueryParquet: Executes Sql, returned in Parquet (.parquet) format (as a file to be downloaded) format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryParquet",
         "parameters": [
           {
@@ -3259,6 +3659,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -3275,7 +3695,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryPipe",
         "parameters": [
           {
@@ -3362,6 +3782,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -3378,7 +3818,7 @@
           "Sql Execution"
         ],
         "summary": "GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryPipe",
         "parameters": [
           {
@@ -3446,6 +3886,26 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3666,6 +4126,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -3682,7 +4162,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQuerySqlite",
         "parameters": [
           {
@@ -3762,6 +4242,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -3778,7 +4278,7 @@
           "Sql Execution"
         ],
         "summary": "GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQuerySqlite",
         "parameters": [
           {
@@ -3839,6 +4339,26 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4052,6 +4572,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -4146,6 +4686,26 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4327,6 +4887,26 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4624,6 +5204,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -4640,7 +5240,7 @@
           "Sql Execution"
         ],
         "summary": "PutByQueryXml: Executes Sql, returned in Xml format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryXml",
         "parameters": [
           {
@@ -4727,6 +5327,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -4743,7 +5363,7 @@
           "Sql Execution"
         ],
         "summary": "GetByQueryXml: Executes Sql, returned in Xml format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n",
+        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryXml",
         "parameters": [
           {
@@ -4828,6 +5448,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -4844,7 +5484,7 @@
           "Sql Background Execution"
         ],
         "summary": "StartQuery: Starts to Execute LuminesceSql in the background.",
-        "description": "\nAllow for starting a potentially long running query and getting back an immediate response with how to \n- fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\n- view progress information (up until this point)\n- cancel the query (if still running) / clear the data (if already returned)\n\nThis can still error on things like an outright syntax error, but more runtime errors (e.g. from providers) will not\ncause this to error (that will happen when attempting to fetch data)\n\nHere is an example that intentionally takes one minute to run:\n\n```sql\nselect Str, Takes500Ms from Testing1K where UseLinq = true and [Int] <= 120\n```\n\nThis is the only place in the Luminesce WebAPI where the following is supported.\nThis will allow for the same user running a character-identical query not kick off a new query but simply be returned a reference \nto the already running one for up to `N` seconds (where `N` should be `<=` `keepForSeconds`).\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time)\n- 401 Unauthorized\n",
+        "description": "\nAllow for starting a potentially long running query and getting back an immediate response with how to \n- fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\n- view progress information (up until this point)\n- cancel the query (if still running) / clear the data (if already returned)\n\nThis can still error on things like an outright syntax error, but more runtime errors (e.g. from providers) will not\ncause this to error (that will happen when attempting to fetch data)\n\nHere is an example that intentionally takes one minute to run:\n\n```sql\nselect Str, Takes500Ms from Testing1K where UseLinq = true and [Int] <= 120\n```\n\nThis is the only place in the Luminesce WebAPI where the following is supported.\nThis will allow for the same user running a character-identical query not kick off a new query but simply be returned a reference \nto the already running one for up to `N` seconds (where `N` should be `<=` `keepForSeconds`).\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time)\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "StartQuery",
         "parameters": [
           {
@@ -4933,6 +5573,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -4949,7 +5609,7 @@
           "Sql Background Execution"
         ],
         "summary": "GetProgressOf: View progress information (up until this point)",
-        "description": "View progress information (up until this point)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't exist and is not running.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "View progress information (up until this point)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "GetProgressOf",
         "parameters": [
           {
@@ -4996,7 +5656,7 @@
           "Sql Background Execution"
         ],
         "summary": "CancelQuery: Cancels (if running) or clears the data from (if completed) a previously started query",
-        "description": "Cancel the query (if still running) / clear the data (if already returned)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't exist and is not running.\n",
+        "description": "Cancel the query (if still running) / clear the data (if already returned)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n",
         "operationId": "CancelQuery",
         "parameters": [
           {
@@ -5045,7 +5705,7 @@
           "Sql Background Execution"
         ],
         "summary": "FetchQueryResultCsv: Fetches the result from a previously started query, in CSV format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultCsv",
         "parameters": [
           {
@@ -5184,6 +5844,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -5200,7 +5880,7 @@
           "Sql Background Execution"
         ],
         "summary": "FetchQueryResultExcel: Fetches the result from a previously started query, in Excel format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultExcel",
         "parameters": [
           {
@@ -5294,6 +5974,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -5310,7 +6010,7 @@
           "Sql Background Execution"
         ],
         "summary": "FetchQueryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).",
-        "description": "Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultHistogram",
         "parameters": [
           {
@@ -5422,6 +6122,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -5438,7 +6158,7 @@
           "Sql Background Execution"
         ],
         "summary": "FetchQueryResultJson: Fetches the result from a previously started query, in JSON string format.\r\nPlease move to '/jsonProper' instead.  This may be marked as Deprecated in the future.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultJson",
         "parameters": [
           {
@@ -5551,6 +6271,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -5567,7 +6307,7 @@
           "Sql Background Execution"
         ],
         "summary": "FetchQueryResultJsonProper: Fetches the result from a previously started query, in JSON format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultJsonProper",
         "parameters": [
           {
@@ -5690,6 +6430,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -5706,7 +6466,7 @@
           "Sql Background Execution"
         ],
         "summary": "FetchQueryResultParquet: Fetches the result from a previously started query, in Parquet format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultParquet",
         "parameters": [
           {
@@ -5800,6 +6560,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -5816,7 +6596,7 @@
           "Sql Background Execution"
         ],
         "summary": "FetchQueryResultPipe: Fetches the result from a previously started query, in pipe-delimited format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultPipe",
         "parameters": [
           {
@@ -5939,6 +6719,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -5955,7 +6755,7 @@
           "Sql Background Execution"
         ],
         "summary": "FetchQueryResultSqlite: Fetches the result from a previously started query, in SqLite format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultSqlite",
         "parameters": [
           {
@@ -6049,6 +6849,26 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -6065,7 +6885,7 @@
           "Sql Background Execution"
         ],
         "summary": "FetchQueryResultXml: Fetches the result from a previously started query, in Xml format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultXml",
         "parameters": [
           {
@@ -6171,6 +6991,26 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "text/plain": {
                 "schema": {

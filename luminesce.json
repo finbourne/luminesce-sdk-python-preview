@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.53",
+    "version": "1.16.60",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2155,6 +2155,154 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FileReaderBuilderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
+    "/api/Sql/frominlinedpropertiesdesign": {
+      "put": {
+        "tags": [
+          "Sql Design"
+        ],
+        "summary": "[EXPERIMENTAL] PutInlinedPropertiesDesignToSql: Generates inlined properties SQL from a structured design",
+        "description": "Inlined properties Designer specification to generate SQL from",
+        "operationId": "PutInlinedPropertiesDesignToSql",
+        "requestBody": {
+          "description": "Structured file read design object to generate SQL from",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InlinedPropertyDesign"
+              },
+              "example": {
+                "providerName": "Lusid.portfolio",
+                "inlinedPropertyItems": [
+                  {
+                    "key": "fieldKey",
+                    "name": "fieldName",
+                    "isMain": true,
+                    "description": "some description"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InlinedPropertyDesign"
+              },
+              "example": {
+                "providerName": "Lusid.portfolio",
+                "inlinedPropertyItems": [
+                  {
+                    "key": "fieldKey",
+                    "name": "fieldName",
+                    "isMain": true,
+                    "description": "some description"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InlinedPropertyDesign"
+              },
+              "example": {
+                "providerName": "Lusid.portfolio",
+                "inlinedPropertyItems": [
+                  {
+                    "key": "fieldKey",
+                    "name": "fieldName",
+                    "isMain": true,
+                    "description": "some description"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InlinedPropertyDesign"
+              },
+              "example": {
+                "providerName": "Lusid.portfolio",
+                "inlinedPropertyItems": [
+                  {
+                    "key": "fieldKey",
+                    "name": "fieldName",
+                    "isMain": true,
+                    "description": "some description"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -8193,6 +8341,55 @@
           }
         },
         "additionalProperties": false
+      },
+      "InlinedPropertyDesign": {
+        "type": "object",
+        "properties": {
+          "providerName": {
+            "type": "string",
+            "description": "The provider name for which these properties are to be inlined",
+            "nullable": true
+          },
+          "inlinedPropertyItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InlinedPropertyItem"
+            },
+            "description": "Collection of Inlined properties",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representation of a set of inlined properties for a given provider so that SQL can be generated to be able to inline properties into luminesce"
+      },
+      "InlinedPropertyItem": {
+        "required": [
+          "key"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Key of the property"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the property",
+            "nullable": true
+          },
+          "isMain": {
+            "type": "boolean",
+            "description": "Is Main indicator for the property"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the property",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a inlined property so that decorated properties can be inlined into luminesce"
       },
       "IntellisenseItem": {
         "required": [

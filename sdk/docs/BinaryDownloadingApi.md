@@ -5,6 +5,7 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**download_binary**](BinaryDownloadingApi.md#download_binary) | **GET** /api/Download/download | [EXPERIMENTAL] DownloadBinary: Downloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.
+[**get_binary_versions**](BinaryDownloadingApi.md#get_binary_versions) | **GET** /api/Download/versions | [EXPERIMENTAL] GetBinaryVersions: Gets the list of available versions of a user-downloadable binary from Nexus
 
 
 # **download_binary**
@@ -79,6 +80,81 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The .nupkg file of the requested binary |  -  |
+**400** | Bad Request |  -  |
+**403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_binary_versions**
+> list[str] get_binary_versions(type=type)
+
+[EXPERIMENTAL] GetBinaryVersions: Gets the list of available versions of a user-downloadable binary from Nexus
+
+ Gets all available versions of a given binary type (from newest to oldest) This does not mean you are entitled to download them.
+
+### Example
+
+* OAuth Authentication (oauth2):
+```python
+from __future__ import print_function
+import time
+import luminesce
+from luminesce.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://www.lusid.com/honeycomb
+# See configuration.py for a list of all supported configuration parameters.
+configuration = luminesce.Configuration(
+    host = "https://www.lusid.com/honeycomb"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure OAuth2 access token for authorization: oauth2
+configuration = luminesce.Configuration(
+    host = "https://www.lusid.com/honeycomb"
+)
+configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Enter a context with an instance of the API client
+with luminesce.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = luminesce.BinaryDownloadingApi(api_client)
+    type = luminesce.LuminesceBinaryType() # LuminesceBinaryType | Type of binary to fetch available versions of (optional)
+
+    try:
+        # [EXPERIMENTAL] GetBinaryVersions: Gets the list of available versions of a user-downloadable binary from Nexus
+        api_response = api_instance.get_binary_versions(type=type)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling BinaryDownloadingApi->get_binary_versions: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **type** | [**LuminesceBinaryType**](.md)| Type of binary to fetch available versions of | [optional] 
+
+### Return type
+
+**list[str]**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
 **400** | Bad Request |  -  |
 **403** | Forbidden |  -  |
 

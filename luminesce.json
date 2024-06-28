@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.198",
+    "version": "1.16.226",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -5042,6 +5042,128 @@
                   "filePath": "/some/folder",
                   "folderFilter": ".*\\.csv",
                   "addFileName": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
+    "/api/Sql/toinlinedpropertiesdesign": {
+      "put": {
+        "tags": [
+          "Sql Design"
+        ],
+        "summary": "[EXPERIMENTAL] PutInlinedPropertiesDesignSqlToDesign: Generates a SQL-inlined-properties-design object from SQL string, if possible.",
+        "description": "SQL to attempt to create an inlined properties Design object from",
+        "operationId": "PutInlinedPropertiesDesignSqlToDesign",
+        "requestBody": {
+          "description": "SQL query to generate the inlined properties design object from",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "@keysToCatalog = values('Portfolio/3897-78d4-e91c-26/location', 'PortfolioLocation', false, '');\n @config = select column1 as [Key], column2 as Name, column3 as IsMain, column4 as Description from @keysToCatalog; \n select * from Sys.Admin.Lusid.Provider.Configure where Provider = 'Lusid.Portfolio' and Configuration = @config;"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InlinedPropertyDesign"
+                },
+                "example": {
+                  "providerName": "Lusid.portfolio",
+                  "inlinedPropertyItems": [
+                    {
+                      "key": "fieldKey",
+                      "name": "fieldName",
+                      "isMain": true,
+                      "description": "some description"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InlinedPropertyDesign"
+                },
+                "example": {
+                  "providerName": "Lusid.portfolio",
+                  "inlinedPropertyItems": [
+                    {
+                      "key": "fieldKey",
+                      "name": "fieldName",
+                      "isMain": true,
+                      "description": "some description"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InlinedPropertyDesign"
+                },
+                "example": {
+                  "providerName": "Lusid.portfolio",
+                  "inlinedPropertyItems": [
+                    {
+                      "key": "fieldKey",
+                      "name": "fieldName",
+                      "isMain": true,
+                      "description": "some description"
+                    }
+                  ]
                 }
               }
             }

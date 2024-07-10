@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.262",
+    "version": "1.16.299",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -7521,6 +7521,57 @@
         ],
         "x-fbn-apistatus": "Stable"
       }
+    },
+    "/fakeNodeReclaim": {
+      "get": {
+        "tags": [
+          "Health checking endpoint"
+        ],
+        "summary": "[INTERNAL] FakeNodeReclaim: An internal Method used to mark the next SIGTERM as though an Aws Node reclaim were about to take place.",
+        "description": "Internal testing controller to simulate having received an AWS node reclaim warning, or similar.",
+        "operationId": "FakeNodeReclaim",
+        "parameters": [
+          {
+            "name": "secondsUntilReclaim",
+            "in": "query",
+            "description": "the number of seconds from which to assume node termination",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 119
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Internal"
+      }
     }
   },
   "components": {
@@ -7634,6 +7685,10 @@
             "type": "string"
           }
         },
+        "additionalProperties": false
+      },
+      "ActionResult": {
+        "type": "object",
         "additionalProperties": false
       },
       "AggregateFunction": {
@@ -7997,7 +8052,8 @@
           "AttemptingToDeserialize",
           "Loaded",
           "Cleared",
-          "Disposed"
+          "Disposed",
+          "OwnerTerminated"
         ],
         "type": "string"
       },
@@ -9469,6 +9525,10 @@
       "description": "Shows Table and Field level information on Providers that are currently running that you have access to."
     },
     {
+      "name": "Health checking endpoint",
+      "description": "Allows for checking health"
+    },
+    {
       "name": "Historically Executed Queries",
       "description": "Shows queries executed at some point and details about them"
     },
@@ -9496,6 +9556,7 @@
       "Binary Downloading",
       "Certificate Management",
       "Current Table/Field Catalog",
+      "Health checking endpoint",
       "Historically Executed Queries",
       "Multi-Query Execution",
       "Sql Background Execution",

@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.301",
+    "version": "1.16.302",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2008,6 +2008,153 @@
           }
         ],
         "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/Sql/extractscalarparameters": {
+      "put": {
+        "tags": [
+          "Sql Design"
+        ],
+        "summary": "[EXPERIMENTAL] PutSqlToExtractScalarParameters: Generates information about all the scalar parameters defined in the given SQL statement",
+        "description": "SQL to extract scalar parameters from",
+        "operationId": "PutSqlToExtractScalarParameters",
+        "requestBody": {
+          "description": "SQL query to generate the design object from",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "select abc, :p1:'this' as c1 from xxx where abc = :abcP:123 or xyz in (:p2:, 'zzz')"
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ScalarParameter"
+                  }
+                },
+                "example": [
+                  {
+                    "name": "p1",
+                    "type": "Text",
+                    "value": "this"
+                  },
+                  {
+                    "name": "abcP",
+                    "type": "Decimal",
+                    "value": "123"
+                  },
+                  {
+                    "name": "p2",
+                    "type": "Text"
+                  }
+                ]
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ScalarParameter"
+                  }
+                },
+                "example": [
+                  {
+                    "name": "p1",
+                    "type": "Text",
+                    "value": "this"
+                  },
+                  {
+                    "name": "abcP",
+                    "type": "Decimal",
+                    "value": "123"
+                  },
+                  {
+                    "name": "p2",
+                    "type": "Text"
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ScalarParameter"
+                  }
+                },
+                "example": [
+                  {
+                    "name": "p1",
+                    "type": "Text",
+                    "value": "this"
+                  },
+                  {
+                    "name": "abcP",
+                    "type": "Decimal",
+                    "value": "123"
+                  },
+                  {
+                    "name": "p2",
+                    "type": "Text"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
       }
     },
     "/api/Sql/fromdesign": {
@@ -9374,6 +9521,30 @@
           }
         },
         "additionalProperties": false
+      },
+      "ScalarParameter": {
+        "required": [
+          "name",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name of the scalar parameter"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DataType"
+          },
+          "value": {
+            "description": "the default value of the parameter",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Describes a scalar parameter as defined in the SQL"
       },
       "Source": {
         "type": "object",

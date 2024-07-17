@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 
 # **get_by_query_csv**
-> str get_by_query_csv(query, query_name=query_name, download=download, timeout=timeout, delimiter=delimiter, escape=escape)
+> str get_by_query_csv(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout, delimiter=delimiter, escape=escape)
 
 GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
 
@@ -58,6 +58,7 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -66,7 +67,7 @@ escape = 'escape_example' # str | Escape character to override the default (opti
 
     try:
         # GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
-        api_response = api_instance.get_by_query_csv(query, query_name=query_name, download=download, timeout=timeout, delimiter=delimiter, escape=escape)
+        api_response = api_instance.get_by_query_csv(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout, delimiter=delimiter, escape=escape)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->get_by_query_csv: %s\n" % e)
@@ -77,6 +78,7 @@ escape = 'escape_example' # str | Escape character to override the default (opti
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| LuminesceSql to Execute (must be one line only) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
@@ -106,7 +108,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_query_excel**
-> file get_by_query_excel(query, query_name=query_name, timeout=timeout)
+> file get_by_query_excel(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
 
 GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
 
@@ -143,12 +145,13 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
-        api_response = api_instance.get_by_query_excel(query, query_name=query_name, timeout=timeout)
+        api_response = api_instance.get_by_query_excel(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->get_by_query_excel: %s\n" % e)
@@ -159,6 +162,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| LuminesceSql to Execute (must be one line only) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -185,7 +189,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_query_json**
-> str get_by_query_json(query, query_name=query_name, timeout=timeout, json_proper=json_proper)
+> str get_by_query_json(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout, json_proper=json_proper)
 
 GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
 
@@ -222,13 +226,14 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
         # GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
-        api_response = api_instance.get_by_query_json(query, query_name=query_name, timeout=timeout, json_proper=json_proper)
+        api_response = api_instance.get_by_query_json(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->get_by_query_json: %s\n" % e)
@@ -239,6 +244,7 @@ json_proper = False # bool | Should this be text/json (not json-encoded-as-a-str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| LuminesceSql to Execute (must be one line only) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
  **json_proper** | **bool**| Should this be text/json (not json-encoded-as-a-string) | [optional] [default to False]
@@ -266,7 +272,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_query_parquet**
-> file get_by_query_parquet(query, query_name=query_name, timeout=timeout)
+> file get_by_query_parquet(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
 
 GetByQueryParquet: Executes Sql, returned in Parquet (.parquet) format (as a file to be downloaded) format, where the sql is simply in the url.
 
@@ -303,12 +309,13 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # GetByQueryParquet: Executes Sql, returned in Parquet (.parquet) format (as a file to be downloaded) format, where the sql is simply in the url.
-        api_response = api_instance.get_by_query_parquet(query, query_name=query_name, timeout=timeout)
+        api_response = api_instance.get_by_query_parquet(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->get_by_query_parquet: %s\n" % e)
@@ -319,6 +326,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| LuminesceSql to Execute (must be one line only) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -345,7 +353,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_query_pipe**
-> str get_by_query_pipe(query, query_name=query_name, download=download, timeout=timeout)
+> str get_by_query_pipe(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout)
 
 GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
 
@@ -382,13 +390,14 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
-        api_response = api_instance.get_by_query_pipe(query, query_name=query_name, download=download, timeout=timeout)
+        api_response = api_instance.get_by_query_pipe(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->get_by_query_pipe: %s\n" % e)
@@ -399,6 +408,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| LuminesceSql to Execute (must be one line only) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
@@ -426,7 +436,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_query_sqlite**
-> file get_by_query_sqlite(query, query_name=query_name, timeout=timeout)
+> file get_by_query_sqlite(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
 
 GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
 
@@ -463,12 +473,13 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
-        api_response = api_instance.get_by_query_sqlite(query, query_name=query_name, timeout=timeout)
+        api_response = api_instance.get_by_query_sqlite(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->get_by_query_sqlite: %s\n" % e)
@@ -479,6 +490,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| LuminesceSql to Execute (must be one line only) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -505,7 +517,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_by_query_xml**
-> str get_by_query_xml(query, query_name=query_name, download=download, timeout=timeout)
+> str get_by_query_xml(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout)
 
 GetByQueryXml: Executes Sql, returned in Xml format, where the sql is simply in the url.
 
@@ -542,13 +554,14 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     query = 'select ^ from Sys.Field order by 1, 2' # str | LuminesceSql to Execute (must be one line only)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # GetByQueryXml: Executes Sql, returned in Xml format, where the sql is simply in the url.
-        api_response = api_instance.get_by_query_xml(query, query_name=query_name, download=download, timeout=timeout)
+        api_response = api_instance.get_by_query_xml(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->get_by_query_xml: %s\n" % e)
@@ -559,6 +572,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **str**| LuminesceSql to Execute (must be one line only) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
@@ -586,7 +600,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_csv**
-> str put_by_query_csv(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds, delimiter=delimiter, escape=escape)
+> str put_by_query_csv(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds, delimiter=delimiter, escape=escape)
 
 PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
 
@@ -623,6 +637,7 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
@@ -631,7 +646,7 @@ escape = 'escape_example' # str | Escape character to override the default (opti
 
     try:
         # PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
-        api_response = api_instance.put_by_query_csv(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds, delimiter=delimiter, escape=escape)
+        api_response = api_instance.put_by_query_csv(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds, delimiter=delimiter, escape=escape)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_by_query_csv: %s\n" % e)
@@ -642,6 +657,7 @@ escape = 'escape_example' # str | Escape character to override the default (opti
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
@@ -671,7 +687,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_excel**
-> file put_by_query_excel(body, query_name=query_name, timeout_seconds=timeout_seconds)
+> file put_by_query_excel(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
 
 PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
 
@@ -708,12 +724,13 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
-        api_response = api_instance.put_by_query_excel(body, query_name=query_name, timeout_seconds=timeout_seconds)
+        api_response = api_instance.put_by_query_excel(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_by_query_excel: %s\n" % e)
@@ -724,6 +741,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -750,7 +768,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_json**
-> str put_by_query_json(body, query_name=query_name, timeout_seconds=timeout_seconds, json_proper=json_proper)
+> str put_by_query_json(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, json_proper=json_proper)
 
 PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
 
@@ -787,13 +805,14 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
         # PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
-        api_response = api_instance.put_by_query_json(body, query_name=query_name, timeout_seconds=timeout_seconds, json_proper=json_proper)
+        api_response = api_instance.put_by_query_json(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_by_query_json: %s\n" % e)
@@ -804,6 +823,7 @@ json_proper = False # bool | Should this be text/json (not json-encoded-as-a-str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
  **json_proper** | **bool**| Should this be text/json (not json-encoded-as-a-string) | [optional] [default to False]
@@ -831,7 +851,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_parquet**
-> file put_by_query_parquet(body, query_name=query_name, timeout_seconds=timeout_seconds)
+> file put_by_query_parquet(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
 
 PutByQueryParquet: Executes Sql, returned in Parquet format, where the sql is the post-body url.
 
@@ -868,12 +888,13 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # PutByQueryParquet: Executes Sql, returned in Parquet format, where the sql is the post-body url.
-        api_response = api_instance.put_by_query_parquet(body, query_name=query_name, timeout_seconds=timeout_seconds)
+        api_response = api_instance.put_by_query_parquet(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_by_query_parquet: %s\n" % e)
@@ -884,6 +905,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -910,7 +932,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_pipe**
-> str put_by_query_pipe(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
+> str put_by_query_pipe(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
 
 PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
 
@@ -947,13 +969,14 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
-        api_response = api_instance.put_by_query_pipe(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
+        api_response = api_instance.put_by_query_pipe(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_by_query_pipe: %s\n" % e)
@@ -964,6 +987,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
@@ -991,7 +1015,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_sqlite**
-> file put_by_query_sqlite(body, query_name=query_name, timeout_seconds=timeout_seconds)
+> file put_by_query_sqlite(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
 
 PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
 
@@ -1028,12 +1052,13 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
-        api_response = api_instance.put_by_query_sqlite(body, query_name=query_name, timeout_seconds=timeout_seconds)
+        api_response = api_instance.put_by_query_sqlite(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_by_query_sqlite: %s\n" % e)
@@ -1044,6 +1069,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]
 
@@ -1070,7 +1096,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_by_query_xml**
-> str put_by_query_xml(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
+> str put_by_query_xml(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
 
 PutByQueryXml: Executes Sql, returned in Xml format, where the sql is the post-body url.
 
@@ -1107,13 +1133,14 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlExecutionApi(api_client)
     body = select * from sys.field # str | LuminesceSql to Execute (may be multi-line)
+scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Get tables/fields' # str | Name to apply to the query in logs and `Sys.Logs.HcQueryStart` (optional)
 download = False # bool | Makes this a file-download request (as opposed to returning the data in the response-body) (optional) (default to False)
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
         # PutByQueryXml: Executes Sql, returned in Xml format, where the sql is the post-body url.
-        api_response = api_instance.put_by_query_xml(body, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
+        api_response = api_instance.put_by_query_xml(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlExecutionApi->put_by_query_xml: %s\n" % e)
@@ -1124,6 +1151,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| LuminesceSql to Execute (may be multi-line) | 
+ **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| Name to apply to the query in logs and &#x60;Sys.Logs.HcQueryStart&#x60; | [optional] 
  **download** | **bool**| Makes this a file-download request (as opposed to returning the data in the response-body) | [optional] [default to False]
  **timeout_seconds** | **int**| In seconds: &lt;0 → ∞, 0 → 120s | [optional] [default to 0]

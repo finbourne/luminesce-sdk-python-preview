@@ -875,7 +875,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_progress_of**
-> BackgroundQueryProgressResponse get_progress_of(execution_id, build_from_logs)
+> BackgroundQueryProgressResponse get_progress_of(execution_id, build_from_logs=build_from_logs)
 
 GetProgressOf: View progress information (up until this point)
 
@@ -912,11 +912,11 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
-build_from_logs = True # bool | Should the response state be build from query logs if missing from the shared-db-state?  False will mean `404 Not Found` in cases where it was a real query but has passed its `keepForSeconds`  since the query completed (as well as 'this was not a query at all' of course) (default to True)
+build_from_logs = True # bool | Should the response state be build from query logs if missing from the shared-db-state?  False will mean `404 Not Found` in cases where it was a real query but has passed its `keepForSeconds`  since the query completed (as well as 'this was not a query at all' of course) (optional) (default to True)
 
     try:
         # GetProgressOf: View progress information (up until this point)
-        api_response = api_instance.get_progress_of(execution_id, build_from_logs)
+        api_response = api_instance.get_progress_of(execution_id, build_from_logs=build_from_logs)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlBackgroundExecutionApi->get_progress_of: %s\n" % e)
@@ -927,7 +927,7 @@ build_from_logs = True # bool | Should the response state be build from query lo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **execution_id** | **str**| ExecutionId returned when starting the query | 
- **build_from_logs** | **bool**| Should the response state be build from query logs if missing from the shared-db-state?  False will mean &#x60;404 Not Found&#x60; in cases where it was a real query but has passed its &#x60;keepForSeconds&#x60;  since the query completed (as well as &#39;this was not a query at all&#39; of course) | [default to True]
+ **build_from_logs** | **bool**| Should the response state be build from query logs if missing from the shared-db-state?  False will mean &#x60;404 Not Found&#x60; in cases where it was a real query but has passed its &#x60;keepForSeconds&#x60;  since the query completed (as well as &#39;this was not a query at all&#39; of course) | [optional] [default to True]
 
 ### Return type
 

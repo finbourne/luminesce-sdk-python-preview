@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.475",
+    "version": "1.16.490",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -6494,13 +6494,13 @@
           },
           {
             "name": "buildFromLogs",
-            "in": "path",
+            "in": "query",
             "description": "Should the response state be build from query logs if missing from the shared-db-state?\r\nFalse will mean `404 Not Found` in cases where it was a real query but has passed its `keepForSeconds`\r\nsince the query completed (as well as 'this was not a query at all' of course)",
-            "required": true,
             "schema": {
               "type": "boolean",
               "default": true
-            }
+            },
+            "x-nullable": true
           }
         ],
         "responses": {

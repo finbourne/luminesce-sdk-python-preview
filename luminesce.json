@@ -8,7 +8,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.573",
+    "version": "1.16.583",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -561,7 +561,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The .nupkg file of the requested binary",
+            "description": "The .nupkg or .msi file of the requested binary",
             "content": {
               "application/octet-stream": {
                 "schema": {

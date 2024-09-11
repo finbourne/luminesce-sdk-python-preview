@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.602",
+    "version": "1.16.605",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2169,6 +2169,150 @@
                     "type": "Text"
                   }
                 ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
+      }
+    },
+    "/api/Sql/fromcasestatementdesign": {
+      "put": {
+        "tags": [
+          "Sql Design"
+        ],
+        "summary": "[EXPERIMENTAL] PutCaseStatementDesignToSql: Generates SQL case statement queries from a structured design",
+        "description": "CaseStatementDesign object to try and create a SQL query from",
+        "operationId": "PutCaseStatementDesignToSql",
+        "requestBody": {
+          "description": "Structured file read design object to generate SQL from",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaseStatementDesign"
+              },
+              "example": {
+                "selectedField": "currency",
+                "caseStatementItems": [
+                  {
+                    "filter": "Eq",
+                    "source": "USD",
+                    "target": "US"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaseStatementDesign"
+              },
+              "example": {
+                "selectedField": "currency",
+                "caseStatementItems": [
+                  {
+                    "filter": "Eq",
+                    "source": "USD",
+                    "target": "US"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaseStatementDesign"
+              },
+              "example": {
+                "selectedField": "currency",
+                "caseStatementItems": [
+                  {
+                    "filter": "Eq",
+                    "source": "USD",
+                    "target": "US"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaseStatementDesign"
+              },
+              "example": {
+                "selectedField": "currency",
+                "caseStatementItems": [
+                  {
+                    "filter": "Eq",
+                    "source": "USD",
+                    "target": "US"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -5085,6 +5229,125 @@
           }
         ],
         "x-fbn-apistatus": "Stable"
+      }
+    },
+    "/api/Sql/tocasestatementdesign": {
+      "put": {
+        "tags": [
+          "Sql Design"
+        ],
+        "summary": "[EXPERIMENTAL] PutCaseStatementDesignSqlToDesign: Converts SQL queries to a CaseStatementDesign object.",
+        "description": "SQL to attempt to create an case statement Design object from",
+        "operationId": "PutCaseStatementDesignSqlToDesign",
+        "requestBody": {
+          "description": "SQL query to generate the case statement design object from",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "CASE \n WHEN [currency] = 'US' THEN 'USD' \n WHEN [currency] = 'Gb' THEN 'GBP' \n ELSE [currency] \n END"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseStatementDesign"
+                },
+                "example": {
+                  "selectedField": "currency",
+                  "caseStatementItems": [
+                    {
+                      "filter": "Eq",
+                      "source": "USD",
+                      "target": "US"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseStatementDesign"
+                },
+                "example": {
+                  "selectedField": "currency",
+                  "caseStatementItems": [
+                    {
+                      "filter": "Eq",
+                      "source": "USD",
+                      "target": "US"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseStatementDesign"
+                },
+                "example": {
+                  "selectedField": "currency",
+                  "caseStatementItems": [
+                    {
+                      "filter": "Eq",
+                      "source": "USD",
+                      "target": "US"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LusidProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "x-fbn-apistatus": "Experimental"
       }
     },
     "/api/Sql/todesign": {
@@ -8453,6 +8716,53 @@
           "OwnerTerminated"
         ],
         "type": "string"
+      },
+      "CaseStatementDesign": {
+        "type": "object",
+        "properties": {
+          "selectedField": {
+            "type": "string",
+            "description": "Selected field in the SQL query.",
+            "nullable": true
+          },
+          "caseStatementItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CaseStatementItem"
+            },
+            "description": "A list containing the filter, source, and target.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Representation of the selected field and a list of: filter, source, and target."
+      },
+      "CaseStatementItem": {
+        "required": [
+          "filter",
+          "source",
+          "target"
+        ],
+        "type": "object",
+        "properties": {
+          "filter": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The operator in the case statement SQL expression"
+          },
+          "source": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The expression that is on the LHS of the operator\r\nA typical case statement would look like:\r\nCASE Field {Filter} Source THEN Target"
+          },
+          "target": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The expression that is on the RHS of the operator\r\nA typical case statement would look like:\r\nCASE Field {Filter} Source THEN Target"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a case statement.\r\nA typical case statement would look like:\r\nCASE WHEN Field {Filter} Source THEN Target\r\nFor example: CASE WHEN 'currency' = 'USD' THEN 'US'\r\nHere the Field is 'currency', the Source is 'USD', the Filter is '=', and the Target is 'US'"
       },
       "CertificateAction": {
         "enum": [

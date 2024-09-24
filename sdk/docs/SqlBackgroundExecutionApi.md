@@ -4,24 +4,24 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancel_query**](SqlBackgroundExecutionApi.md#cancel_query) | **DELETE** /api/SqlBackground/{executionId} | CancelQuery: Cancels (if running) or clears the data from (if completed) a previously started query
-[**fetch_query_result_csv**](SqlBackgroundExecutionApi.md#fetch_query_result_csv) | **GET** /api/SqlBackground/{executionId}/csv | FetchQueryResultCsv: Fetches the result from a previously started query, in CSV format.
-[**fetch_query_result_excel**](SqlBackgroundExecutionApi.md#fetch_query_result_excel) | **GET** /api/SqlBackground/{executionId}/excel | FetchQueryResultExcel: Fetches the result from a previously started query, in Excel format.
-[**fetch_query_result_histogram**](SqlBackgroundExecutionApi.md#fetch_query_result_histogram) | **GET** /api/SqlBackground/{executionId}/histogram | FetchQueryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).
-[**fetch_query_result_json**](SqlBackgroundExecutionApi.md#fetch_query_result_json) | **GET** /api/SqlBackground/{executionId}/json | FetchQueryResultJson: Fetches the result from a previously started query, in JSON string format.  Please move to &#39;/jsonProper&#39; instead.  This may be marked as Deprecated in the future.
-[**fetch_query_result_json_proper**](SqlBackgroundExecutionApi.md#fetch_query_result_json_proper) | **GET** /api/SqlBackground/{executionId}/jsonProper | FetchQueryResultJsonProper: Fetches the result from a previously started query, in JSON format.
-[**fetch_query_result_parquet**](SqlBackgroundExecutionApi.md#fetch_query_result_parquet) | **GET** /api/SqlBackground/{executionId}/parquet | FetchQueryResultParquet: Fetches the result from a previously started query, in Parquet format.
-[**fetch_query_result_pipe**](SqlBackgroundExecutionApi.md#fetch_query_result_pipe) | **GET** /api/SqlBackground/{executionId}/pipe | FetchQueryResultPipe: Fetches the result from a previously started query, in pipe-delimited format.
-[**fetch_query_result_sqlite**](SqlBackgroundExecutionApi.md#fetch_query_result_sqlite) | **GET** /api/SqlBackground/{executionId}/sqlite | FetchQueryResultSqlite: Fetches the result from a previously started query, in SqLite format.
-[**fetch_query_result_xml**](SqlBackgroundExecutionApi.md#fetch_query_result_xml) | **GET** /api/SqlBackground/{executionId}/xml | FetchQueryResultXml: Fetches the result from a previously started query, in Xml format.
-[**get_progress_of**](SqlBackgroundExecutionApi.md#get_progress_of) | **GET** /api/SqlBackground/{executionId} | GetProgressOf: View progress information (up until this point)
-[**start_query**](SqlBackgroundExecutionApi.md#start_query) | **PUT** /api/SqlBackground | StartQuery: Starts to Execute LuminesceSql in the background.
+[**cancel_query**](SqlBackgroundExecutionApi.md#cancel_query) | **DELETE** /api/SqlBackground/{executionId} | CancelQuery: Cancels / Clears data from a previously run query
+[**fetch_query_result_csv**](SqlBackgroundExecutionApi.md#fetch_query_result_csv) | **GET** /api/SqlBackground/{executionId}/csv | FetchQueryResultCsv: Fetches the result of a query as CSV
+[**fetch_query_result_excel**](SqlBackgroundExecutionApi.md#fetch_query_result_excel) | **GET** /api/SqlBackground/{executionId}/excel | FetchQueryResultExcel: Fetches the result of a query as an Excel file
+[**fetch_query_result_histogram**](SqlBackgroundExecutionApi.md#fetch_query_result_histogram) | **GET** /api/SqlBackground/{executionId}/histogram | FetchQueryResultHistogram: Constructs a histogram of the result of a query
+[**fetch_query_result_json**](SqlBackgroundExecutionApi.md#fetch_query_result_json) | **GET** /api/SqlBackground/{executionId}/json | FetchQueryResultJson: Fetches the result of a query as a JSON string
+[**fetch_query_result_json_proper**](SqlBackgroundExecutionApi.md#fetch_query_result_json_proper) | **GET** /api/SqlBackground/{executionId}/jsonProper | FetchQueryResultJsonProper: Fetches the result of a query as JSON
+[**fetch_query_result_parquet**](SqlBackgroundExecutionApi.md#fetch_query_result_parquet) | **GET** /api/SqlBackground/{executionId}/parquet | FetchQueryResultParquet: Fetches the result of a query as Parquet
+[**fetch_query_result_pipe**](SqlBackgroundExecutionApi.md#fetch_query_result_pipe) | **GET** /api/SqlBackground/{executionId}/pipe | FetchQueryResultPipe: Fetches the result of a query as pipe-delimited
+[**fetch_query_result_sqlite**](SqlBackgroundExecutionApi.md#fetch_query_result_sqlite) | **GET** /api/SqlBackground/{executionId}/sqlite | FetchQueryResultSqlite: Fetches the result of a query as SqLite
+[**fetch_query_result_xml**](SqlBackgroundExecutionApi.md#fetch_query_result_xml) | **GET** /api/SqlBackground/{executionId}/xml | FetchQueryResultXml: Fetches the result of a query as XML
+[**get_progress_of**](SqlBackgroundExecutionApi.md#get_progress_of) | **GET** /api/SqlBackground/{executionId} | GetProgressOf: View progress information up until this point
+[**start_query**](SqlBackgroundExecutionApi.md#start_query) | **PUT** /api/SqlBackground | StartQuery: Starts to Execute Sql in the background
 
 
 # **cancel_query**
 > BackgroundQueryCancelResponse cancel_query(execution_id)
 
-CancelQuery: Cancels (if running) or clears the data from (if completed) a previously started query
+CancelQuery: Cancels / Clears data from a previously run query
 
 Cancel the query (if still running) / clear the data (if already returned) The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't exist and is not running. 
 
@@ -58,7 +58,7 @@ with luminesce.ApiClient(configuration) as api_client:
     execution_id = 'execution_id_example' # str | ExecutionId returned when starting the query
 
     try:
-        # CancelQuery: Cancels (if running) or clears the data from (if completed) a previously started query
+        # CancelQuery: Cancels / Clears data from a previously run query
         api_response = api_instance.cancel_query(execution_id)
         pprint(api_response)
     except ApiException as e:
@@ -94,9 +94,9 @@ Name | Type | Description  | Notes
 # **fetch_query_result_csv**
 > str fetch_query_result_csv(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page, delimiter=delimiter, escape=escape)
 
-FetchQueryResultCsv: Fetches the result from a previously started query, in CSV format.
+FetchQueryResultCsv: Fetches the result of a query as CSV
 
-Fetch the data in various formats (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
 ### Example
 
@@ -140,7 +140,7 @@ delimiter = 'delimiter_example' # str | Delimiter string to override the default
 escape = 'escape_example' # str | Escape character to override the default (optional)
 
     try:
-        # FetchQueryResultCsv: Fetches the result from a previously started query, in CSV format.
+        # FetchQueryResultCsv: Fetches the result of a query as CSV
         api_response = api_instance.fetch_query_result_csv(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page, delimiter=delimiter, escape=escape)
         pprint(api_response)
     except ApiException as e:
@@ -187,9 +187,9 @@ Name | Type | Description  | Notes
 # **fetch_query_result_excel**
 > file fetch_query_result_excel(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
 
-FetchQueryResultExcel: Fetches the result from a previously started query, in Excel format.
+FetchQueryResultExcel: Fetches the result of a query as an Excel file
 
-Fetch the data in various formats (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
 ### Example
 
@@ -228,7 +228,7 @@ select = 'select_example' # str | Default is null (meaning return all columns in
 group_by = 'group_by_example' # str | Groups by the specified fields.              A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).              e.g. `2,3`, `myColumn`.              Default is null (meaning no grouping will be performed on the selected columns).              This applies only over the result set being requested here, meaning indexes into the \"select\" parameter fields.              Only specify this if you are selecting aggregations in the \"select\" parameter. (optional)
 
     try:
-        # FetchQueryResultExcel: Fetches the result from a previously started query, in Excel format.
+        # FetchQueryResultExcel: Fetches the result of a query as an Excel file
         api_response = api_instance.fetch_query_result_excel(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
         pprint(api_response)
     except ApiException as e:
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 # **fetch_query_result_histogram**
 > str fetch_query_result_histogram(execution_id, timestamp_field_name, start_at=start_at, end_at=end_at, bucket_size=bucket_size, filter=filter, json_proper=json_proper)
 
-FetchQueryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).
+FetchQueryResultHistogram: Constructs a histogram of the result of a query
 
 Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
@@ -313,7 +313,7 @@ filter = 'filter_example' # str | An ODATA filter per Finbourne.Filtering syntax
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
-        # FetchQueryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).
+        # FetchQueryResultHistogram: Constructs a histogram of the result of a query
         api_response = api_instance.fetch_query_result_histogram(execution_id, timestamp_field_name, start_at=start_at, end_at=end_at, bucket_size=bucket_size, filter=filter, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:
@@ -357,9 +357,9 @@ Name | Type | Description  | Notes
 # **fetch_query_result_json**
 > str fetch_query_result_json(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
 
-FetchQueryResultJson: Fetches the result from a previously started query, in JSON string format.  Please move to '/jsonProper' instead.  This may be marked as Deprecated in the future.
+FetchQueryResultJson: Fetches the result of a query as a JSON string
 
-Fetch the data in various formats (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+ *Please move to '/jsonProper' instead.  This may be marked as Deprecated in the future.*  Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
 ### Example
 
@@ -400,7 +400,7 @@ limit = 0 # int | When paginating, only return this number of records, page shou
 page = 0 # int | 0-N based on chunk sized determined by the limit, ignored if limit < 1. (optional) (default to 0)
 
     try:
-        # FetchQueryResultJson: Fetches the result from a previously started query, in JSON string format.  Please move to '/jsonProper' instead.  This may be marked as Deprecated in the future.
+        # FetchQueryResultJson: Fetches the result of a query as a JSON string
         api_response = api_instance.fetch_query_result_json(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
         pprint(api_response)
     except ApiException as e:
@@ -444,9 +444,9 @@ Name | Type | Description  | Notes
 # **fetch_query_result_json_proper**
 > str fetch_query_result_json_proper(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
 
-FetchQueryResultJsonProper: Fetches the result from a previously started query, in JSON format.
+FetchQueryResultJsonProper: Fetches the result of a query as JSON
 
-Fetch the data in various formats (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
 ### Example
 
@@ -488,7 +488,7 @@ limit = 0 # int | When paginating, only return this number of records, page shou
 page = 0 # int | 0-N based on chunk sized determined by the limit, ignored if limit < 1. (optional) (default to 0)
 
     try:
-        # FetchQueryResultJsonProper: Fetches the result from a previously started query, in JSON format.
+        # FetchQueryResultJsonProper: Fetches the result of a query as JSON
         api_response = api_instance.fetch_query_result_json_proper(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
         pprint(api_response)
     except ApiException as e:
@@ -533,9 +533,9 @@ Name | Type | Description  | Notes
 # **fetch_query_result_parquet**
 > file fetch_query_result_parquet(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
 
-FetchQueryResultParquet: Fetches the result from a previously started query, in Parquet format.
+FetchQueryResultParquet: Fetches the result of a query as Parquet
 
-Fetch the data in various formats (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
 ### Example
 
@@ -574,7 +574,7 @@ select = 'select_example' # str | Default is null (meaning return all columns in
 group_by = 'group_by_example' # str | Groups by the specified fields.              A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).              e.g. `2,3`, `myColumn`.              Default is null (meaning no grouping will be performed on the selected columns).              This applies only over the result set being requested here, meaning indexes into the \"select\" parameter fields.              Only specify this if you are selecting aggregations in the \"select\" parameter. (optional)
 
     try:
-        # FetchQueryResultParquet: Fetches the result from a previously started query, in Parquet format.
+        # FetchQueryResultParquet: Fetches the result of a query as Parquet
         api_response = api_instance.fetch_query_result_parquet(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
         pprint(api_response)
     except ApiException as e:
@@ -616,9 +616,9 @@ Name | Type | Description  | Notes
 # **fetch_query_result_pipe**
 > str fetch_query_result_pipe(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
 
-FetchQueryResultPipe: Fetches the result from a previously started query, in pipe-delimited format.
+FetchQueryResultPipe: Fetches the result of a query as pipe-delimited
 
-Fetch the data in various formats (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
 ### Example
 
@@ -660,7 +660,7 @@ limit = 0 # int | When paginating, only return this number of records, page shou
 page = 0 # int | 0-N based on chunk sized determined by the limit, ignored if limit < 1. (optional) (default to 0)
 
     try:
-        # FetchQueryResultPipe: Fetches the result from a previously started query, in pipe-delimited format.
+        # FetchQueryResultPipe: Fetches the result of a query as pipe-delimited
         api_response = api_instance.fetch_query_result_pipe(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
         pprint(api_response)
     except ApiException as e:
@@ -705,9 +705,9 @@ Name | Type | Description  | Notes
 # **fetch_query_result_sqlite**
 > file fetch_query_result_sqlite(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
 
-FetchQueryResultSqlite: Fetches the result from a previously started query, in SqLite format.
+FetchQueryResultSqlite: Fetches the result of a query as SqLite
 
-Fetch the data in various formats (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
 ### Example
 
@@ -746,7 +746,7 @@ select = 'select_example' # str | Default is null (meaning return all columns in
 group_by = 'group_by_example' # str | Groups by the specified fields.              A comma delimited list of: 1 based numeric indexes (cleaner), or repeats of the select expressions (a bit verbose and must match exactly).              e.g. `2,3`, `myColumn`.              Default is null (meaning no grouping will be performed on the selected columns).              This applies only over the result set being requested here, meaning indexes into the \"select\" parameter fields.              Only specify this if you are selecting aggregations in the \"select\" parameter. (optional)
 
     try:
-        # FetchQueryResultSqlite: Fetches the result from a previously started query, in SqLite format.
+        # FetchQueryResultSqlite: Fetches the result of a query as SqLite
         api_response = api_instance.fetch_query_result_sqlite(execution_id, sort_by=sort_by, filter=filter, select=select, group_by=group_by)
         pprint(api_response)
     except ApiException as e:
@@ -788,9 +788,9 @@ Name | Type | Description  | Notes
 # **fetch_query_result_xml**
 > str fetch_query_result_xml(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
 
-FetchQueryResultXml: Fetches the result from a previously started query, in Xml format.
+FetchQueryResultXml: Fetches the result of a query as XML
 
-Fetch the data in various formats (if available, or if not simply being informed it is not yet ready) The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
+Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).  The following error codes are to be anticipated most with standard Problem Detail reports: - 400 BadRequest : Something failed with the execution of your query - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't (yet) exist. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
 ### Example
 
@@ -832,7 +832,7 @@ limit = 0 # int | When paginating, only return this number of records, page shou
 page = 0 # int | 0-N based on chunk sized determined by the limit, ignored if limit < 1. (optional) (default to 0)
 
     try:
-        # FetchQueryResultXml: Fetches the result from a previously started query, in Xml format.
+        # FetchQueryResultXml: Fetches the result of a query as XML
         api_response = api_instance.fetch_query_result_xml(execution_id, download=download, sort_by=sort_by, filter=filter, select=select, group_by=group_by, limit=limit, page=page)
         pprint(api_response)
     except ApiException as e:
@@ -877,7 +877,7 @@ Name | Type | Description  | Notes
 # **get_progress_of**
 > BackgroundQueryProgressResponse get_progress_of(execution_id, build_from_logs=build_from_logs)
 
-GetProgressOf: View progress information (up until this point)
+GetProgressOf: View progress information up until this point
 
 View progress information (up until this point) The following error codes are to be anticipated most with standard Problem Detail reports: - 401 Unauthorized - 403 Forbidden - 404 Not Found : The requested query result doesn't exist and is not running. - 429 Too Many Requests : Please try your request again soon   1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.   1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.   1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.
 
@@ -915,7 +915,7 @@ with luminesce.ApiClient(configuration) as api_client:
 build_from_logs = True # bool | Should the response state be build from query logs if missing from the shared-db-state?  False will mean `404 Not Found` in cases where it was a real query but has passed its `keepForSeconds`  since the query completed (as well as 'this was not a query at all' of course) (optional) (default to True)
 
     try:
-        # GetProgressOf: View progress information (up until this point)
+        # GetProgressOf: View progress information up until this point
         api_response = api_instance.get_progress_of(execution_id, build_from_logs=build_from_logs)
         pprint(api_response)
     except ApiException as e:
@@ -952,7 +952,7 @@ Name | Type | Description  | Notes
 # **start_query**
 > BackgroundQueryResponse start_query(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, keep_for_seconds=keep_for_seconds)
 
-StartQuery: Starts to Execute LuminesceSql in the background.
+StartQuery: Starts to Execute Sql in the background
 
  Allow for starting a potentially long running query and getting back an immediate response with how to  - fetch the data in various formats (if available, or if not simply being informed it is not yet ready) - view progress information (up until this point) - cancel the query (if still running) / clear the data (if already returned)  This can still error on things like an outright syntax error, but more runtime errors (e.g. from providers) will not cause this to error (that will happen when attempting to fetch data)  Here is an example that intentionally takes one minute to run:  ```sql select Str, Takes500Ms from Testing1K where UseLinq = true and [Int] <= 120 ```  This is the only place in the Luminesce WebAPI where the following is supported. This will allow for the same user running a character-identical query not kick off a new query but simply be returned a reference  to the already running one for up to `N` seconds (where `N` should be `<=` `keepForSeconds`).  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time) - 401 Unauthorized - 403 Forbidden 
 
@@ -993,7 +993,7 @@ timeout_seconds = 0 # int | Maximum time the query may run for, in seconds: <0 �
 keep_for_seconds = 0 # int | Maximum time the result may be kept for, in seconds: <0 → 1200 (20m), 0 → 28800 (8h), max = 2,678,400 (31d) (optional) (default to 0)
 
     try:
-        # StartQuery: Starts to Execute LuminesceSql in the background.
+        # StartQuery: Starts to Execute Sql in the background
         api_response = api_instance.start_query(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, keep_for_seconds=keep_for_seconds)
         pprint(api_response)
     except ApiException as e:

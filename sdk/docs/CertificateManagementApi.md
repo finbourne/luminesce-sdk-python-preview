@@ -4,17 +4,17 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**download_certificate**](CertificateManagementApi.md#download_certificate) | **GET** /api/Certificate/certificate | [EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate&#39;s public or private key - if any
-[**list_certificates**](CertificateManagementApi.md#list_certificates) | **GET** /api/Certificate/certificates | [EXPERIMENTAL] ListCertificates: Lists all the certificates previously minted to which you have access
-[**manage_certificate**](CertificateManagementApi.md#manage_certificate) | **PUT** /api/Certificate/manage | [EXPERIMENTAL] ManageCertificate: Manages a new certificate (Create / Renew / Revoke)
+[**download_certificate**](CertificateManagementApi.md#download_certificate) | **GET** /api/Certificate/certificate | [EXPERIMENTAL] DownloadCertificate: Download Domain or your personal certificates
+[**list_certificates**](CertificateManagementApi.md#list_certificates) | **GET** /api/Certificate/certificates | [EXPERIMENTAL] ListCertificates: Lists previously minted certificates
+[**manage_certificate**](CertificateManagementApi.md#manage_certificate) | **PUT** /api/Certificate/manage | [EXPERIMENTAL] ManageCertificate: Create / Renew / Revoke a certificate
 
 
 # **download_certificate**
 > file download_certificate(type=type, file_type=file_type, may_auto_create=may_auto_create)
 
-[EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate's public or private key - if any
+[EXPERIMENTAL] DownloadCertificate: Download Domain or your personal certificates
 
- Downloads your latest Domain or User certificate's public or private key - if any.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - certificate is not available for some reason - 401 Unauthorized - 403 Forbidden 
+ Downloads your latest Domain or your User certificate's public or private key - if any.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - certificate is not available for some reason - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -51,7 +51,7 @@ file_type = luminesce.CertificateFileType() # CertificateFileType | Should the p
 may_auto_create = False # bool | If no matching cert is available, should an attempt be made to Create/Renew it with default options? (optional) (default to False)
 
     try:
-        # [EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate's public or private key - if any
+        # [EXPERIMENTAL] DownloadCertificate: Download Domain or your personal certificates
         api_response = api_instance.download_certificate(type=type, file_type=file_type, may_auto_create=may_auto_create)
         pprint(api_response)
     except ApiException as e:
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 # **list_certificates**
 > list[CertificateState] list_certificates()
 
-[EXPERIMENTAL] ListCertificates: Lists all the certificates previously minted to which you have access
+[EXPERIMENTAL] ListCertificates: Lists previously minted certificates
 
  Lists all the certificates previously minted to which you have access.  The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 403 Forbidden 
 
@@ -127,7 +127,7 @@ with luminesce.ApiClient(configuration) as api_client:
     api_instance = luminesce.CertificateManagementApi(api_client)
     
     try:
-        # [EXPERIMENTAL] ListCertificates: Lists all the certificates previously minted to which you have access
+        # [EXPERIMENTAL] ListCertificates: Lists previously minted certificates
         api_response = api_instance.list_certificates()
         pprint(api_response)
     except ApiException as e:
@@ -162,7 +162,7 @@ This endpoint does not need any parameter.
 # **manage_certificate**
 > CertificateState manage_certificate(action=action, type=type, version=version, validity_start=validity_start, validity_end=validity_end, dry_run=dry_run)
 
-[EXPERIMENTAL] ManageCertificate: Manages a new certificate (Create / Renew / Revoke)
+[EXPERIMENTAL] ManageCertificate: Create / Renew / Revoke a certificate
 
  Manages a certificate.  This could be creating a new one, renewing an old one or revoking one explicitly.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something about the request cannot be processed - 401 Unauthorized - 403 Forbidden 
 
@@ -204,7 +204,7 @@ validity_end = '2013-10-20T19:20:30+01:00' # datetime | When should the cert no 
 dry_run = True # bool | True will just validate the request, but perform no changes to any system (optional) (default to True)
 
     try:
-        # [EXPERIMENTAL] ManageCertificate: Manages a new certificate (Create / Renew / Revoke)
+        # [EXPERIMENTAL] ManageCertificate: Create / Renew / Revoke a certificate
         api_response = api_instance.manage_certificate(action=action, type=type, version=version, validity_start=validity_start, validity_end=validity_end, dry_run=dry_run)
         pprint(api_response)
     except ApiException as e:

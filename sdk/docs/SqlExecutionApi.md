@@ -4,28 +4,28 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_by_query_csv**](SqlExecutionApi.md#get_by_query_csv) | **GET** /api/Sql/csv/{query} | GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
-[**get_by_query_excel**](SqlExecutionApi.md#get_by_query_excel) | **GET** /api/Sql/excel/{query} | GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
-[**get_by_query_json**](SqlExecutionApi.md#get_by_query_json) | **GET** /api/Sql/json/{query} | GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
-[**get_by_query_parquet**](SqlExecutionApi.md#get_by_query_parquet) | **GET** /api/Sql/parquet/{query} | GetByQueryParquet: Executes Sql, returned in Parquet (.parquet) format (as a file to be downloaded) format, where the sql is simply in the url.
-[**get_by_query_pipe**](SqlExecutionApi.md#get_by_query_pipe) | **GET** /api/Sql/pipe/{query} | GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
-[**get_by_query_sqlite**](SqlExecutionApi.md#get_by_query_sqlite) | **GET** /api/Sql/sqlite/{query} | GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
-[**get_by_query_xml**](SqlExecutionApi.md#get_by_query_xml) | **GET** /api/Sql/xml/{query} | GetByQueryXml: Executes Sql, returned in Xml format, where the sql is simply in the url.
-[**put_by_query_csv**](SqlExecutionApi.md#put_by_query_csv) | **PUT** /api/Sql/csv | PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
-[**put_by_query_excel**](SqlExecutionApi.md#put_by_query_excel) | **PUT** /api/Sql/excel | PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
-[**put_by_query_json**](SqlExecutionApi.md#put_by_query_json) | **PUT** /api/Sql/json | PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
-[**put_by_query_parquet**](SqlExecutionApi.md#put_by_query_parquet) | **PUT** /api/Sql/parquet | PutByQueryParquet: Executes Sql, returned in Parquet format, where the sql is the post-body url.
-[**put_by_query_pipe**](SqlExecutionApi.md#put_by_query_pipe) | **PUT** /api/Sql/pipe | PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
-[**put_by_query_sqlite**](SqlExecutionApi.md#put_by_query_sqlite) | **PUT** /api/Sql/sqlite | PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
-[**put_by_query_xml**](SqlExecutionApi.md#put_by_query_xml) | **PUT** /api/Sql/xml | PutByQueryXml: Executes Sql, returned in Xml format, where the sql is the post-body url.
+[**get_by_query_csv**](SqlExecutionApi.md#get_by_query_csv) | **GET** /api/Sql/csv/{query} | GetByQueryCsv: Executes Sql from the url returning CSV
+[**get_by_query_excel**](SqlExecutionApi.md#get_by_query_excel) | **GET** /api/Sql/excel/{query} | GetByQueryExcel: Executes Sql from the url returning an Excel file
+[**get_by_query_json**](SqlExecutionApi.md#get_by_query_json) | **GET** /api/Sql/json/{query} | GetByQueryJson: Executes Sql from the url returning JSON
+[**get_by_query_parquet**](SqlExecutionApi.md#get_by_query_parquet) | **GET** /api/Sql/parquet/{query} | GetByQueryParquet: Executes Sql from the url returning a Parquet file
+[**get_by_query_pipe**](SqlExecutionApi.md#get_by_query_pipe) | **GET** /api/Sql/pipe/{query} | GetByQueryPipe: Executes Sql from the url returning pipe-delimited
+[**get_by_query_sqlite**](SqlExecutionApi.md#get_by_query_sqlite) | **GET** /api/Sql/sqlite/{query} | GetByQuerySqlite: Executes Sql from the url returning SqLite DB
+[**get_by_query_xml**](SqlExecutionApi.md#get_by_query_xml) | **GET** /api/Sql/xml/{query} | GetByQueryXml: Executes Sql from the url returning XML
+[**put_by_query_csv**](SqlExecutionApi.md#put_by_query_csv) | **PUT** /api/Sql/csv | PutByQueryCsv: Executes Sql from the body returning CSV
+[**put_by_query_excel**](SqlExecutionApi.md#put_by_query_excel) | **PUT** /api/Sql/excel | PutByQueryExcel: Executes Sql from the body making an Excel file
+[**put_by_query_json**](SqlExecutionApi.md#put_by_query_json) | **PUT** /api/Sql/json | PutByQueryJson: Executes Sql from the body returning JSON
+[**put_by_query_parquet**](SqlExecutionApi.md#put_by_query_parquet) | **PUT** /api/Sql/parquet | PutByQueryParquet: Executes Sql from the body making a Parquet file
+[**put_by_query_pipe**](SqlExecutionApi.md#put_by_query_pipe) | **PUT** /api/Sql/pipe | PutByQueryPipe: Executes Sql from the body making pipe-delimited
+[**put_by_query_sqlite**](SqlExecutionApi.md#put_by_query_sqlite) | **PUT** /api/Sql/sqlite | PutByQuerySqlite: Executes Sql from the body returning SqLite DB
+[**put_by_query_xml**](SqlExecutionApi.md#put_by_query_xml) | **PUT** /api/Sql/xml | PutByQueryXml: Executes Sql from the body returning XML
 
 
 # **get_by_query_csv**
 > str get_by_query_csv(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout, delimiter=delimiter, escape=escape)
 
-GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
+GetByQueryCsv: Executes Sql from the url returning CSV
 
- For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ Returns data from a simple single-line query execution which is specified on the url. e.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -66,7 +66,7 @@ delimiter = 'delimiter_example' # str | Delimiter string to override the default
 escape = 'escape_example' # str | Escape character to override the default (optional)
 
     try:
-        # GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.
+        # GetByQueryCsv: Executes Sql from the url returning CSV
         api_response = api_instance.get_by_query_csv(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout, delimiter=delimiter, escape=escape)
         pprint(api_response)
     except ApiException as e:
@@ -110,9 +110,9 @@ Name | Type | Description  | Notes
 # **get_by_query_excel**
 > file get_by_query_excel(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
 
-GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
+GetByQueryExcel: Executes Sql from the url returning an Excel file
 
- For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ Returns data from a simple single-line query execution which is specified on the url. e.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -150,7 +150,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.
+        # GetByQueryExcel: Executes Sql from the url returning an Excel file
         api_response = api_instance.get_by_query_excel(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
@@ -191,9 +191,9 @@ Name | Type | Description  | Notes
 # **get_by_query_json**
 > str get_by_query_json(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout, json_proper=json_proper)
 
-GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
+GetByQueryJson: Executes Sql from the url returning JSON
 
- For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ Returns data from a simple single-line query execution which is specified on the url. e.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -232,7 +232,7 @@ timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
-        # GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.
+        # GetByQueryJson: Executes Sql from the url returning JSON
         api_response = api_instance.get_by_query_json(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:
@@ -274,9 +274,9 @@ Name | Type | Description  | Notes
 # **get_by_query_parquet**
 > file get_by_query_parquet(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
 
-GetByQueryParquet: Executes Sql, returned in Parquet (.parquet) format (as a file to be downloaded) format, where the sql is simply in the url.
+GetByQueryParquet: Executes Sql from the url returning a Parquet file
 
- For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ Returns data from a simple single-line query execution which is specified on the url. e.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -314,7 +314,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # GetByQueryParquet: Executes Sql, returned in Parquet (.parquet) format (as a file to be downloaded) format, where the sql is simply in the url.
+        # GetByQueryParquet: Executes Sql from the url returning a Parquet file
         api_response = api_instance.get_by_query_parquet(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
@@ -355,9 +355,9 @@ Name | Type | Description  | Notes
 # **get_by_query_pipe**
 > str get_by_query_pipe(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout)
 
-GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
+GetByQueryPipe: Executes Sql from the url returning pipe-delimited
 
- For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ Returns data from a simple single-line query execution which is specified on the url. e.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -396,7 +396,7 @@ download = False # bool | Makes this a file-download request (as opposed to retu
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.
+        # GetByQueryPipe: Executes Sql from the url returning pipe-delimited
         api_response = api_instance.get_by_query_pipe(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
@@ -438,9 +438,9 @@ Name | Type | Description  | Notes
 # **get_by_query_sqlite**
 > file get_by_query_sqlite(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
 
-GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
+GetByQuerySqlite: Executes Sql from the url returning SqLite DB
 
- For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ Returns data from a simple single-line query execution which is specified on the url. e.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -478,7 +478,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.
+        # GetByQuerySqlite: Executes Sql from the url returning SqLite DB
         api_response = api_instance.get_by_query_sqlite(query, scalar_parameters=scalar_parameters, query_name=query_name, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
@@ -519,9 +519,9 @@ Name | Type | Description  | Notes
 # **get_by_query_xml**
 > str get_by_query_xml(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout)
 
-GetByQueryXml: Executes Sql, returned in Xml format, where the sql is simply in the url.
+GetByQueryXml: Executes Sql from the url returning XML
 
- For simple single-line query execution via the url. e.g. `select ^ from Sys.Field order by 1, 2`  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ Returns data from a simple single-line query execution which is specified on the url. e.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -560,7 +560,7 @@ download = False # bool | Makes this a file-download request (as opposed to retu
 timeout = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # GetByQueryXml: Executes Sql, returned in Xml format, where the sql is simply in the url.
+        # GetByQueryXml: Executes Sql from the url returning XML
         api_response = api_instance.get_by_query_xml(query, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout=timeout)
         pprint(api_response)
     except ApiException as e:
@@ -602,9 +602,9 @@ Name | Type | Description  | Notes
 # **put_by_query_csv**
 > str put_by_query_csv(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds, delimiter=delimiter, escape=escape)
 
-PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
+PutByQueryCsv: Executes Sql from the body returning CSV
 
- For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ For more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -645,7 +645,7 @@ delimiter = 'delimiter_example' # str | Delimiter string to override the default
 escape = 'escape_example' # str | Escape character to override the default (optional)
 
     try:
-        # PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.
+        # PutByQueryCsv: Executes Sql from the body returning CSV
         api_response = api_instance.put_by_query_csv(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds, delimiter=delimiter, escape=escape)
         pprint(api_response)
     except ApiException as e:
@@ -689,9 +689,9 @@ Name | Type | Description  | Notes
 # **put_by_query_excel**
 > file put_by_query_excel(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
 
-PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
+PutByQueryExcel: Executes Sql from the body making an Excel file
 
- For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ For more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -729,7 +729,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.
+        # PutByQueryExcel: Executes Sql from the body making an Excel file
         api_response = api_instance.put_by_query_excel(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
@@ -770,9 +770,9 @@ Name | Type | Description  | Notes
 # **put_by_query_json**
 > str put_by_query_json(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, json_proper=json_proper)
 
-PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
+PutByQueryJson: Executes Sql from the body returning JSON
 
- For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ For more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -811,7 +811,7 @@ timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (defau
 json_proper = False # bool | Should this be text/json (not json-encoded-as-a-string) (optional) (default to False)
 
     try:
-        # PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.
+        # PutByQueryJson: Executes Sql from the body returning JSON
         api_response = api_instance.put_by_query_json(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, json_proper=json_proper)
         pprint(api_response)
     except ApiException as e:
@@ -853,9 +853,9 @@ Name | Type | Description  | Notes
 # **put_by_query_parquet**
 > file put_by_query_parquet(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
 
-PutByQueryParquet: Executes Sql, returned in Parquet format, where the sql is the post-body url.
+PutByQueryParquet: Executes Sql from the body making a Parquet file
 
- For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ For more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -893,7 +893,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # PutByQueryParquet: Executes Sql, returned in Parquet format, where the sql is the post-body url.
+        # PutByQueryParquet: Executes Sql from the body making a Parquet file
         api_response = api_instance.put_by_query_parquet(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
@@ -934,9 +934,9 @@ Name | Type | Description  | Notes
 # **put_by_query_pipe**
 > str put_by_query_pipe(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
 
-PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
+PutByQueryPipe: Executes Sql from the body making pipe-delimited
 
- For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ For more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -975,7 +975,7 @@ download = False # bool | Makes this a file-download request (as opposed to retu
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.
+        # PutByQueryPipe: Executes Sql from the body making pipe-delimited
         api_response = api_instance.put_by_query_pipe(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
@@ -1017,9 +1017,9 @@ Name | Type | Description  | Notes
 # **put_by_query_sqlite**
 > file put_by_query_sqlite(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
 
-PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
+PutByQuerySqlite: Executes Sql from the body returning SqLite DB
 
- For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ For more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -1057,7 +1057,7 @@ query_name = 'Get tables/fields' # str | Name to apply to the query in logs and 
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.
+        # PutByQuerySqlite: Executes Sql from the body returning SqLite DB
         api_response = api_instance.put_by_query_sqlite(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:
@@ -1098,9 +1098,9 @@ Name | Type | Description  | Notes
 # **put_by_query_xml**
 > str put_by_query_xml(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
 
-PutByQueryXml: Executes Sql, returned in Xml format, where the sql is the post-body url.
+PutByQueryXml: Executes Sql from the body returning XML
 
- For more complex LuminesceSql a PUT will allow for longer Sql. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
+ For more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name. e.g.: ```sql @@cutoff = select #2020-02-01#; @issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;  select i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary from @issues i inner join Dev.Jira.Issue.Link li     on i.Id = li.IssueId ```  The following error codes are to be anticipated with standard Problem Detail reports: - 400 BadRequest - something failed with the execution or parsing of your query - 401 Unauthorized - 403 Forbidden 
 
 ### Example
 
@@ -1139,7 +1139,7 @@ download = False # bool | Makes this a file-download request (as opposed to retu
 timeout_seconds = 0 # int | In seconds: <0 → ∞, 0 → 120s (optional) (default to 0)
 
     try:
-        # PutByQueryXml: Executes Sql, returned in Xml format, where the sql is the post-body url.
+        # PutByQueryXml: Executes Sql from the body returning XML
         api_response = api_instance.put_by_query_xml(body, scalar_parameters=scalar_parameters, query_name=query_name, download=download, timeout_seconds=timeout_seconds)
         pprint(api_response)
     except ApiException as e:

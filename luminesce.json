@@ -9,10 +9,45 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.626",
+    "version": "1.16.635",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
+    },
+    "x-fbn-error-codes": {
+      "233": {
+        "description": "Query Parser Failure"
+      },
+      "850": {
+        "description": "Required provider not visible; provider may not exist, be temporarily unavailable, or you may not have the necessary permissions"
+      },
+      "851": {
+        "description": "Query reached a timeout period or was cancelled"
+      },
+      "852": {
+        "description": "Query failed during execution"
+      },
+      "853": {
+        "description": "Query failed during execution for an unexpected reason"
+      },
+      "854": {
+        "description": "Query failed during execution for a reason known to be an internal error (e.g. a Lusid provider where a corresponding API would return a 500)"
+      },
+      "855": {
+        "description": "Required column is not in the queried provider(s)"
+      },
+      "856": {
+        "description": "One or more columns are ambiguously referenced in the query"
+      },
+      "857": {
+        "description": "Query failed during execution of a provider (e.g. in a way that might be transient, like an upstream issue)"
+      },
+      "858": {
+        "description": "Query failed during execution within the Query Engine's SQL processing"
+      },
+      "859": {
+        "description": "A variable has been defined more than once"
+      }
     }
   },
   "servers": [
@@ -26,8 +61,8 @@
         "tags": [
           "Current Table/Field Catalog"
         ],
-        "summary": "GetCatalog: Shows Table and Field level information on Providers that are currently running that you have access to (in Json format)",
-        "description": "\nReturns the User's full version of the catalog (Providers and their fields)\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetCatalog: Flattened Table/Faield Catalog",
+        "description": "\nReturns the User's full version of the catalog (Providers, their fields and associated information)\nthat are currently running that you have access to (in Json format).\n\nThis is the entire catalog flattened, which is often quite large and always a bit repetitive.  \nThe internal results are cached for several minutes.\n\nConsider using `api/Catalog/providers` and `api/Catalog/fields` for a more granular and incremental loading flow.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetCatalog",
         "parameters": [
           {
@@ -94,8 +129,8 @@
         "tags": [
           "Current Table/Field Catalog"
         ],
-        "summary": "GetFields: Shows Table level information on Providers that are currently running that you have access to (in Json format)",
-        "description": "\nReturns the User's full version of the catalog but only the field/parameter-level information \n(as well as the TableName they refer to, of course) for tables matching the `tableLike` (manually include wildcards if desired).\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetFields: Lists field/parameter information for providers",
+        "description": "\nReturns the User's full version of the catalog but only the field/parameter-level information \n(as well as the TableName they refer to, of course) for tables matching the `tableLike` (manually include wildcards if desired).\n\nThe internal results are cached for several minutes.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetFields",
         "parameters": [
           {
@@ -142,8 +177,8 @@
         "tags": [
           "Current Table/Field Catalog"
         ],
-        "summary": "GetProviders: Shows Table level information on Providers that are currently running that you have access to (in Json format)",
-        "description": "\nReturns the User's full version of the catalog but only the table/provider-level information\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetProviders: Lists providers available",
+        "description": "\nReturns the User's full version of the catalog but only the table/provider-level information they have access to.\n\nThe internal results are cached for several minutes.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetProviders",
         "parameters": [
           {
@@ -200,8 +235,8 @@
         "tags": [
           "Certificate Management"
         ],
-        "summary": "[EXPERIMENTAL] DownloadCertificate: Downloads your latest Domain or User certificate's public or private key - if any",
-        "description": "\nDownloads your latest Domain or User certificate's public or private key - if any.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - certificate is not available for some reason\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "[EXPERIMENTAL] DownloadCertificate: Download Domain or your personal certificates",
+        "description": "\nDownloads your latest Domain or your User certificate's public or private key - if any.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - certificate is not available for some reason\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "DownloadCertificate",
         "parameters": [
           {
@@ -311,7 +346,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "summary": "[EXPERIMENTAL] ListCertificates: Lists all the certificates previously minted to which you have access",
+        "summary": "[EXPERIMENTAL] ListCertificates: Lists previously minted certificates",
         "description": "\nLists all the certificates previously minted to which you have access.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "ListCertificates",
         "responses": {
@@ -398,7 +433,7 @@
         "tags": [
           "Certificate Management"
         ],
-        "summary": "[EXPERIMENTAL] ManageCertificate: Manages a new certificate (Create / Renew / Revoke)",
+        "summary": "[EXPERIMENTAL] ManageCertificate: Create / Renew / Revoke a certificate",
         "description": "\nManages a certificate.  This could be creating a new one, renewing an old one or revoking one explicitly.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something about the request cannot be processed\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "ManageCertificate",
         "parameters": [
@@ -537,8 +572,8 @@
         "tags": [
           "Binary Downloading"
         ],
-        "summary": "[EXPERIMENTAL] DownloadBinary: Downloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.",
-        "description": "\nDownloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.\n\n*NOTE:* This endpoint is an alternative to time-consuming manual distribution via Drive or Email.\n> it relies on as underlying datastore that is not quite as \"Highly Available\" to the degree \n> that FINBOURNE services generally are.  \n> Thus it is not subject to the same SLAs as other API endpoints are.\n> *If you perceive an outage, please try again later.*\n\nOnce a file has been downloaded the following steps can be used to install it (for the dotnet tools at least):\n\n1. Open a terminal and cd to the directory you downloaded it to\n2. Install / extract files from that package via:\n```\ndotnet tool install NameOfFileWithoutVersionNumberOrExtension -g --add-source \".\"\n```\ne.g.\n```\ndotnet tool install Finbourne.Luminesce.DbProviders.Oracle_Snowflake -g --add-source \".\"\n```\n3. Execute them (see documentation for specific binary)...\n\nThe installed binaries can then be found in\n- Windows - `%USERPROFILE%\\.dotnet\\tools\\.store\\`\n- Linux/macOS - `$HOME/.dotnet/tools/.store/`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - binary file is not available for some reason (e.g. permissions or invalid version)\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "[EXPERIMENTAL] DownloadBinary: Download Luminesce Binaries you may run on site",
+        "description": "\nDownloads the latest version (or specific if needs be) of the specified Luminesce Binary, given the required entitlements.\n\n> This endpoint is an alternative to time-consuming manual distribution via Drive or Email.\n> it relies on an underlying datastore that is not quite as \"Highly Available\" to the degree \n> that FINBOURNE services generally are.  \n> Thus it is not subject to the same SLAs as other API endpoints are.\n> *If you perceive an outage, please try again later.*\n\nOnce a file has been downloaded the following steps can be used to install it (for the dotnet tools at least):\n\n1. Open a terminal and cd to the directory you downloaded it to\n2. Install / extract files from that package via:\n```\ndotnet tool install NameOfFileWithoutVersionNumberOrExtension -g --add-source \".\"\n```\ne.g.\n```\ndotnet tool install Finbourne.Luminesce.DbProviders.Oracle_Snowflake -g --add-source \".\"\n```\n3. Execute them (see documentation for specific binary)...\n\nThe installed binaries can then be found in\n- Windows - `%USERPROFILE%\\.dotnet\\tools\\.store\\`\n- Linux/macOS - `$HOME/.dotnet/tools/.store/`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - binary file is not available for some reason (e.g. permissions or invalid version)\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "DownloadBinary",
         "parameters": [
           {
@@ -625,7 +660,7 @@
         "tags": [
           "Binary Downloading"
         ],
-        "summary": "[EXPERIMENTAL] GetBinaryVersions: Gets the list of available versions of a user-downloadable binary from Nexus",
+        "summary": "[EXPERIMENTAL] GetBinaryVersions: Lists the available versions of binaries",
         "description": "\nGets all available versions of a given binary type (from newest to oldest)\nThis does not mean you are entitled to download them.",
         "operationId": "GetBinaryVersions",
         "parameters": [
@@ -723,7 +758,7 @@
         "tags": [
           "Historically Executed Queries"
         ],
-        "summary": "GetHistory: Shows queries executed in a given historical time window (in Json format).",
+        "summary": "GetHistory: Starts a background query history search",
         "description": "\nStarts to load the historical query logs for a certain time range, search criteria, etc.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetHistory",
         "parameters": [
@@ -811,7 +846,7 @@
         "tags": [
           "Historically Executed Queries"
         ],
-        "summary": "GetProgressOfHistory: View progress information (up until this point) of a history query",
+        "summary": "GetProgressOfHistory: View progress of a query history search",
         "description": "View progress information (up until this point) of previously started History query\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "GetProgressOfHistory",
         "parameters": [
@@ -858,7 +893,7 @@
         "tags": [
           "Historically Executed Queries"
         ],
-        "summary": "CancelHistory: Cancels (if running) or clears the data from (if completed) a previously started History query",
+        "summary": "CancelHistory: Cancels / Clears data from a query history search",
         "description": "Cancel the query (if still running) / clear the data (if already returned)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n",
         "operationId": "CancelHistory",
         "parameters": [
@@ -907,7 +942,7 @@
         "tags": [
           "Historically Executed Queries"
         ],
-        "summary": "FetchHistoryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).",
+        "summary": "FetchHistoryResultHistogram: Makes a histogram of results from a query history search",
         "description": "Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchHistoryResultHistogram",
         "parameters": [
@@ -1026,7 +1061,7 @@
         "tags": [
           "Historically Executed Queries"
         ],
-        "summary": "FetchHistoryResultJson: Fetches the result from a previously started query, in JSON format.",
+        "summary": "FetchHistoryResultJson: Fetches JSON results from a query history search",
         "description": "Fetch the data in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchHistoryResultJson",
         "parameters": [
@@ -1223,7 +1258,7 @@
         "tags": [
           "Multi-Query Execution"
         ],
-        "summary": "StartQueries: Starts to Execute the LuminesceSql statements in the background.",
+        "summary": "StartQueries: Runs a given set of Sql queries in the background",
         "description": "\nAllow for starting a potentially long running query and getting back an immediate response with how to \n- fetch the data in various formats (if available, or if not simply being informed it is not yet ready), on a per result basis\n- view progress information (up until this point), for all results in one go\n- cancel the queries (if still running) / clear the data (if already returned)\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time)\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "StartQueries",
         "parameters": [
@@ -1413,7 +1448,7 @@
         "tags": [
           "Multi-Query Execution"
         ],
-        "summary": "GetProgressOfMultiQuery: View progress information (up until this point) for the entire query-set",
+        "summary": "GetProgressOfMultiQuery: View progress information for the entire query-set",
         "description": "View progress information (up until this point) for the entire query-set\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "GetProgressOfMultiQuery",
         "parameters": [
@@ -1460,7 +1495,7 @@
         "tags": [
           "Multi-Query Execution"
         ],
-        "summary": "CancelMultiQuery: Cancels (if running) or clears the data from (if completed) a previously started query-set",
+        "summary": "CancelMultiQuery: Cancels / Clears a previously started query-set",
         "description": "Cancel the query-set (if still running) / clear the data (if already returned)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n",
         "operationId": "CancelMultiQuery",
         "parameters": [
@@ -1509,8 +1544,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "PutByQueryCsv: Executes Sql, returned in CSV format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "PutByQueryCsv: Executes Sql from the body returning CSV",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryCsv",
         "parameters": [
           {
@@ -1664,8 +1699,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "GetByQueryCsv: Executes Sql, returned in CSV format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetByQueryCsv: Executes Sql from the url returning CSV",
+        "description": "\nReturns data from a simple single-line query execution which is specified on the url.\ne.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryCsv",
         "parameters": [
           {
@@ -1817,8 +1852,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "PutByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded), where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "PutByQueryExcel: Executes Sql from the body making an Excel file",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryExcel",
         "parameters": [
           {
@@ -1949,8 +1984,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "GetByQueryExcel: Executes Sql, returned in Excel (xlsx) format (as a file to be downloaded) format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetByQueryExcel: Executes Sql from the url returning an Excel file",
+        "description": "\nReturns data from a simple single-line query execution which is specified on the url.\ne.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryExcel",
         "parameters": [
           {
@@ -2079,8 +2114,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutSqlToExtractScalarParameters: Generates information about all the scalar parameters defined in the given SQL statement",
-        "description": "SQL to extract scalar parameters from",
+        "summary": "[EXPERIMENTAL] PutSqlToExtractScalarParameters: Extracts scalar parameter information from SQL",
+        "description": "Extracts information about all the scalar parameters defined in the given SQL statement\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutSqlToExtractScalarParameters",
         "requestBody": {
           "description": "SQL query to generate the design object from",
@@ -2226,11 +2261,11 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutCaseStatementDesignToSql: Generates SQL case statement queries from a structured design",
-        "description": "CaseStatementDesign object to try and create a SQL query from",
+        "summary": "[EXPERIMENTAL] PutCaseStatementDesignToSql: Converts a case statement design object to SQL",
+        "description": "Generates a SQL case statement query from a structured CaseStatementDesign object\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutCaseStatementDesignToSql",
         "requestBody": {
-          "description": "Structured file read design object to generate SQL from",
+          "description": "CaseStatementDesign object to try and create a SQL query from",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -2370,8 +2405,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutQueryDesignToSql: Generates SQL from a structured query design",
-        "description": "SQL Designer specification to generate SQL from",
+        "summary": "[EXPERIMENTAL] PutQueryDesignToSql: Makes SQL from a structured query design",
+        "description": "Generates SQL from a QueryDesign object\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutQueryDesignToSql",
         "requestBody": {
           "description": "Structured Query design object to generate SQL from",
@@ -2626,8 +2661,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutFileReadDesignToSql: Generates file read SQL from a structured query design",
-        "description": "SQL Designer specification to generate SQL from",
+        "summary": "[EXPERIMENTAL] PutFileReadDesignToSql: Makes file read SQL from a design object",
+        "description": "Generates SQL from a FileReaderBuilderDef object\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutFileReadDesignToSql",
         "parameters": [
           {
@@ -2782,11 +2817,11 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutInlinedPropertiesDesignToSql: Generates inlined properties SQL from a structured design",
-        "description": "Inlined properties Designer specification to generate SQL from",
+        "summary": "[EXPERIMENTAL] PutInlinedPropertiesDesignToSql: Makes inlined properties SQL from a design object",
+        "description": "Generates inlined properties SQL from a structured design\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutInlinedPropertiesDesignToSql",
         "requestBody": {
-          "description": "Structured file read design object to generate SQL from",
+          "description": "Inlined properties Designer specification to generate SQL from",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -2930,8 +2965,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutViewDesignToSql: Generates view creation sql from a structured view creation design",
-        "description": "Converts a ConvertToView specification into SQL that creates a view",
+        "summary": "[EXPERIMENTAL] PutViewDesignToSql: Makes view creation sql from a view-design",
+        "description": "Converts a ConvertToView specification into SQL that creates a view\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutViewDesignToSql",
         "requestBody": {
           "description": "Structured Query design object to generate SQL from",
@@ -3182,8 +3217,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutWriterDesignToSql: Generates writer SQL from a valid writer-design structure",
-        "description": "SQL Writer Design specification to generate Writer SQL from",
+        "summary": "[EXPERIMENTAL] PutWriterDesignToSql: Makes writer SQL from a writer-design object",
+        "description": "Generates writer SQL from a valid WriterDesign structure\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutWriterDesignToSql",
         "requestBody": {
           "description": "Structured Writer Design design object to generate Writer SQL from",
@@ -3550,10 +3585,11 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "PutIntellisense: Generate a set of possible intellisense prompts given a SQL snip-it (in need not yet be valid) and cursor location",
-        "description": "SQL and a row/colum position within it from which to determine intellisense options for the user to potentially choose from.",
+        "summary": "PutIntellisense: Makes a intellisense prompts given an SQL snip-it",
+        "description": "Generate a set of possible intellisense prompts given a SQL snip-it (in need not yet be valid SQL) and cursor location\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutIntellisense",
         "requestBody": {
+          "description": "SQL and a row/colum position within it from which to determine intellisense options for the user to potentially choose from.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -3759,10 +3795,11 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "PutIntellisenseError: Generate a set of error ranges, if any, in the given SQL (expressed as Lines)",
-        "description": "SQL (by line) to syntax check and return error ranges from within, if any.",
+        "summary": "PutIntellisenseError: Expresses error ranges from SQL",
+        "description": "Generate a set of error ranges, if any, in the given SQL (expressed as Lines)\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutIntellisenseError",
         "requestBody": {
+          "description": "SQL (by line) to syntax check and return error ranges from within, if any.",
           "content": {
             "application/json-patch+json": {
               "schema": {
@@ -3937,8 +3974,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "PutByQueryJson: Executes Sql, returned in JSON format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "PutByQueryJson: Executes Sql from the body returning JSON",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryJson",
         "parameters": [
           {
@@ -4076,8 +4113,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "GetByQueryJson: Executes Sql, returned in JSON format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetByQueryJson: Executes Sql from the url returning JSON",
+        "description": "\nReturns data from a simple single-line query execution which is specified on the url.\ne.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryJson",
         "parameters": [
           {
@@ -4213,8 +4250,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "PutByQueryParquet: Executes Sql, returned in Parquet format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "PutByQueryParquet: Executes Sql from the body making a Parquet file",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryParquet",
         "parameters": [
           {
@@ -4345,8 +4382,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "GetByQueryParquet: Executes Sql, returned in Parquet (.parquet) format (as a file to be downloaded) format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetByQueryParquet: Executes Sql from the url returning a Parquet file",
+        "description": "\nReturns data from a simple single-line query execution which is specified on the url.\ne.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryParquet",
         "parameters": [
           {
@@ -4475,8 +4512,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "PutByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "PutByQueryPipe: Executes Sql from the body making pipe-delimited",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryPipe",
         "parameters": [
           {
@@ -4614,8 +4651,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "GetByQueryPipe: Executes Sql, returned in pipe-delimited format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetByQueryPipe: Executes Sql from the url returning pipe-delimited",
+        "description": "\nReturns data from a simple single-line query execution which is specified on the url.\ne.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryPipe",
         "parameters": [
           {
@@ -4751,8 +4788,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "PutQueryToFormat: Formats SQL into a more readable form, a.k.a. Pretty-Print the SQL.",
-        "description": "\nThis formats SQL (given a set of options as to how to do so).\nIt takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly)\nand returns the reformatted version.\ne.g.\n```sql\nselect x,y,z from a inner join b on a.x=b.x where x>y or y!=z\n```\nbecomes\n```sql\nselect x, y, z\nfrom a\ninner join b\n   on a.x = b.x\nwhere x > y\n   or y != z\n```\n",
+        "summary": "PutQueryToFormat: Formats SQL into a more readable form",
+        "description": "\nThis formats SQL (given a set of options as to how to do so), a.k.a. Pretty-Print the SQL.\nIt takes some SQL (or a fragment thereof, it need not fully parse as yet and certainly need not execute correctly)\nand returns the reformatted version.\ne.g.\n```sql\nselect x,y,z from a inner join b on a.x=b.x where x>y or y!=z\n```\nbecomes\n```sql\nselect x, y, z\nfrom a\ninner join b\n   on a.x = b.x\nwhere x > y\n   or y != z\n```\n",
         "operationId": "PutQueryToFormat",
         "parameters": [
           {
@@ -4974,8 +5011,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "PutByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded), where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "PutByQuerySqlite: Executes Sql from the body returning SqLite DB",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQuerySqlite",
         "parameters": [
           {
@@ -5106,8 +5143,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "GetByQuerySqlite: Executes Sql, returned in SqLite DB (sqlite3) format (as a file to be downloaded) format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetByQuerySqlite: Executes Sql from the url returning SqLite DB",
+        "description": "\nReturns data from a simple single-line query execution which is specified on the url.\ne.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQuerySqlite",
         "parameters": [
           {
@@ -5236,11 +5273,11 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutCaseStatementDesignSqlToDesign: Converts SQL queries to a CaseStatementDesign object.",
-        "description": "SQL to attempt to create an case statement Design object from",
+        "summary": "[EXPERIMENTAL] PutCaseStatementDesignSqlToDesign: Converts SQL to a case statement design object",
+        "description": "Converts a SQL query to a CaseStatementDesign object\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutCaseStatementDesignSqlToDesign",
         "requestBody": {
-          "description": "SQL query to generate the case statement design object from",
+          "description": "SQL to attempt to create an case statement Design object from",
           "content": {
             "text/plain": {
               "schema": {
@@ -5355,8 +5392,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutSqlToQueryDesign: Generates a SQL-design object from SQL string, if possible.",
-        "description": "SQL to attempt to create a Design object from",
+        "summary": "[EXPERIMENTAL] PutSqlToQueryDesign: Makes a SQL-design object from SQL if possible",
+        "description": "Generates a QueryDesign object from simple SQL if possible\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutSqlToQueryDesign",
         "parameters": [
           {
@@ -5571,8 +5608,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutSqlToFileReadDesign: Generates a SQL-file-read-design object from SQL string, if possible.",
-        "description": "SQL to attempt to create a Design object from",
+        "summary": "[EXPERIMENTAL] PutSqlToFileReadDesign: Makes a design object from file-read SQL",
+        "description": "Generates a SQL-file-read-design object from SQL string, if possible.\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutSqlToFileReadDesign",
         "parameters": [
           {
@@ -5702,11 +5739,11 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutInlinedPropertiesDesignSqlToDesign: Generates a SQL-inlined-properties-design object from SQL string, if possible.",
-        "description": "SQL to attempt to create an inlined properties Design object from",
+        "summary": "[EXPERIMENTAL] PutInlinedPropertiesDesignSqlToDesign: Makes an inlined properties design from SQL",
+        "description": "Generates a SQL-inlined-properties-design object from SQL string, if possible.\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutInlinedPropertiesDesignSqlToDesign",
         "requestBody": {
-          "description": "SQL query to generate the inlined properties design object from",
+          "description": "SQL query to attempt to generate the inlined properties design object from",
           "content": {
             "text/plain": {
               "schema": {
@@ -5824,8 +5861,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutSqlToViewDesign: Generates a structured view creation design from existing view creation SQL.",
-        "description": "SQL which creates a view into a structured ConvertToViewData object",
+        "summary": "[EXPERIMENTAL] PutSqlToViewDesign: Makes a view-design from view creation SQL",
+        "description": "Converts SQL which creates a view into a structured ConvertToViewData object\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutSqlToViewDesign",
         "requestBody": {
           "description": "SQL Query to generate the ConvertToViewData object from",
@@ -6025,8 +6062,8 @@
         "tags": [
           "Sql Design"
         ],
-        "summary": "[EXPERIMENTAL] PutSqlToWriterDesign: Generates a SQL-writer-design object from SQL string, if possible.",
-        "description": "SQL to attempt to create a Writer Design object from",
+        "summary": "[EXPERIMENTAL] PutSqlToWriterDesign: Makes a SQL-writer-design object from SQL",
+        "description": "Generates a SQL-writer-design object (WriterDesign) from a SQL query, if possible\n\n> This method is generally only intended for IDE generation purposes. \n> It is largely internal to the Finbourne web user interfaces and subject to change without notice.\n",
         "operationId": "PutSqlToWriterDesign",
         "parameters": [
           {
@@ -6325,8 +6362,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "PutByQueryXml: Executes Sql, returned in Xml format, where the sql is the post-body url.",
-        "description": "\nFor more complex LuminesceSql a PUT will allow for longer Sql.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "PutByQueryXml: Executes Sql from the body returning XML",
+        "description": "\nFor more complex LuminesceSql a PUT will allow for longer and line break delimited Sql, whic will be returned in the format of the method name.\ne.g.:\n```sql\n@@cutoff = select #2020-02-01#;\n@issues = select Id, SortId, Summary, Created, Updated from Dev.Jira.Issue where Project='HC' and Created < @@cutoff and Updated > @@cutoff;\n\nselect i.Id, i.SortId, i.Summary, LinkText, LinkedIssueId, LinkedIssueSortId, LinkedIssueSummary\nfrom @issues i\ninner join Dev.Jira.Issue.Link li\n    on i.Id = li.IssueId\n```\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "PutByQueryXml",
         "parameters": [
           {
@@ -6464,8 +6501,8 @@
         "tags": [
           "Sql Execution"
         ],
-        "summary": "GetByQueryXml: Executes Sql, returned in Xml format, where the sql is simply in the url.",
-        "description": "\nFor simple single-line query execution via the url.\ne.g. `select ^ from Sys.Field order by 1, 2`\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
+        "summary": "GetByQueryXml: Executes Sql from the url returning XML",
+        "description": "\nReturns data from a simple single-line query execution which is specified on the url.\ne.g. `select ^ from Sys.Field order by 1, 2`, returned in the format of the method name.\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - something failed with the execution or parsing of your query\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "GetByQueryXml",
         "parameters": [
           {
@@ -6601,7 +6638,7 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "StartQuery: Starts to Execute LuminesceSql in the background.",
+        "summary": "StartQuery: Starts to Execute Sql in the background",
         "description": "\nAllow for starting a potentially long running query and getting back an immediate response with how to \n- fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\n- view progress information (up until this point)\n- cancel the query (if still running) / clear the data (if already returned)\n\nThis can still error on things like an outright syntax error, but more runtime errors (e.g. from providers) will not\ncause this to error (that will happen when attempting to fetch data)\n\nHere is an example that intentionally takes one minute to run:\n\n```sql\nselect Str, Takes500Ms from Testing1K where UseLinq = true and [Int] <= 120\n```\n\nThis is the only place in the Luminesce WebAPI where the following is supported.\nThis will allow for the same user running a character-identical query not kick off a new query but simply be returned a reference \nto the already running one for up to `N` seconds (where `N` should be `<=` `keepForSeconds`).\n\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 400 BadRequest - there was something wrong with your query syntax (the issue was detected at parse-time)\n- 401 Unauthorized\n- 403 Forbidden\n",
         "operationId": "StartQuery",
         "parameters": [
@@ -6742,7 +6779,7 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "GetProgressOf: View progress information (up until this point)",
+        "summary": "GetProgressOf: View progress information up until this point",
         "description": "View progress information (up until this point)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "GetProgressOf",
         "parameters": [
@@ -6799,7 +6836,7 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "CancelQuery: Cancels (if running) or clears the data from (if completed) a previously started query",
+        "summary": "CancelQuery: Cancels / Clears data from a previously run query",
         "description": "Cancel the query (if still running) / clear the data (if already returned)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't exist and is not running.\n",
         "operationId": "CancelQuery",
         "parameters": [
@@ -6848,8 +6885,8 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "FetchQueryResultCsv: Fetches the result from a previously started query, in CSV format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "summary": "FetchQueryResultCsv: Fetches the result of a query as CSV",
+        "description": "Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).\n\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultCsv",
         "parameters": [
           {
@@ -7023,8 +7060,8 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "FetchQueryResultExcel: Fetches the result from a previously started query, in Excel format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "summary": "FetchQueryResultExcel: Fetches the result of a query as an Excel file",
+        "description": "Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).\n\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultExcel",
         "parameters": [
           {
@@ -7153,7 +7190,7 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "FetchQueryResultHistogram: Fetches the result from a previously started query, converts it to a histogram (counts in buckets).",
+        "summary": "FetchQueryResultHistogram: Constructs a histogram of the result of a query",
         "description": "Fetch the histogram in Json format (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated with standard Problem Detail reports:\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultHistogram",
         "parameters": [
@@ -7301,8 +7338,8 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "FetchQueryResultJson: Fetches the result from a previously started query, in JSON string format.\r\nPlease move to '/jsonProper' instead.  This may be marked as Deprecated in the future.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "summary": "FetchQueryResultJson: Fetches the result of a query as a JSON string",
+        "description": "\n*Please move to '/jsonProper' instead.  This may be marked as Deprecated in the future.*\n\nFetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).\n\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultJson",
         "parameters": [
           {
@@ -7450,8 +7487,8 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "FetchQueryResultJsonProper: Fetches the result from a previously started query, in JSON format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "summary": "FetchQueryResultJsonProper: Fetches the result of a query as JSON",
+        "description": "Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).\n\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultJsonProper",
         "parameters": [
           {
@@ -7609,8 +7646,8 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "FetchQueryResultParquet: Fetches the result from a previously started query, in Parquet format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "summary": "FetchQueryResultParquet: Fetches the result of a query as Parquet",
+        "description": "Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).\n\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultParquet",
         "parameters": [
           {
@@ -7739,8 +7776,8 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "FetchQueryResultPipe: Fetches the result from a previously started query, in pipe-delimited format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "summary": "FetchQueryResultPipe: Fetches the result of a query as pipe-delimited",
+        "description": "Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).\n\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultPipe",
         "parameters": [
           {
@@ -7898,8 +7935,8 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "FetchQueryResultSqlite: Fetches the result from a previously started query, in SqLite format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "summary": "FetchQueryResultSqlite: Fetches the result of a query as SqLite",
+        "description": "Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).\n\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultSqlite",
         "parameters": [
           {
@@ -8028,8 +8065,8 @@
         "tags": [
           "Sql Background Execution"
         ],
-        "summary": "FetchQueryResultXml: Fetches the result from a previously started query, in Xml format.",
-        "description": "Fetch the data in various formats (if available, or if not simply being informed it is not yet ready)\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
+        "summary": "FetchQueryResultXml: Fetches the result of a query as XML",
+        "description": "Fetch the data in the format of the method's name (if available, or if not simply being informed it is not yet ready).\n\nThe following error codes are to be anticipated most with standard Problem Detail reports:\n- 400 BadRequest : Something failed with the execution of your query\n- 401 Unauthorized\n- 403 Forbidden\n- 404 Not Found : The requested query result doesn't (yet) exist.\n- 429 Too Many Requests : Please try your request again soon\n  1. The query has been executed successfully in the past yet the server-instance receiving this request (e.g. from a load balancer) doesn't yet have this data available.\n  1. By virtue of the request you have just placed this will have started to load from the persisted cache and will soon be available.\n  1. It is also the case that the original server-instance to process the original query is likely to already be able to service this request.",
         "operationId": "FetchQueryResultXml",
         "parameters": [
           {
@@ -8187,8 +8224,8 @@
         "tags": [
           "Health checking endpoint"
         ],
-        "summary": "[INTERNAL] FakeNodeReclaim: An internal Method used to mark the next SIGTERM as though an Aws Node reclaim were about to take place.",
-        "description": "Internal testing controller to simulate having received an AWS node reclaim warning, or similar.",
+        "summary": "[INTERNAL] FakeNodeReclaim: Helps testing of AWS node reclaim behaviour",
+        "description": "\nAn internal Method used to mark the next SIGTERM as though an Aws Node reclaim were about to take place.\nSimulates having received an AWS node reclaim warning, or similar.",
         "operationId": "FakeNodeReclaim",
         "parameters": [
           {
@@ -10251,11 +10288,11 @@
     },
     {
       "name": "Certificate Management",
-      "description": "List, Mint, Renew and Revoke your Honeycomb / Luminesce TLS Certificates."
+      "description": "List / Mint / Renew / Revoke Luminesce TLS Certs"
     },
     {
       "name": "Current Table/Field Catalog",
-      "description": "Shows Table and Field level information on Providers that are currently running that you have access to."
+      "description": "Table/Field information on available Providers"
     },
     {
       "name": "Health checking endpoint",

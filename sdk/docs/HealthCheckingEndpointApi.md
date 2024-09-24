@@ -4,15 +4,15 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**fake_node_reclaim**](HealthCheckingEndpointApi.md#fake_node_reclaim) | **GET** /fakeNodeReclaim | [INTERNAL] FakeNodeReclaim: An internal Method used to mark the next SIGTERM as though an Aws Node reclaim were about to take place.
+[**fake_node_reclaim**](HealthCheckingEndpointApi.md#fake_node_reclaim) | **GET** /fakeNodeReclaim | [INTERNAL] FakeNodeReclaim: Helps testing of AWS node reclaim behaviour
 
 
 # **fake_node_reclaim**
 > object fake_node_reclaim(seconds_until_reclaim=seconds_until_reclaim)
 
-[INTERNAL] FakeNodeReclaim: An internal Method used to mark the next SIGTERM as though an Aws Node reclaim were about to take place.
+[INTERNAL] FakeNodeReclaim: Helps testing of AWS node reclaim behaviour
 
-Internal testing controller to simulate having received an AWS node reclaim warning, or similar.
+ An internal Method used to mark the next SIGTERM as though an Aws Node reclaim were about to take place. Simulates having received an AWS node reclaim warning, or similar.
 
 ### Example
 
@@ -47,7 +47,7 @@ with luminesce.ApiClient(configuration) as api_client:
     seconds_until_reclaim = 119 # int | the number of seconds from which to assume node termination (optional) (default to 119)
 
     try:
-        # [INTERNAL] FakeNodeReclaim: An internal Method used to mark the next SIGTERM as though an Aws Node reclaim were about to take place.
+        # [INTERNAL] FakeNodeReclaim: Helps testing of AWS node reclaim behaviour
         api_response = api_instance.fake_node_reclaim(seconds_until_reclaim=seconds_until_reclaim)
         pprint(api_response)
     except ApiException as e:

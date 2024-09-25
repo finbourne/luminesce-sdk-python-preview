@@ -4,15 +4,15 @@ All URIs are relative to *https://www.lusid.com/honeycomb*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_catalog**](CurrentTableFieldCatalogApi.md#get_catalog) | **GET** /api/Catalog | GetCatalog: Flattened Table/Faield Catalog
-[**get_fields**](CurrentTableFieldCatalogApi.md#get_fields) | **GET** /api/Catalog/fields | GetFields: Lists field/parameter information for providers
-[**get_providers**](CurrentTableFieldCatalogApi.md#get_providers) | **GET** /api/Catalog/providers | GetProviders: Lists providers available
+[**get_catalog**](CurrentTableFieldCatalogApi.md#get_catalog) | **GET** /api/Catalog | GetCatalog: Get a Flattened Table/Field Catalog
+[**get_fields**](CurrentTableFieldCatalogApi.md#get_fields) | **GET** /api/Catalog/fields | GetFields: List field and parameters for providers
+[**get_providers**](CurrentTableFieldCatalogApi.md#get_providers) | **GET** /api/Catalog/providers | GetProviders: List available providers
 
 
 # **get_catalog**
 > str get_catalog(free_text_search=free_text_search, json_proper=json_proper, use_cache=use_cache)
 
-GetCatalog: Flattened Table/Faield Catalog
+GetCatalog: Get a Flattened Table/Field Catalog
 
  Returns the User's full version of the catalog (Providers, their fields and associated information) that are currently running that you have access to (in Json format).  This is the entire catalog flattened, which is often quite large and always a bit repetitive.   The internal results are cached for several minutes.  Consider using `api/Catalog/providers` and `api/Catalog/fields` for a more granular and incremental loading flow.  The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 403 Forbidden 
 
@@ -51,7 +51,7 @@ json_proper = False # bool | Should this be text/json (not json-encoded-as-a-str
 use_cache = False # bool | Should the available cache be used? false is effectively to pick up a change in the catalog (optional) (default to False)
 
     try:
-        # GetCatalog: Flattened Table/Faield Catalog
+        # GetCatalog: Get a Flattened Table/Field Catalog
         api_response = api_instance.get_catalog(free_text_search=free_text_search, json_proper=json_proper, use_cache=use_cache)
         pprint(api_response)
     except ApiException as e:
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 # **get_fields**
 > str get_fields(table_like=table_like)
 
-GetFields: Lists field/parameter information for providers
+GetFields: List field and parameters for providers
 
  Returns the User's full version of the catalog but only the field/parameter-level information  (as well as the TableName they refer to, of course) for tables matching the `tableLike` (manually include wildcards if desired).  The internal results are cached for several minutes.  The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 403 Forbidden 
 
@@ -126,7 +126,7 @@ with luminesce.ApiClient(configuration) as api_client:
     table_like = '%' # str |  (optional) (default to '%')
 
     try:
-        # GetFields: Lists field/parameter information for providers
+        # GetFields: List field and parameters for providers
         api_response = api_instance.get_fields(table_like=table_like)
         pprint(api_response)
     except ApiException as e:
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 # **get_providers**
 > str get_providers(free_text_search=free_text_search, use_cache=use_cache)
 
-GetProviders: Lists providers available
+GetProviders: List available providers
 
  Returns the User's full version of the catalog but only the table/provider-level information they have access to.  The internal results are cached for several minutes.  The following error codes are to be anticipated with standard Problem Detail reports: - 401 Unauthorized - 403 Forbidden 
 
@@ -200,7 +200,7 @@ with luminesce.ApiClient(configuration) as api_client:
 use_cache = True # bool | Should the available cache be used? false is effectively to pick up a change in the catalog (optional) (default to True)
 
     try:
-        # GetProviders: Lists providers available
+        # GetProviders: List available providers
         api_response = api_instance.get_providers(free_text_search=free_text_search, use_cache=use_cache)
         pprint(api_response)
     except ApiException as e:

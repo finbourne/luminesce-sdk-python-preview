@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.676",
+    "version": "1.16.682",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -7085,6 +7085,17 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "loadWaitMilliseconds",
+            "in": "query",
+            "description": "Optional period to wait for results deserialization if in progress when this method is called.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -7212,6 +7223,17 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "loadWaitMilliseconds",
+            "in": "query",
+            "description": "Optional period to wait for results deserialization if in progress when this method is called.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -7512,6 +7534,17 @@
               "default": 0
             },
             "x-nullable": true
+          },
+          {
+            "name": "loadWaitMilliseconds",
+            "in": "query",
+            "description": "Optional period to wait for results deserialization if in progress when this method is called.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -7671,6 +7704,17 @@
               "default": 0
             },
             "x-nullable": true
+          },
+          {
+            "name": "loadWaitMilliseconds",
+            "in": "query",
+            "description": "Optional period to wait for results deserialization if in progress when this method is called.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -7798,6 +7842,17 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "loadWaitMilliseconds",
+            "in": "query",
+            "description": "Optional period to wait for results deserialization if in progress when this method is called.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -7960,6 +8015,17 @@
               "default": 0
             },
             "x-nullable": true
+          },
+          {
+            "name": "loadWaitMilliseconds",
+            "in": "query",
+            "description": "Optional period to wait for results deserialization if in progress when this method is called.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -8087,6 +8153,17 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "loadWaitMilliseconds",
+            "in": "query",
+            "description": "Optional period to wait for results deserialization if in progress when this method is called.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
           }
         ],
         "responses": {
@@ -8243,6 +8320,17 @@
             "name": "page",
             "in": "query",
             "description": "0-N based on chunk sized determined by the limit, ignored if limit < 1.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "x-nullable": true
+          },
+          {
+            "name": "loadWaitMilliseconds",
+            "in": "query",
+            "description": "Optional period to wait for results deserialization if in progress when this method is called.",
             "schema": {
               "type": "integer",
               "format": "int32",

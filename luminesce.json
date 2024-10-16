@@ -9,7 +9,7 @@
       "url": "https://www.finbourne.com",
       "email": "info@finbourne.com"
     },
-    "version": "1.16.699",
+    "version": "1.16.723",
     "x-logo": {
       "url": "https://www.lusid.com/app/assets/logo_white.png",
       "backgroundColor": "#415464"
@@ -2278,7 +2278,8 @@
                   {
                     "filter": "Eq",
                     "source": "USD",
-                    "target": "US"
+                    "target": "US",
+                    "isTargetNonLiteral": false
                   }
                 ]
               }
@@ -2293,7 +2294,8 @@
                   {
                     "filter": "Eq",
                     "source": "USD",
-                    "target": "US"
+                    "target": "US",
+                    "isTargetNonLiteral": false
                   }
                 ]
               }
@@ -2308,7 +2310,8 @@
                   {
                     "filter": "Eq",
                     "source": "USD",
-                    "target": "US"
+                    "target": "US",
+                    "isTargetNonLiteral": false
                   }
                 ]
               }
@@ -2323,7 +2326,8 @@
                   {
                     "filter": "Eq",
                     "source": "USD",
-                    "target": "US"
+                    "target": "US",
+                    "isTargetNonLiteral": false
                   }
                 ]
               }
@@ -5403,7 +5407,8 @@
                     {
                       "filter": "Eq",
                       "source": "USD",
-                      "target": "US"
+                      "target": "US",
+                      "isTargetNonLiteral": false
                     }
                   ]
                 }
@@ -5418,7 +5423,8 @@
                     {
                       "filter": "Eq",
                       "source": "USD",
-                      "target": "US"
+                      "target": "US",
+                      "isTargetNonLiteral": false
                     }
                   ]
                 }
@@ -5433,7 +5439,8 @@
                     {
                       "filter": "Eq",
                       "source": "USD",
-                      "target": "US"
+                      "target": "US",
+                      "isTargetNonLiteral": false
                     }
                   ]
                 }
@@ -8986,6 +8993,10 @@
             "minLength": 1,
             "type": "string",
             "description": "The expression that is on the RHS of the operator\r\nA typical case statement would look like:\r\nCASE Field {Filter} Source THEN Target"
+          },
+          "isTargetNonLiteral": {
+            "type": "boolean",
+            "description": "The Target can be a literal value or a non literal (field) and\r\nhence will be interpreted differently.\r\nThis can be determined from the UI and passed down as a true / false"
           }
         },
         "additionalProperties": false,

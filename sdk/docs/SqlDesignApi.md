@@ -216,7 +216,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlDesignApi(api_client)
-    case_statement_design = {"selectedField":"currency","caseStatementItems":[{"filter":"Eq","source":"USD","target":"US"}]} # CaseStatementDesign | CaseStatementDesign object to try and create a SQL query from
+    case_statement_design = {"selectedField":"currency","caseStatementItems":[{"filter":"Eq","source":"USD","target":"US","isTargetNonLiteral":false}]} # CaseStatementDesign | CaseStatementDesign object to try and create a SQL query from
 
     try:
         # [EXPERIMENTAL] PutCaseStatementDesignToSql: Convert a case statement design object to SQL

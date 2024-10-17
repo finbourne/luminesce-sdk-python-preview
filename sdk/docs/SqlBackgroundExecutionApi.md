@@ -966,7 +966,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start_query**
-> BackgroundQueryResponse start_query(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, keep_for_seconds=keep_for_seconds)
+> BackgroundQueryResponse start_query(body, execution_id=execution_id, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, keep_for_seconds=keep_for_seconds)
 
 StartQuery: Start to Execute Sql in the background
 
@@ -1003,6 +1003,7 @@ with luminesce.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = luminesce.SqlBackgroundExecutionApi(api_client)
     body = select Str, Takes500Ms from Testing1K where UseLinq = true and [Int] <= 120 # str | The LuminesceSql query to kick off.
+execution_id = '686a0b70-0e97-4187-a2ab-509cf6d1091b' # str | An explicit ExecutionId to use.  This must be blank OR assigned to a valid GUID-as-a-string.  It might be ignored / replaced, for example if using the query cache and a cached query is found. (optional)
 scalar_parameters = {'key': '{\"someParameter\":12,\"someOtherParameter\":\"someValue\"}'} # dict(str, str) | Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. (optional)
 query_name = 'Intentionally slow test query' # str | A name for this query.  This goes into logs and is available in `Sys.Logs.HcQueryStart`. (optional)
 timeout_seconds = 0 # int | Maximum time the query may run for, in seconds: <0 → ∞, 0 → 7200 (2h) (optional) (default to 0)
@@ -1010,7 +1011,7 @@ keep_for_seconds = 0 # int | Maximum time the result may be kept for, in seconds
 
     try:
         # StartQuery: Start to Execute Sql in the background
-        api_response = api_instance.start_query(body, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, keep_for_seconds=keep_for_seconds)
+        api_response = api_instance.start_query(body, execution_id=execution_id, scalar_parameters=scalar_parameters, query_name=query_name, timeout_seconds=timeout_seconds, keep_for_seconds=keep_for_seconds)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling SqlBackgroundExecutionApi->start_query: %s\n" % e)
@@ -1021,6 +1022,7 @@ keep_for_seconds = 0 # int | Maximum time the result may be kept for, in seconds
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | **str**| The LuminesceSql query to kick off. | 
+ **execution_id** | **str**| An explicit ExecutionId to use.  This must be blank OR assigned to a valid GUID-as-a-string.  It might be ignored / replaced, for example if using the query cache and a cached query is found. | [optional] 
  **scalar_parameters** | [**dict(str, str)**](str.md)| Json encoded dictionary of key-value pairs for scalar parameter values to use in the sql execution. | [optional] 
  **query_name** | **str**| A name for this query.  This goes into logs and is available in &#x60;Sys.Logs.HcQueryStart&#x60;. | [optional] 
  **timeout_seconds** | **int**| Maximum time the query may run for, in seconds: &lt;0 → ∞, 0 → 7200 (2h) | [optional] [default to 0]
